@@ -26,21 +26,21 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Role findById(long id) {
-        return null;
+        return roleRepository.findById(id).orElse(null);
     }
 
     @Override
     public void deleteById(long id) {
-
+        roleRepository.deleteById(id);
     }
 
     @Override
     public void deleteAll() {
-
+        roleRepository.deleteAll();
     }
 
     @Override
     public Role saveRole(Role role) {
-        return null;
+        return roleRepository.save(role);;
     }
 }
