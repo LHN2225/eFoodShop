@@ -1,0 +1,17 @@
+-- Create user EFOODSHOP
+CREATE USER EFOODSHOP IDENTIFIED BY 123456;
+
+-- Assign all permissions to the user
+GRANT ALL PRIVILEGES TO EFOODSHOP;
+
+
+-- Add ROLE table
+
+
+-- Add USER table
+/*CREATE TABLE USER_1 (
+	ID NVARCHAR2(100) PRIMARY KEY,
+	Password VARCHAR2(100),
+	Fullname NVARCHAR2(100),
+	Phone VARCHAR2(30)
+);*/

@@ -22,6 +22,7 @@
 
   <modules>
     <module>food</module>
+	<module>shipper</module>
   </modules>
 
   <dependencyManagement>
