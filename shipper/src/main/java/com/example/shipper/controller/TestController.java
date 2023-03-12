@@ -27,5 +27,10 @@ public class TestController {
     public String index3() {
         return "test";
     }
+
+    @GetMapping("/4")
+    public String index4() {
+        return "home";
+    }
     
 }

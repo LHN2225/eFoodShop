@@ -65,9 +65,9 @@
 
 		<section class="sample-page">
 			<div class="container" data-aos="fade-up">
-				<p>
-					You can duplicate this sample page and create any number of inner pages you like!
-				</p>
+				<h1 class="mb-5">Not-busy Orders</h1>
+				<div id="not-busy-order"></div>
+				<!--<table th:replace="fragment/not-busy-orders :: not-busy-orders"></table>-->
 			</div>
 		</section>
 
@@ -92,6 +92,20 @@
 
 	<!-- Template Main JS File -->
 	<script th:src="@{/assets/js/main.js}"></script>
+	
+	<!-- Ajax -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+	<script>
+		$.ajax({
+			url: "http://localhost:8080/order/not-busy",
+			type: 'GET',
+			contentType: "html",
+			crossDomain: true,
+			success: function (data) {
+				$("#not-busy-order").html(data);
+			}
+		});
+	</script>
 
 </body>
 

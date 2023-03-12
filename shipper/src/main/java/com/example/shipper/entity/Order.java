@@ -2,6 +2,8 @@ package com.example.shipper.entity;
 
 import lombok.Data;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -17,6 +19,12 @@ public class Order {
 
     @Column(name = "cart_id")
     private Long cartId;
+
+    @Column(name = "created_date")
+    private Timestamp createdDate;
+
+    @Column(name = "address")
+    private String address;
 
     @Column(name = "shipper_id")
     private Long shipperId;
