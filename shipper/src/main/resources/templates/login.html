@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-	<title>[Template] Sample Inner Page</title>
+	<title>Login</title>
 	<meta content="" name="description">
 	<meta content="" name="keywords">
 
@@ -48,7 +48,7 @@
 				<div class="container position-relative">
 					<div class="row d-flex justify-content-center">
 						<div class="col-lg-6 text-center">
-							<h2>Sample Inner Page</h2>
+							<h2>Login</h2>
 						</div>
 					</div>
 				</div>
@@ -57,7 +57,7 @@
 				<div class="container">
 					<ol>
 						<li><a href="index.html">Home</a></li>
-						<li>Sample Inner Page</li>
+						<li>Login</li>
 					</ol>
 				</div>
 			</nav>
@@ -65,9 +65,31 @@
 
 		<section class="sample-page">
 			<div class="container" data-aos="fade-up">
-				<h1 class="mb-5">Not-busy Orders</h1>
-				<div id="not-busy-order"></div>
-				<!--<table th:replace="fragment/not-busy-orders :: not-busy-orders"></table>-->
+				<div class="d-flex justify-content-center align-items-center">
+					<form id="submit-form">
+						<h3>Login</h3>
+						<div class="row gy-4 mt-2">
+
+							<div class="col-md-12 ">
+								<input type="text" class="form-control" id="username" name="username"
+									placeholder="Username" required>
+							</div>
+
+							<div class="col-md-12">
+								<input type="password" class="form-control" id="password" name="password"
+									placeholder="Password" required>
+							</div>
+
+							<div class="col-md-12 text-center">
+								<div>
+									<button class="btn btn-primary me-5">Login</button>
+									<a class="get-a-quote text-secondary" href="get-a-quote.html">Cancel</a>
+								</div>
+							</div>
+
+						</div>
+					</form>
+				</div>
 			</div>
 		</section>
 
@@ -88,7 +110,7 @@
 	<script th:src="@{/assets/vendor/glightbox/js/glightbox.min.js}"></script>
 	<script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
 	<script th:src="@{/assets/vendor/aos/aos.js}"></script>
-	<script th:src="@{/assets/vendor/php-email-form/validate.js}"></script>
+	<!--<script th:src="@{/assets/vendor/php-email-form/validate.js}"></script>-->
 
 	<!-- Template Main JS File -->
 	<script th:src="@{/assets/js/main.js}"></script>
@@ -96,13 +118,43 @@
 	<!-- Ajax -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 	<script>
+		$('#submit-form').on('submit', function (e) {
+			e.preventDefault(); // Prevent the form from submitting in the traditional way
+			//let username = $("#username").val();
+			//let password = $("#password").val();
 
-		let shipperId = 1; // Test for shipper id before authentication and authorization handling by security
+			let formData = $(this).serialize();
 
-		render();	// Show all content at the first load
+			$.ajax({
+				url: 'http://localhost:8080/shipper/login',
+				method: 'POST',
+				data: formData,
+				success: function(response) {
+					console.log(response)
+				},
+				error: function(xhr, status, error) {
+					console.log('Request failed:', error);
+				}
+			});
 
 
-		function render() {
+			/*var formData = $(this).serialize(); // Serialize the form data
+			$.ajax({
+				type: 'POST',
+				url: 'process-form.php', // URL where the form data should be submitted
+				data: formData,
+				success: function(response) {
+					alert('Form submitted successfully!'); // Show a success message
+				},
+				error: function(xhr, status, error) {
+					alert('Error submitting form: ' + error); // Show an error message
+				}
+			});*/
+		});
+
+
+
+		/*function render() {
 			$.ajax({
 				url: "http://localhost:8080/order/not-busy",
 				type: 'GET',
@@ -112,9 +164,9 @@
 					$("#not-busy-order").html(data);
 				}
 			});
-		}
+		}*/
 
-		function choose(that) {
+		/*function choose(that) {
 			let orderId = $(that).closest("tr").find(".order-id").text();
 			$.ajax({
 				url: 'http://localhost:8080/api/order/shipper',
@@ -131,7 +183,7 @@
 					console.log('Request failed:', error);
 				}
 			});
-		}
+		}*/
 	</script>
 
 </body>
