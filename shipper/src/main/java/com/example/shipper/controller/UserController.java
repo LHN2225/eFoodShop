@@ -29,7 +29,21 @@ public class UserController {
         }
     }
 
-    @PostMapping("/")
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable Long id){
+        try {
+            User user = userService.findById(id);
+
+            if (user == null) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("")
     public ResponseEntity<User> createUser(@RequestBody User user){
         try {
             User tempUser = new User();
