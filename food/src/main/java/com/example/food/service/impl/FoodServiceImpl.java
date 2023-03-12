@@ -1,10 +1,13 @@
 package com.example.food.service.impl;
 
+import com.example.food.entity.Food;
 import com.example.food.repository.FoodRepository;
 import com.example.food.service.FoodService;
 import com.example.food.viewmodel.FoodListViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.io.IOException;
 
 @Service
 public class FoodServiceImpl implements FoodService {
@@ -19,5 +22,15 @@ public class FoodServiceImpl implements FoodService {
                 pageNumber,
                 foodRepository.getAllFood(pageNumber)
         );
+    }
+
+    @Override
+    public void saveFood(Food food) throws IOException {
+        foodRepository.saveFood(food);
+    }
+
+    @Override
+    public void deleteFood(long id) {
+        foodRepository.deleteFood(id);
     }
 }

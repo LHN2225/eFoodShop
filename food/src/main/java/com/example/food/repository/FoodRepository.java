@@ -2,6 +2,7 @@ package com.example.food.repository;
 
 import com.example.food.convention.PageConvention;
 import com.example.food.dto.FoodRecordDto;
+import com.example.food.entity.Food;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -38,5 +39,20 @@ public class FoodRepository {
                                         rs.getFloat("price")
                                 )
                 );
+    }
+
+    public int saveFood(Food food) {
+        return jdbcTemplate.update("insert into food (name, description, image_url, price, is_deleted) " +
+                "values (?, ?, ?, ?, 0)",
+                food.getName(),
+                food.getDescription(),
+                food.getImageUrl(),
+                food.getPrice()
+        );
+
+    }
+
+    public int deleteFood(long id) {
+        return jdbcTemplate.update("update food set is_deleted = 1 where id = " + id + " and is_deleted = 0");
     }
 }
