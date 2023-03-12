@@ -1,6 +1,7 @@
 package com.example.food.controller;
 
 import com.example.food.dto.CreateFoodDto;
+import com.example.food.dto.FoodDetailDto;
 import com.example.food.entity.Food;
 import com.example.food.service.FoodService;
 import com.example.food.service.StorageService;
@@ -37,18 +38,23 @@ public class FoodController {
     @PostMapping(value = "save-food", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseBody
     public String viewAllFoodPage(@ModelAttribute @Valid CreateFoodDto createFoodDto,
-                                  HttpServletRequest request) throws IOException {
+                                  HttpServletRequest request) {
         String referer = request.getHeader("Referer");
 
-        String imageName = storageService.saveImage(createFoodDto.getImage(), "/image-food");
-        if (imageName.isEmpty()) return "redirect:"+referer;
+        try {
+            String imageName = storageService.saveImage(createFoodDto.getImage(), "/image-food");
+            if (imageName.isEmpty()) return "redirect:"+referer;
 
-        foodService.saveFood(new Food(
-                createFoodDto.getName(),
-                createFoodDto.getDescription(),
-                imageName,
-                createFoodDto.getPrice()
-        ));
+            foodService.saveFood(new Food(
+                    createFoodDto.getName(),
+                    createFoodDto.getDescription(),
+                    imageName,
+                    createFoodDto.getPrice()
+            ));
+        }
+        catch (Exception e) {
+            return "redirect:"+referer;
+        }
 
         return "redirect:"+referer;
     }
@@ -56,10 +62,27 @@ public class FoodController {
     @DeleteMapping("remove-food")
     @ResponseBody
     public String viewAllFoodPage(@RequestParam(value = "id") long id,
-                                  HttpServletRequest request) throws IOException {
+                                  HttpServletRequest request) {
         foodService.deleteFood(id);
 
         String referer = request.getHeader("Referer");
         return "redirect:"+referer;
+    }
+
+    @GetMapping("view-food-detail")
+    @ResponseBody
+    public FoodDetailDto viewAllFoodPage(@RequestParam(value = "id") long id,
+                                         final Model model,
+                                         HttpServletRequest request) {
+        FoodDetailDto foodDetailDto = foodService.viewFoodDetail(id);
+        if (foodDetailDto == null) {
+            String referer = request.getHeader("Referer");
+            return new FoodDetailDto();
+//            return "redirect:"+referer;
+        }
+        model.addAttribute("Model", foodDetailDto);
+
+        return foodDetailDto;
+//        return "ViewAllFood";
     }
 }
