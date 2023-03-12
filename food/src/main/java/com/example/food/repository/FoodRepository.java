@@ -67,12 +67,33 @@ public class FoodRepository {
                                 new FoodDetailDto(
                                         rs.getLong("id"),
                                         rs.getString("name"),
-                                        rs.getString("image_url"),
                                         rs.getString("description"),
+                                        rs.getString("image_url"),
                                         rs.getFloat("price")
                                 )
                 );
 
         return result;
+    }
+
+    public int updateFoodWithoutImage(Food food) {
+        return jdbcTemplate.update("UPDATE food"
+                +" SET name = "+ "'" + food.getName() + "'"
+                +", description = '"+ food.getDescription() + "'"
+                +", price = "+ food.getPrice()
+                +" WHERE id = "+ food.getId()
+                +" and is_deleted = 0"
+        );
+    }
+
+    public int updateFoodWithNewImage(Food food) {
+        return jdbcTemplate.update("UPDATE food"
+                +" SET name = "+ "'" + food.getName() + "'"
+                +", description = '"+ food.getDescription() + "'"
+                +", image_url = '"+ food.getImageUrl() + "'"
+                +", price = "+ food.getPrice()
+                +" WHERE id = "+ food.getId()
+                +" and is_deleted = 0"
+        );
     }
 }

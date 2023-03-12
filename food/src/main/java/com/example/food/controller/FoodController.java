@@ -2,6 +2,7 @@ package com.example.food.controller;
 
 import com.example.food.dto.CreateFoodDto;
 import com.example.food.dto.FoodDetailDto;
+import com.example.food.dto.UpdateFoodDto;
 import com.example.food.entity.Food;
 import com.example.food.service.FoodService;
 import com.example.food.service.StorageService;
@@ -37,7 +38,7 @@ public class FoodController {
 
     @PostMapping(value = "save-food", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseBody
-    public String viewAllFoodPage(@ModelAttribute @Valid CreateFoodDto createFoodDto,
+    public String saveFood(@ModelAttribute @Valid CreateFoodDto createFoodDto,
                                   HttpServletRequest request) {
         String referer = request.getHeader("Referer");
 
@@ -53,6 +54,7 @@ public class FoodController {
             ));
         }
         catch (Exception e) {
+            System.out.println(e);
             return "redirect:"+referer;
         }
 
@@ -61,7 +63,7 @@ public class FoodController {
 
     @DeleteMapping("remove-food")
     @ResponseBody
-    public String viewAllFoodPage(@RequestParam(value = "id") long id,
+    public String deleteFood(@RequestParam(value = "id") long id,
                                   HttpServletRequest request) {
         foodService.deleteFood(id);
 
@@ -71,7 +73,7 @@ public class FoodController {
 
     @GetMapping("view-food-detail")
     @ResponseBody
-    public FoodDetailDto viewAllFoodPage(@RequestParam(value = "id") long id,
+    public FoodDetailDto viewFoodDetailPage(@RequestParam(value = "id") long id,
                                          final Model model,
                                          HttpServletRequest request) {
         FoodDetailDto foodDetailDto = foodService.viewFoodDetail(id);
@@ -84,5 +86,43 @@ public class FoodController {
 
         return foodDetailDto;
 //        return "ViewAllFood";
+    }
+
+    @PostMapping(value = "update-food", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ResponseBody
+    public String updateFood(@ModelAttribute @Valid UpdateFoodDto updateFoodDto,
+                             HttpServletRequest request) {
+        String referer = request.getHeader("Referer");
+
+        try {
+            String imageName;
+            if (updateFoodDto.getIsImageChange()) {
+                imageName = storageService.saveImage(updateFoodDto.getImage(), "/image-food");
+                if (imageName.isEmpty()) return "redirect:"+referer;
+
+                foodService.updateFoodWithNewImage(new Food(
+                        updateFoodDto.getId(),
+                        updateFoodDto.getName(),
+                        updateFoodDto.getDescription(),
+                        imageName,
+                        updateFoodDto.getPrice()
+                ));
+            }
+            else {
+                foodService.updateFoodWithoutImage(new Food(
+                        updateFoodDto.getId(),
+                        updateFoodDto.getName(),
+                        updateFoodDto.getDescription(),
+                        updateFoodDto.getPrice()
+                ));
+            }
+
+        }
+        catch (Exception e) {
+            System.out.println(e);
+            return "redirect:"+referer;
+        }
+
+        return "redirect:"+referer;
     }
 }

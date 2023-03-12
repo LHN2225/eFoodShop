@@ -1,5 +1,6 @@
 package com.example.food.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -21,6 +22,21 @@ public class Food {
         this.name = name;
         this.description = description;
         this.imageUrl = imageUrl;
+        this.price = price;
+    }
+
+    public Food(Long id, String name, String description, String imageUrl, Float price) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.imageUrl = imageUrl;
+        this.price = price;
+    }
+
+    public Food(Long id, String name, String description, Float price) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
         this.price = price;
     }
 }
