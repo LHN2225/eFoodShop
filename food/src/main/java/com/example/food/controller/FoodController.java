@@ -26,14 +26,13 @@ public class FoodController {
     StorageService storageService;
 
     @GetMapping("view-food")
-    @ResponseBody
-    public FoodListViewModel viewAllFoodPage(@RequestParam(value = "page", required = false , defaultValue = "1") int page_number,
+    public String viewAllFoodPage(@RequestParam(value = "page", required = false , defaultValue = "1") int page_number,
                                              final Model model) {
         FoodListViewModel viewModel = foodService.viewAllFood(page_number);
         model.addAttribute("Model", viewModel);
 
-        return viewModel;
-//        return "ViewAllFood";
+//        return viewModel;
+        return "view-all-food";
     }
 
     @PostMapping(value = "save-food", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
