@@ -1,12 +1,14 @@
 package com.example.food.repository;
 
 import com.example.food.convention.PageConvention;
+import com.example.food.dto.FoodDetailDto;
 import com.example.food.dto.FoodRecordDto;
 import com.example.food.entity.Food;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.NoResultException;
 import java.util.List;
 
 @Repository
@@ -54,5 +56,23 @@ public class FoodRepository {
 
     public int deleteFood(long id) {
         return jdbcTemplate.update("update food set is_deleted = 1 where id = " + id + " and is_deleted = 0");
+    }
+
+    public FoodDetailDto viewFoodDetail(long id) throws NoResultException {
+        FoodDetailDto result = (FoodDetailDto) jdbcTemplate
+                .queryForObject("select id, name, description, image_url, price"
+                                + " from food"
+                                + " where id = " + id + " and is_deleted = 0",
+                        (rs, rowNum) ->
+                                new FoodDetailDto(
+                                        rs.getLong("id"),
+                                        rs.getString("name"),
+                                        rs.getString("image_url"),
+                                        rs.getString("description"),
+                                        rs.getFloat("price")
+                                )
+                );
+
+        return result;
     }
 }

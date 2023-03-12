@@ -1,5 +1,6 @@
 package com.example.food.service.impl;
 
+import com.example.food.dto.FoodDetailDto;
 import com.example.food.entity.Food;
 import com.example.food.repository.FoodRepository;
 import com.example.food.service.FoodService;
@@ -32,5 +33,14 @@ public class FoodServiceImpl implements FoodService {
     @Override
     public void deleteFood(long id) {
         foodRepository.deleteFood(id);
+    }
+
+    @Override
+    public FoodDetailDto viewFoodDetail(long id) {
+        try {
+            return foodRepository.viewFoodDetail(id);
+        } catch (Exception e) {
+            return null;
+        }
     }
 }
