@@ -8,6 +8,8 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import java.util.function.Predicate;
+
 @Configuration
 public class SpringFoxConfig {
     @Bean
@@ -16,6 +18,7 @@ public class SpringFoxConfig {
                 .select()
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
+                .paths(Predicate.not(PathSelectors.regex("/error.*")))
                 .build();
     }
 }

@@ -1,10 +1,12 @@
 package com.example.food.entity;
 
-import javax.persistence.Entity;
+import lombok.Data;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "food")
+@Data
 public class Food {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,4 +16,11 @@ public class Food {
     String imageUrl;
     Float price;
     Boolean isDeleted;
+
+    public Food(String name, String description, String imageUrl, Float price) {
+        this.name = name;
+        this.description = description;
+        this.imageUrl = imageUrl;
+        this.price = price;
+    }
 }
