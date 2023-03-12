@@ -18,4 +18,9 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> getOrderThatNotBusy() {
         return orderRepository.findByShipperId(null);
     }
+
+    @Override
+    public int receiveOrderByShipper(Long shipperId, Long orderId) {
+        return orderRepository.receiveOrderByShipper(shipperId, orderId);
+    }
 }

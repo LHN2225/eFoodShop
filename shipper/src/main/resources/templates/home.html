@@ -92,19 +92,46 @@
 
 	<!-- Template Main JS File -->
 	<script th:src="@{/assets/js/main.js}"></script>
-	
+
 	<!-- Ajax -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 	<script>
-		$.ajax({
-			url: "http://localhost:8080/order/not-busy",
-			type: 'GET',
-			contentType: "html",
-			crossDomain: true,
-			success: function (data) {
-				$("#not-busy-order").html(data);
-			}
-		});
+
+		let shipperId = 1; // Test for shipper id before authentication and authorization handling by security
+
+		render();	// Show all content at the first load
+
+
+		function render() {
+			$.ajax({
+				url: "http://localhost:8080/order/not-busy",
+				type: 'GET',
+				contentType: "html",
+				crossDomain: true,
+				success: function (data) {
+					$("#not-busy-order").html(data);
+				}
+			});
+		}
+
+		function choose(that) {
+			let orderId = $(that).closest("tr").find(".order-id").text();
+			$.ajax({
+				url: 'http://localhost:8080/api/order/shipper',
+				method: 'PUT',
+				data: {
+					shipperId: shipperId,
+					orderId: orderId
+				},
+				success: function(response) {
+					//console.log('Request succeeded:', response);
+					render();
+				},
+				error: function(xhr, status, error) {
+					console.log('Request failed:', error);
+				}
+			});
+		}
 	</script>
 
 </body>
