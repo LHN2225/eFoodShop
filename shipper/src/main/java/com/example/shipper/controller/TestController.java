@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/")
-public class IndexController {
+public class TestController {
 
     @GetMapping("/")
     public String index() {
@@ -21,6 +21,11 @@ public class IndexController {
     @GetMapping("/2")
     public String index2() {
         return "sample-inner-page";
+    }
+
+    @GetMapping("/3")
+    public String index3() {
+        return "test";
     }
     
 }
