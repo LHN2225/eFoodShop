@@ -25,8 +25,6 @@ public class ProfileViewController {
 
     @GetMapping("/profile-box")
     public String getProfilePBox(Model model) {
-
-
         User user = userService.findById(shipper_id_test);
         model.addAttribute("user", user);
         return "fragment/profile-box";

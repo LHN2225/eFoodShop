@@ -18,4 +18,6 @@ public interface UserService {
     void deleteAll();
 
     User saveUser(User user);
+
+    int updateProfile(Long id, String password, String fullname, String phone);
 }

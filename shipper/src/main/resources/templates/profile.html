@@ -92,8 +92,7 @@
 	<!-- Ajax -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 	<script>
-
-		render();	// Show all content at the first load
+		render(); // Show all content at the first load
 
 		function render() {
 			$.ajax({
@@ -107,6 +106,25 @@
 			});
 		}
 
+
+		function submitForm() {
+			let formData = $('#submit-form').serialize(); // Serialize the form data
+
+			$.ajax({
+				url: 'http://localhost:8080/api/user',
+				method: 'PUT',
+				data: formData,
+				success: function (response) {
+					render();
+					alert("Update successfully!");
+				},
+				error: function (xhr, status, error) {
+					console.log('Request failed:', error);
+					alert("Something wrong happen!");
+				}
+			});
+
+		}
 	</script>
 
 </body>

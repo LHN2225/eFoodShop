@@ -12,6 +12,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
+
+    // Test for shipper id before authentication and authorization handling by security
+    public Long shipper_id_test = 1L;
+
     @Autowired
     private UserService userService;
 
@@ -92,6 +96,21 @@ public class UserController {
         }
         catch (Exception e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("")
+    public ResponseEntity<Integer> updateProfile(
+            @RequestParam String password,
+            @RequestParam String fullname,
+            @RequestParam String phone
+    ) {
+        int response = userService.updateProfile(shipper_id_test, password, fullname, phone);
+        try {
+            //int response = userService.updateProfile(shipper_id_test, password, fullname, phone);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

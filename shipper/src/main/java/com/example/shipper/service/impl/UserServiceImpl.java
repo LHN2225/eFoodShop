@@ -43,4 +43,9 @@ public class UserServiceImpl implements UserService {
     public User saveUser(User user) {
         return null;
     }
+
+    @Override
+    public int updateProfile(Long id, String password, String fullname, String phone) {
+        return userRepository.updateProfile(id, password, fullname, phone);
+    }
 }
