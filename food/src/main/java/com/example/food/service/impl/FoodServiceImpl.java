@@ -43,4 +43,14 @@ public class FoodServiceImpl implements FoodService {
             return null;
         }
     }
+
+    @Override
+    public void updateFoodWithoutImage(Food food) {
+        foodRepository.updateFoodWithoutImage(food);
+    }
+
+    @Override
+    public void updateFoodWithNewImage(Food food) {
+        foodRepository.updateFoodWithNewImage(food);
+    }
 }

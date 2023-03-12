@@ -15,4 +15,8 @@ public interface FoodService {
     void deleteFood(long id);
 
     FoodDetailDto viewFoodDetail(long id);
+
+    void updateFoodWithoutImage(Food food);
+
+    void updateFoodWithNewImage(Food food);
 }
