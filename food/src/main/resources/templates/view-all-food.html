@@ -64,7 +64,7 @@
 			<nav>
 				<div class="container">
 					<ol>
-						<li><a href="index.html">Home</a></li>
+						<li><a href="../food/view-food">Home</a></li>
 						<li>Food</li>
 					</ol>
 				</div>
@@ -74,7 +74,7 @@
 		<section class="sample-page">
 			<div class="container" data-aos="fade-up">
 				<div class="row">
-					<div class="col-md-4 col-sm-6 col-xs-12 p-0">
+					<div class="col-md-4 col-sm-6 col-xs-12 p-0" style="margin-bottom: 2rem;">
 						<a href="#" class="btn btn-success">Add food</a>
 					</div>
 				</div>
@@ -82,12 +82,13 @@
 					<div th:if="${Model != null}">
 						<div class="row">
 							<th:block th:each="food : ${Model.getFoodList()}">
-								<div class="card col-md-4 col-sm-6 col-xs-12 p-0" style="width: 25rem; height: 32rem; margin: auto auto;">
-									<img style="width: 25rem; height: 20rem"
+								<div class="card col-auto"
+									 style="width: 27rem; height: 32rem; margin-left: auto; margin-right: auto; margin-bottom: 2rem; display: flex; justify-content: center; align-items: center;">
+									<img style="width: 27rem; height: 20rem"
 										 th:src="@{|${@environment.getProperty('food-image.server.url')}/${food.getImageUrl()}|}"
 										 class="card-img-top"
 										 alt="Image">
-									<div class="card-body" style="width: 25rem; height: 10rem;">
+									<div class="card-body" style="width: 27rem; height: 10rem;">
 										<h5 th:text="${food.getName()}"></h5>
 										<p th:text="${food.getPrice()}"> VND</p>
 										<a href="#" class="btn btn-primary">Go somewhere</a>
@@ -116,7 +117,7 @@
 				</div>
 				<div class="row">
 					<div th:if="${Model == null}">
-						<p>Model is null</p>
+						<h1>No product found!</h1>
 					</div>
 				</div>
 				</div>
