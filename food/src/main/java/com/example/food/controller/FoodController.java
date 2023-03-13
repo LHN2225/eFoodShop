@@ -86,16 +86,13 @@ public class FoodController {
     }
 
     @PostMapping(value = "update-food", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @ResponseBody
-    public String updateFood(@ModelAttribute @Valid UpdateFoodDto updateFoodDto,
-                             HttpServletRequest request) {
-        String referer = request.getHeader("Referer");
+    public String updateFood(@ModelAttribute @Valid UpdateFoodDto updateFoodDto) {
 
         try {
             String imageName;
             if (updateFoodDto.getIsImageChange()) {
                 imageName = storageService.saveImage(updateFoodDto.getImage(), "/image-food");
-                if (imageName.isEmpty()) return "redirect:"+referer;
+                if (imageName.isEmpty()) return "bad-request-message";
 
                 foodService.updateFoodWithNewImage(new Food(
                         updateFoodDto.getId(),
@@ -117,9 +114,9 @@ public class FoodController {
         }
         catch (Exception e) {
             System.out.println(e);
-            return "redirect:"+referer;
+            return "bad-request-message";
         }
 
-        return "redirect:"+referer;
+        return "success-message";
     }
 }
