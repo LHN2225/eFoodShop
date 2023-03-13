@@ -65,7 +65,7 @@
 				<div class="container">
 					<ol>
 						<li><a href="../food/view-food">Home</a></li>
-						<li>Food</li>
+						<li>Result</li>
 					</ol>
 				</div>
 			</nav>
@@ -73,54 +73,12 @@
 
 		<section class="sample-page">
 			<div class="container" data-aos="fade-up">
-				<div class="row">
-					<div class="col-md-4 col-sm-6 col-xs-12 p-0" style="margin-bottom: 2rem;">
-						<a href="./create-food" class="btn btn-success">Add food</a>
-					</div>
-				</div>
-				<div class="row">
-					<div th:if="${Model != null}">
-						<div class="row">
-							<th:block th:each="food : ${Model.getFoodList()}">
-								<div class="card col-auto"
-									 style="width: 27rem; height: 32rem; margin-left: auto; margin-right: auto; margin-bottom: 2rem; display: flex; justify-content: center; align-items: center;">
-									<img style="width: 27rem; height: 20rem;"
-										 th:src="@{|${@environment.getProperty('food-image.server.url')}/${food.getImageUrl()}|}"
-										 class="card-img-top"
-										 alt="Image">
-									<div class="card-body" style="width: 27rem; height: 10rem;">
-										<h5 th:text="${food.getName()}"></h5>
-										<p th:text="${food.getPrice()}"> VND</p>
-										<a href="#" class="btn btn-primary">Go somewhere</a>
-									</div>
-								</div>
-							</th:block>
-						</div>
-						<div class="row">
-							<nav aria-label="...">
-								<ul class="pagination">
-									<th:block th:each="i : ${#numbers.sequence(1, Model.getTotalPage())}">
-										<li class="page-item">
-											<a class="page-link" th:classappend="(${i} == ${Model.getCurrentPage()}) ? active : ''"
-											   th:href="@{|../food/view-food?page=${i}|}"
-											   th:text="${i}"></a>
-										</li>
-									</th:block>
-									<!--								<li class="page-item active" aria-current="page">-->
-									<!--									<a class="page-link" href="#">2</a>-->
-									<!--								</li>-->
-									<!--								<li class="page-item"><a class="page-link" href="#">3</a></li>-->
-								</ul>
-							</nav>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div th:if="${Model == null}">
-						<h1>No product found!</h1>
-					</div>
-				</div>
-				</div>
+				<h1>Success</h1>
+				<a href="../food/view-food">
+					<button class="btn btn-primary">
+						Back
+					</button>
+				</a>
 			</div>
 		</section>
 
@@ -145,6 +103,7 @@
 
 	<!-- Template Main JS File -->
 	<script th:src="@{/assets/js/main.js}"></script>
+	<script th:src="@{/assets/js/site.js}"></script>
 
 </body>
 

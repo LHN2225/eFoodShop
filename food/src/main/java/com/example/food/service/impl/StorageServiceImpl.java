@@ -33,11 +33,11 @@ public class StorageServiceImpl implements StorageService {
 
         Resource resource = resourceLoader.getResource("classpath:/static" + packageName);
         String packagePath = resource.getFile().getAbsolutePath();
-        fileNames.append("/" + String.valueOf(new Date().getTime()) + fileExtension);
-        Path path = Paths.get(packagePath + fileNames);
+        fileNames.append(String.valueOf(new Date().getTime()) + fileExtension);
+        Path path = Paths.get(packagePath + "/" + fileNames);
         Files.write(path, file.getBytes());
 
-        return path.toString();
+        return fileNames.toString();
     }
 
 }

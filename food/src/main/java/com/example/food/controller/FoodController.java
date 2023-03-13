@@ -34,16 +34,17 @@ public class FoodController {
 //        return viewModel;
         return "view-all-food";
     }
+    @GetMapping("create-food")
+    public String viewAllFoodPage() {
+        return "create-food";
+    }
+
 
     @PostMapping(value = "save-food", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @ResponseBody
-    public String saveFood(@ModelAttribute @Valid CreateFoodDto createFoodDto,
-                                  HttpServletRequest request) {
-        String referer = request.getHeader("Referer");
-
+    public String saveFood(@ModelAttribute @Valid CreateFoodDto createFoodDto) {
         try {
             String imageName = storageService.saveImage(createFoodDto.getImage(), "/image-food");
-            if (imageName.isEmpty()) return "redirect:"+referer;
+            if (imageName.isEmpty()) return "bad-request-message";
 
             foodService.saveFood(new Food(
                     createFoodDto.getName(),
@@ -54,20 +55,18 @@ public class FoodController {
         }
         catch (Exception e) {
             System.out.println(e);
-            return "redirect:"+referer;
+            return "bad-request-message";
         }
 
-        return "redirect:"+referer;
+        return "success-message";
     }
 
     @DeleteMapping("remove-food")
     @ResponseBody
-    public String deleteFood(@RequestParam(value = "id") long id,
-                                  HttpServletRequest request) {
+    public String deleteFood(@RequestParam(value = "id") long id) {
         foodService.deleteFood(id);
 
-        String referer = request.getHeader("Referer");
-        return "redirect:"+referer;
+        return "success-message";
     }
 
     @GetMapping("view-food-detail")

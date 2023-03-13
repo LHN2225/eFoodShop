@@ -8,6 +8,6 @@ public class UIController {
 
     @GetMapping("/ui")
     public String UI() {
-        return "view-all-food";
+        return "success-message";
     }
 }

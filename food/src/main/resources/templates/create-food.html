@@ -65,7 +65,7 @@
 				<div class="container">
 					<ol>
 						<li><a href="../food/view-food">Home</a></li>
-						<li>Food</li>
+						<li>Create Food</li>
 					</ol>
 				</div>
 			</nav>
@@ -73,54 +73,27 @@
 
 		<section class="sample-page">
 			<div class="container" data-aos="fade-up">
-				<div class="row">
-					<div class="col-md-4 col-sm-6 col-xs-12 p-0" style="margin-bottom: 2rem;">
-						<a href="./create-food" class="btn btn-success">Add food</a>
+				<form action="../food/save-food" method="POST" enctype="multipart/form-data">
+					<div class="mb-3">
+						<label for="name" class="form-label">Food name:</label>
+						<input type="text" class="form-control" id="name" name="name">
 					</div>
-				</div>
-				<div class="row">
-					<div th:if="${Model != null}">
-						<div class="row">
-							<th:block th:each="food : ${Model.getFoodList()}">
-								<div class="card col-auto"
-									 style="width: 27rem; height: 32rem; margin-left: auto; margin-right: auto; margin-bottom: 2rem; display: flex; justify-content: center; align-items: center;">
-									<img style="width: 27rem; height: 20rem;"
-										 th:src="@{|${@environment.getProperty('food-image.server.url')}/${food.getImageUrl()}|}"
-										 class="card-img-top"
-										 alt="Image">
-									<div class="card-body" style="width: 27rem; height: 10rem;">
-										<h5 th:text="${food.getName()}"></h5>
-										<p th:text="${food.getPrice()}"> VND</p>
-										<a href="#" class="btn btn-primary">Go somewhere</a>
-									</div>
-								</div>
-							</th:block>
-						</div>
-						<div class="row">
-							<nav aria-label="...">
-								<ul class="pagination">
-									<th:block th:each="i : ${#numbers.sequence(1, Model.getTotalPage())}">
-										<li class="page-item">
-											<a class="page-link" th:classappend="(${i} == ${Model.getCurrentPage()}) ? active : ''"
-											   th:href="@{|../food/view-food?page=${i}|}"
-											   th:text="${i}"></a>
-										</li>
-									</th:block>
-									<!--								<li class="page-item active" aria-current="page">-->
-									<!--									<a class="page-link" href="#">2</a>-->
-									<!--								</li>-->
-									<!--								<li class="page-item"><a class="page-link" href="#">3</a></li>-->
-								</ul>
-							</nav>
-						</div>
+					<div class="mb-3">
+						<label for="description" class="form-label">Description:</label>
+						<input type="text" class="form-control" id="description" name="description">
 					</div>
-				</div>
-				<div class="row">
-					<div th:if="${Model == null}">
-						<h1>No product found!</h1>
+					<div class="mb-3">
+						<label for="price" class="form-label">Price:</label>
+						<input type="number" step="any" class="form-control" id="price" name="price">
 					</div>
-				</div>
-				</div>
+					<div class="mb-3">
+						<label for="image-input" class="form-label">Image Upload:</label>
+						<input type="file" class="form-control" id="image-input" name="image" accept="image/*"><br><br>
+						<img id="uploaded-image" src="#" alt="Uploaded Image" style="display:none; width: 27rem; height: 20rem;">
+					</div>
+					<br><br>
+					<button type="submit" class="btn btn-success">Submit</button>
+				</form>
 			</div>
 		</section>
 
@@ -145,6 +118,7 @@
 
 	<!-- Template Main JS File -->
 	<script th:src="@{/assets/js/main.js}"></script>
+	<script th:src="@{/assets/js/site.js}"></script>
 
 </body>
 
