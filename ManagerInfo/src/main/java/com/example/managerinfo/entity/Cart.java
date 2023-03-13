@@ -22,4 +22,7 @@ public class Cart {
     @Column(name = "customer_id")
     private Long customerId;
 
+    @Column(name = "is_deleted")
+    private boolean isDeleted;
+
 }

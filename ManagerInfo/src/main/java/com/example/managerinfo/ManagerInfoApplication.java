@@ -10,6 +10,6 @@ public class ManagerInfoApplication {
         SpringApplication.run(ManagerInfoApplication.class, args);
     }
 
-//    TODO: Add templates to FE
+//    TODO: Make the get quantity in cart more global in FE
 
 }

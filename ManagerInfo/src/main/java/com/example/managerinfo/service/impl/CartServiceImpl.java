@@ -12,6 +12,7 @@ import com.example.managerinfo.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -32,7 +33,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public FoodCartDto addToCart(Long customerId, Long foodId) throws Exception {
-        Cart currentCart = cartRepository.findByCustomerId(customerId);
+        Cart currentCart = cartRepository.findByCustomerIdAndIsDeleted(customerId, false);
 
         if (currentCart == null) {
             currentCart = new Cart();
@@ -61,5 +62,24 @@ public class CartServiceImpl implements CartService {
         addFoodToCart = foodCartRepository.save(addFoodToCart);
 
         return foodCartMapper.INSTANCE.entityToDto(addFoodToCart);
+    }
+
+    @Override
+    public Long getQuantityInCartByCustomerId(Long customerId) {
+        Cart currentCart = cartRepository.findByCustomerIdAndIsDeleted(customerId, false);
+        if (currentCart == null) {
+            return 0L;
+        }
+
+        List<FoodCart> listFoodInCart = foodCartRepository.findAllByCartId(currentCart.getId());
+        if (listFoodInCart.isEmpty()) {
+            return 0L;
+        }
+
+        Long quantity = 0L;
+        for (FoodCart foodCart: listFoodInCart) {
+            quantity += foodCart.getFoodQuantity();
+        }
+        return quantity;
     }
 }
