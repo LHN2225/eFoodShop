@@ -61,8 +61,7 @@ public class FoodController {
         return "success-message";
     }
 
-    @DeleteMapping("remove-food")
-    @ResponseBody
+    @GetMapping("remove-food")
     public String deleteFood(@RequestParam(value = "id") long id) {
         foodService.deleteFood(id);
 
