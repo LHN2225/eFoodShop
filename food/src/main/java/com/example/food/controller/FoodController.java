@@ -69,20 +69,15 @@ public class FoodController {
     }
 
     @GetMapping("view-food-detail")
-    @ResponseBody
-    public FoodDetailDto viewFoodDetailPage(@RequestParam(value = "id") long id,
-                                         final Model model,
-                                         HttpServletRequest request) {
+    public String viewFoodDetailPage(@RequestParam(value = "id") long id,
+                                         final Model model) {
         FoodDetailDto foodDetailDto = foodService.viewFoodDetail(id);
         if (foodDetailDto == null) {
-            String referer = request.getHeader("Referer");
-            return new FoodDetailDto();
-//            return "redirect:"+referer;
+            return "bad-request-message";
         }
         model.addAttribute("Model", foodDetailDto);
 
-        return foodDetailDto;
-//        return "ViewAllFood";
+        return "view-food-detail";
     }
 
     @PostMapping(value = "update-food", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)

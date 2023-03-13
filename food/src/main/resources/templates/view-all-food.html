@@ -82,7 +82,7 @@
 					<div th:if="${Model != null}">
 						<div class="row">
 							<th:block th:each="food : ${Model.getFoodList()}">
-								<div class="card col-auto"
+								<a th:href="@{|../food/view-food-detail?id=${food.getId()}|}" class="card col-auto"
 									 style="width: 27rem; height: 32rem; margin-left: auto; margin-right: auto; margin-bottom: 2rem; display: flex; justify-content: center; align-items: center;">
 									<img style="width: 27rem; height: 20rem;"
 										 th:src="@{|${@environment.getProperty('food-image.server.url')}/${food.getImageUrl()}|}"
@@ -96,7 +96,7 @@
 											<button type="submit" class="btn btn-danger">Remove</button>
 										</form>
 									</div>
-								</div>
+								</a>
 							</th:block>
 						</div>
 						<div class="row">
