@@ -90,8 +90,11 @@
 										 alt="Image">
 									<div class="card-body" style="width: 27rem; height: 10rem;">
 										<h5 th:text="${food.getName()}"></h5>
-										<p th:text="${food.getPrice()}"> VND</p>
-										<a href="#" class="btn btn-primary">Go somewhere</a>
+										<p th:text="|${food.getPrice()} VND|"></p>
+										<form th:method="GET" th:action="@{../food/remove-food}">
+											<input type="hidden" name="id" th:value="${food.getId()}">
+											<button type="submit" class="btn btn-danger">Remove</button>
+										</form>
 									</div>
 								</div>
 							</th:block>
