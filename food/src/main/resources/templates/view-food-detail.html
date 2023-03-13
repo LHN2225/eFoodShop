@@ -73,38 +73,59 @@
 
 		<section class="sample-page">
 			<div class="container" data-aos="fade-up">
-				<form action="../food/save-food" method="POST" enctype="multipart/form-data">
-					<div class="mb-3">
-						<label for="name" class="form-label">Food name:</label>
-						<input type="text" class="form-control" id="name" name="name">
-					</div>
-					<div class="mb-3">
-						<label for="description" class="form-label">Description:</label>
-						<input type="text" class="form-control" id="description" name="description">
-					</div>
-					<div class="mb-3">
-						<label for="price" class="form-label">Price:</label>
-						<input type="number" step="any" class="form-control" id="price" name="price">
-					</div>
-					<div class="mb-3">
-						<label for="image-input" class="form-label">Image Upload:</label>
-						<input type="file" class="form-control" id="image-input" name="image" accept="image/*"><br><br>
-						<img id="uploaded-image" src="#" alt="Uploaded Image" style="display:none; width: 27rem; height: 20rem;">
-					</div>
-					<br><br>
-					<div class="row">
-						<div class="col-auto">
-							<a href="../food/view-food">
-								<div class="btn btn-primary">
-									Back
+				<div th:if="${Model != null}">
+					<form action="../food/update-food" method="POST" enctype="multipart/form-data">
+						<div class="mb-3">
+							<label for="name" class="form-label">Food name:</label>
+							<input type="text" class="form-control" id="name" name="name" th:value="${Model.getName()}">
+						</div>
+						<div class="mb-3">
+							<label for="description" class="form-label">Description:</label>
+							<input type="text" class="form-control" id="description" name="description" th:value="${Model.getDescription()}">
+						</div>
+						<div class="mb-3">
+							<label for="price" class="form-label">Price:</label>
+							<input type="number" step="any" class="form-control" id="price" name="price" th:value="${Model.getPrice()}">
+						</div>
+						<div class="mb-3">
+							<label for="image-input" class="form-label">Image Upload:</label>
+							<input type="file" class="form-control" id="image-input" name="image" accept="image/*"><br><br>
+							<div class="row">
+								<div class="col-auto">
+									<label for="default-image" class="form-label">Current Image:</label>
+									<img id="default-image"
+										 th:src="@{|${@environment.getProperty('food-image.server.url')}/${Model.getImageUrl()}|}"
+										 alt="Default Image" style="display: block; width: 27rem; height: 20rem;">
 								</div>
-							</a>
+								<div class="col-auto">
+									<label for="uploaded-image" class="form-label">Upload Image:</label>
+									<img id="uploaded-image"
+										 src="#"
+										 alt="Uploaded Image" style="display:none; width: 27rem; height: 20rem;">
+								</div>
+							</div>
 						</div>
-						<div class="col-auto">
-							<button type="submit" class="btn btn-success">Create</button>
+						<br><br>
+						<input type="hidden" name="id" th:value="${Model.getId()}">
+						<input type="hidden" id="isImageChange" name="isImageChange" value="false">
+						<div class="row">
+							<div class="col-auto">
+								<a href="../food/view-food">
+									<div class="btn btn-primary">
+										Back
+									</div>
+								</a>
+							</div>
+							<div class="col-auto">
+								<button type="submit" class="btn btn-success">Update</button>
+							</div>
 						</div>
-					</div>
-				</form>
+
+					</form>
+				</div>
+				<div th:if="${Model == null}">
+					<h1>No product found!</h1>
+				</div>
 			</div>
 		</section>
 
