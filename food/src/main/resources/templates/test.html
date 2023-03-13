@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+</head>
+<body>
+
+    <script>
+        $.ajax({
+              url: "http://localhost:8080/api/role",
+              type: 'GET',
+              contentType: "json",
+              crossDomain: true,
+              success: function(data) {
+                console.log(data);
+              }
+        });
+    </script>
+</body>
+</html>
