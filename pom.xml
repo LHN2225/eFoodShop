@@ -25,6 +25,7 @@
     <module>ManagerInfo</module>
     <module>configserver</module>
     <module>eureka-server</module>
+    <module>gateway</module>
   </modules>
 
   <dependencyManagement>
