@@ -24,6 +24,7 @@
     <module>food</module>
     <module>ManagerInfo</module>
     <module>configserver</module>
+    <module>eureka-server</module>
   </modules>
 
   <dependencyManagement>
