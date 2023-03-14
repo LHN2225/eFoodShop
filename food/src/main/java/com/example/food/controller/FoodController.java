@@ -18,7 +18,6 @@ import javax.validation.Valid;
 import java.io.IOException;
 
 @Controller
-@RequestMapping("/food")
 public class FoodController {
     @Autowired
     FoodService foodService;
