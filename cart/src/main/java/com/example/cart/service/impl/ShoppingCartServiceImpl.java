@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
@@ -19,12 +20,12 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Autowired
     private FoodCartRepository foodCartRepository;
     @Override
-    public Cart updateItemInCart(Food product, Long quantity, User customer) {
+    public Cart updateItemInCart(Optional<Food> product, Long quantity, User customer) {
         Long cartId = cartRepository.findByCustomerId(customer.getId()).getId();
         List<FoodCart> cartItems = foodCartRepository.findByCartId(cartId);
 
 
-        FoodCart item = findFood(cartItems, product.getId());
+        FoodCart item = findFood(cartItems, product.get().getId());
 
         item.setFoodQuantity(quantity);
 
@@ -33,11 +34,11 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public Cart deleteItemFromCart(Food product, User customer) {
+    public Cart deleteItemFromCart(Optional<Food> product, User customer) {
         Long cartId = cartRepository.findByCustomerId(customer.getId()).getId();
         List<FoodCart> cartItems = foodCartRepository.findByCartId(cartId);
 
-        FoodCart item = findFood(cartItems, product.getId());
+        FoodCart item = findFood(cartItems, product.get().getId());
         cartItems.remove(item);
         foodCartRepository.delete(item);
         return cartRepository.findByCustomerId(customer.getId());

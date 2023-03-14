@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FoodServiceImpl implements FoodService {
@@ -21,6 +22,12 @@ public class FoodServiceImpl implements FoodService {
         List<FoodDto> productDtoList = transfer(products);
         return productDtoList;
     }
+
+    @Override
+    public Optional<Food> getFoodById(Long foodId) {
+        return foodReposiroty.findById(foodId);
+    }
+
     private List<FoodDto> transfer(List<Food> products){
         List<FoodDto> productDtoList = new ArrayList<>();
         for(Food product : products){
