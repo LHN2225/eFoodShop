@@ -22,6 +22,8 @@
 
   <modules>
     <module>food</module>
+    <module>ManagerInfo</module>
+    <module>configserver</module>
   </modules>
 
   <dependencyManagement>
