@@ -52,8 +52,8 @@ public class UserController {
         try {
             User tempUser = new User();
             tempUser.setId(user.getId());
-            tempUser.setUsername(user.getUsername());
-            tempUser.setRole(user.getRole());
+            tempUser.setEmail(user.getEmail());
+            tempUser.setRoleId(user.getRoleId());
             tempUser.setPassword(user.getPassword());
             tempUser.setPhone(user.getPhone());
 

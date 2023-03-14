@@ -9,8 +9,6 @@ import java.util.List;
 public interface UserService {
     List<User> findAll();
 
-    User findByUsername(String username);
-
     User findById(long id);
 
     void deleteById(long id);

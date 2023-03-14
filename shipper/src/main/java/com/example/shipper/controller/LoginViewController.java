@@ -20,9 +20,9 @@ public class LoginViewController {
 
     @PostMapping("")
     @ResponseBody
-    public User testPassParameters(@RequestParam String username, @RequestParam String password) {
+    public User testPassParameters(@RequestParam String email, @RequestParam String password) {
         User user = new User();
-        user.setUsername(username);
+        user.setEmail(email);
         user.setPassword(password);
         return user;
     }

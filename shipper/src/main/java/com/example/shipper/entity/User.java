@@ -6,14 +6,15 @@ import javax.persistence.*;
 
 @Entity
 @Data
-@Table(name = "USER_1")
+@Table(name = "user_1")
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "username")
-    private String username;
+    @Column(name = "email")
+    private String email;
 
     @Column(name = "password")
     private String password;
@@ -24,7 +25,6 @@ public class User {
     @Column(name = "phone")
     private String phone;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private Role role;
+    @Column(name = "role_id")
+    private Long roleId;
 }

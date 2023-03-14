@@ -11,8 +11,6 @@ import javax.transaction.Transactional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    User findByUsername(String username);
-
     @Modifying
     @Transactional
     @Query("UPDATE User u SET u.password = :password, u.fullname = :fullname, u.phone = :phone WHERE u.id = :id")
