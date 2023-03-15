@@ -1,8 +1,9 @@
 package com.example.shipper.controller;
 
 import com.example.shipper.dto.OrderDetailDto;
-import com.example.shipper.dto.UserLoginDto;
-import com.example.shipper.repository.OrderDetailRepository;
+import com.example.shipper.dto.OrderDetailFoodDto;
+import com.example.shipper.service.OrderDetailFoodService;
+import com.example.shipper.service.OrderDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,13 @@ import java.util.List;
 public class TestController {
 
     @Autowired
-    private OrderDetailRepository orderDetailRepository;
+    private OrderDetailService orderDetailService;
+
+    @Autowired
+    private OrderDetailFoodService orderDetailFoodService;
+
+    @Autowired
+    private OrderDetailFoodService findByOrderId;
 
     @GetMapping("/")
     public String index() {
@@ -45,14 +52,14 @@ public class TestController {
 
     @GetMapping("/5")
     @ResponseBody
-    public List<OrderDetailDto> getAllDto() {
-        return orderDetailRepository.findByOrderId(1L);
+    public OrderDetailDto getAllDto() {
+        return orderDetailService.getOrderDetailById(1L);
     }
 
     @GetMapping("/6")
     @ResponseBody
-    public List<UserLoginDto> getAllDto1() {
-        return orderDetailRepository.test();
+    public List<OrderDetailFoodDto> getAllFoods() {
+        return orderDetailFoodService.getFoodsByOrderId(1L);
     }
     
 }

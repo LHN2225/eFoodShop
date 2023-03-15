@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -13,7 +14,4 @@ public class OrderDetailDto {
     private String address;
     private String customerFullname;
     private String shipperFullname;
-    private String foodName;
-    private int food_quantity;
-    private float cost;
 }
