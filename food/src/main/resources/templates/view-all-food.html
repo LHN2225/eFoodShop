@@ -85,7 +85,7 @@
 								<a th:href="@{|../food/view-food-detail?id=${food.getId()}|}" class="card col-auto"
 									 style="width: 27rem; height: 32rem; margin-left: auto; margin-right: auto; margin-bottom: 2rem; display: flex; justify-content: center; align-items: center;">
 									<img style="width: 27rem; height: 20rem;"
-										 th:src="@{|${@environment.getProperty('food-image.server.url')}/${food.getImageUrl()}|}"
+										 th:src="@{|${@environment.getProperty('food-image.server.url')}/${food.getImageLink()}|}"
 										 class="card-img-top"
 										 alt="Image">
 									<div class="card-body" style="width: 27rem; height: 10rem;">
