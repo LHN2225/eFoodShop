@@ -20,6 +20,21 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public List<Order> getNotBusyOrders() {
+        return orderRepository.findByShipperIdAndShippingStatus(null, "IN_PROGRESS");
+    }
+
+    @Override
+    public List<Order> getInProgressOrders(Long shipperId) {
+        return orderRepository.findByShipperIdAndShippingStatus(shipperId, "IN_PROGRESS");
+    }
+
+    @Override
+    public List<Order> getDeliveredOrders(Long shipperId) {
+        return orderRepository.findByShipperIdAndShippingStatus(shipperId, "DELIVERED");
+    }
+
+    @Override
     public int receiveOrderByShipper(Long shipperId, Long orderId) {
         return orderRepository.receiveOrderByShipper(shipperId, orderId);
     }

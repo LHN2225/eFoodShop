@@ -14,6 +14,8 @@ import java.util.List;
 public interface OrderRepository extends JpaRepository<Order, Long> {
     List<Order> findByShipperId(Long shipperId);
 
+    List<Order> findByShipperIdAndShippingStatus(Long shipperId, String shippingStatus);
+
     @Modifying
     @Transactional
     @Query("UPDATE Order o SET o.shipperId = :shipperId WHERE o.id = :id")
