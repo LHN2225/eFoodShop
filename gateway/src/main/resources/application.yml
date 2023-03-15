@@ -11,6 +11,10 @@ spring:
           uri: lb://FOOD/
           predicates:
             - Path=/food/**
+        - id: storage
+          uri: lb://STORAGE/
+          predicates:
+            - Path=/storage/**
 
 eureka:
   client:
