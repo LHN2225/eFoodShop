@@ -5,9 +5,11 @@ import com.example.shipper.dto.OrderDetailFoodDto;
 import com.example.shipper.service.OrderDetailFoodService;
 import com.example.shipper.service.OrderDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -22,6 +24,9 @@ public class TestController {
 
     @Autowired
     private OrderDetailFoodService orderDetailFoodService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/")
     public String index() {
@@ -77,5 +82,13 @@ public class TestController {
     public String test9() {
         return "delivered-order";
     }
-    
+
+    @GetMapping("/10/{password}")
+    @ResponseBody
+    public String test10(@PathVariable String password) {
+        System.out.println(passwordEncoder.encode((password)));
+        System.out.println(passwordEncoder.matches("123",
+                "$2a$10$8z2WnT9SVaWLyYfwxbEEEOScnxcIFU1d7x86TE3Q8Rj.BJVXgUySy"));
+        return "delivered-order";
+    }
 }

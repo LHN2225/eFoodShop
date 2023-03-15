@@ -5,6 +5,7 @@ import com.example.shipper.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("")
     public ResponseEntity<List<User>> getAllUsers(){
@@ -65,9 +69,9 @@ public class UserController {
         }
     }
 
-    @PutMapping("/{id}")
+    /*@PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable("id") Long id, @RequestBody User user){
-        User _user = userService.findById(id);
+        User _user = userService.findById(shipper_id_test);
         if (_user!=null) {
             _user.setPassword(user.getPassword());
             _user.setFullname(user.getFullname());
@@ -75,7 +79,7 @@ public class UserController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-    }
+    }*/
 
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteRole(@PathVariable("id") long id){
@@ -105,7 +109,8 @@ public class UserController {
             @RequestParam String fullname,
             @RequestParam String phone
     ) {
-        int response = userService.updateProfile(shipper_id_test, password, fullname, phone);
+        System.out.println(password);
+        int response = userService.updateProfile(shipper_id_test, passwordEncoder.encode(password), fullname, phone);
         try {
             //int response = userService.updateProfile(shipper_id_test, password, fullname, phone);
             return new ResponseEntity<>(response, HttpStatus.OK);
