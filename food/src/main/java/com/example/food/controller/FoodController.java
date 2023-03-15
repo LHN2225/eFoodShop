@@ -4,25 +4,27 @@ import com.example.food.dto.CreateFoodDto;
 import com.example.food.dto.FoodDetailDto;
 import com.example.food.dto.UpdateFoodDto;
 import com.example.food.entity.Food;
+import com.example.food.helper.Helper;
 import com.example.food.service.FoodService;
-import com.example.food.service.StorageService;
 import com.example.food.viewmodel.FoodListViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.io.IOException;
 
 @Controller
 public class FoodController {
     @Autowired
     FoodService foodService;
     @Autowired
-    StorageService storageService;
+    RestTemplate restTemplate;
 
     @GetMapping("view-food")
     public String viewAllFoodPage(@RequestParam(value = "page", required = false , defaultValue = "1") int page_number,
@@ -30,7 +32,6 @@ public class FoodController {
         FoodListViewModel viewModel = foodService.viewAllFood(page_number);
         model.addAttribute("Model", viewModel);
 
-//        return viewModel;
         return "view-all-food";
     }
     @GetMapping("create-food")
@@ -42,7 +43,8 @@ public class FoodController {
     @PostMapping(value = "save-food", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public String saveFood(@ModelAttribute @Valid CreateFoodDto createFoodDto) {
         try {
-            String imageName = storageService.saveImage(createFoodDto.getImage(), "/image-food");
+            Helper helper = new Helper();
+            String imageName = helper.uploadImage(createFoodDto.getImage(), restTemplate);
             if (imageName.isEmpty()) return "bad-request-message";
 
             foodService.saveFood(new Food(
@@ -85,7 +87,8 @@ public class FoodController {
         try {
             String imageName;
             if (updateFoodDto.getIsImageChange()) {
-                imageName = storageService.saveImage(updateFoodDto.getImage(), "/image-food");
+                Helper helper = new Helper();
+                imageName = helper.uploadImage(updateFoodDto.getImage(), restTemplate);
                 if (imageName.isEmpty()) return "bad-request-message";
 
                 foodService.updateFoodWithNewImage(new Food(
