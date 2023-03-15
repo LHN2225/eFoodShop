@@ -9,11 +9,11 @@ import java.util.List;
 public interface OrderService {
     List<Order> getOrderThatNotBusy();
 
-    List<Order> getNotBusyOrders();
+    List<Order> getNotBusyOrders(int pageNumber);
 
-    List<Order> getInProgressOrders(Long shipperId);
+    List<Order> getInProgressOrders(Long shipperId, int pageNumber);
 
-    List<Order> getDeliveredOrders(Long shipperId);
+    List<Order> getDeliveredOrders(Long shipperId, int pageNumber);
 
     int receiveOrderByShipper(Long shipperId, Long orderId);
 }

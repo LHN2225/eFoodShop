@@ -2,6 +2,7 @@ package com.example.shipper.controller;
 
 import com.example.shipper.dto.OrderDetailDto;
 import com.example.shipper.entity.Order;
+import com.example.shipper.repository.PageRepository;
 import com.example.shipper.service.OrderDetailFoodService;
 import com.example.shipper.service.OrderDetailService;
 import com.example.shipper.service.OrderService;
@@ -28,10 +29,10 @@ public class OrderController {
     @Autowired
     private OrderDetailFoodService orderDetailFoodService;
 
-    @GetMapping("/not-busy")
-    public ResponseEntity<List<Order>> getOrderThatNotBusy() {
+    @GetMapping("/not-busy/{pageNumber}")
+    public ResponseEntity<List<Order>> getOrderThatNotBusy(@PathVariable int pageNumber) {
         try {
-            List<Order> orders = orderService.getOrderThatNotBusy();
+            List<Order> orders = orderService.getNotBusyOrders(pageNumber);
             if (orders.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -41,10 +42,10 @@ public class OrderController {
         }
     }
 
-    @GetMapping("/in-progress")
-    public ResponseEntity<List<Order>> getInProgressOrder() {
+    @GetMapping("/in-progress/{pageNumber}")
+    public ResponseEntity<List<Order>> getInProgressOrder(@PathVariable int pageNumber) {
         try {
-            List<Order> orders = orderService.getInProgressOrders(shipper_id_test);
+            List<Order> orders = orderService.getInProgressOrders(shipper_id_test, pageNumber);
             if (orders.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -54,10 +55,10 @@ public class OrderController {
         }
     }
 
-    @GetMapping("/delivered")
-    public ResponseEntity<List<Order>> getDeliveredOrder() {
+    @GetMapping("/delivered/{pageNumber}")
+    public ResponseEntity<List<Order>> getDeliveredOrder(@PathVariable int pageNumber) {
         try {
-            List<Order> orders = orderService.getDeliveredOrders(shipper_id_test);
+            List<Order> orders = orderService.getDeliveredOrders(shipper_id_test, pageNumber);
             if (orders.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }

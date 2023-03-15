@@ -2,8 +2,12 @@ package com.example.shipper.controller;
 
 import com.example.shipper.dto.OrderDetailDto;
 import com.example.shipper.dto.OrderDetailFoodDto;
+import com.example.shipper.entity.Order;
+import com.example.shipper.repository.OrderRepository;
+import com.example.shipper.repository.PageRepository;
 import com.example.shipper.service.OrderDetailFoodService;
 import com.example.shipper.service.OrderDetailService;
+import org.apache.tomcat.util.net.jsse.JSSEUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -90,5 +94,18 @@ public class TestController {
         System.out.println(passwordEncoder.matches("123",
                 "$2a$10$8z2WnT9SVaWLyYfwxbEEEOScnxcIFU1d7x86TE3Q8Rj.BJVXgUySy"));
         return "delivered-order";
+    }
+
+    @Autowired
+    private OrderRepository orderRepository;
+
+    @Autowired
+    private PageRepository pageRepository;
+
+    @GetMapping("/11/{pageNumber}")
+    @ResponseBody
+    public List<Order> test11(@PathVariable int pageNumber) {
+        System.out.println(pageRepository.findOrderTotalPageNumber(2));
+        return orderRepository.findAll1(pageNumber, 2);
     }
 }

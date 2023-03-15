@@ -11,6 +11,8 @@ import java.util.List;
 @Service
 public class OrderServiceImpl implements OrderService {
 
+    int pageSize = 5;
+
     @Autowired
     private OrderRepository orderRepository;
 
@@ -20,18 +22,18 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getNotBusyOrders() {
-        return orderRepository.findByShipperIdAndShippingStatus(null, "IN_PROGRESS");
+    public List<Order> getNotBusyOrders(int pageNumber) {
+        return orderRepository.findNotBusyOrders("IN_PROGRESS", pageNumber, pageSize);
     }
 
     @Override
-    public List<Order> getInProgressOrders(Long shipperId) {
-        return orderRepository.findByShipperIdAndShippingStatus(shipperId, "IN_PROGRESS");
+    public List<Order> getInProgressOrders(Long shipperId, int pageNumber) {
+        return orderRepository.findByShipperIdAndShippingStatus(shipperId, "IN_PROGRESS", pageNumber, pageSize);
     }
 
     @Override
-    public List<Order> getDeliveredOrders(Long shipperId) {
-        return orderRepository.findByShipperIdAndShippingStatus(shipperId, "DELIVERED");
+    public List<Order> getDeliveredOrders(Long shipperId, int pageNumber) {
+        return orderRepository.findByShipperIdAndShippingStatus(shipperId, "DELIVERED", pageNumber, pageSize);
     }
 
     @Override

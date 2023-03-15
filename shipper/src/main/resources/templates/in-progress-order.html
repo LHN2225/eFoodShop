@@ -121,7 +121,7 @@
 
 		function render() {
 			$.ajax({
-				url: "http://localhost:8080/shipper/order/fragment/in-progress",
+				url: "http://localhost:8080/shipper/order/fragment/in-progress/" + 1,
 				type: 'GET',
 				contentType: "html",
 				crossDomain: true,
