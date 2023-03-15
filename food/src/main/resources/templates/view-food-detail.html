@@ -94,7 +94,7 @@
 								<div class="col-auto">
 									<label for="default-image" class="form-label">Current Image:</label>
 									<img id="default-image"
-										 th:src="@{|${@environment.getProperty('food-image.server.url')}/${Model.getImageUrl()}|}"
+										 th:src="@{|${@environment.getProperty('food-image.server.url')}/${Model.getImageLink()}|}"
 										 alt="Default Image" style="display: block; width: 27rem; height: 20rem;">
 								</div>
 								<div class="col-auto">
