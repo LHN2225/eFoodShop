@@ -67,5 +67,15 @@ public class TestController {
         model.addAttribute("foods", orderDetail.getFoods());
         return "order-detail";
     }
+
+    @GetMapping("/8")
+    public String test8() {
+        return "in-progress-order";
+    }
+
+    @GetMapping("/9")
+    public String test9() {
+        return "delivered-order";
+    }
     
 }

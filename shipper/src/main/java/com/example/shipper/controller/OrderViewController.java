@@ -14,15 +14,32 @@ import com.example.shipper.service.OrderService;
 @Controller
 @RequestMapping("/order")
 public class OrderViewController {
+
+    // Test for shipper id before authentication and authorization handling by security
+    public Long shipper_id_test = 1L;
     
     @Autowired
     private OrderService orderService;
 
     @GetMapping("/not-busy")
     public String getNotBusyOrders(Model model) {
-        List<Order> orders = orderService.getOrderThatNotBusy();
+        List<Order> orders = orderService.getNotBusyOrders();
         model.addAttribute("orders", orders);
         return "fragment/not-busy-orders";
+    }
+
+    @GetMapping("/in-progress")
+    public String getInProgressOrders(Model model) {
+        List<Order> orders = orderService.getInProgressOrders(shipper_id_test);
+        model.addAttribute("orders", orders);
+        return "fragment/in-progress-orders-box";
+    }
+
+    @GetMapping("/delivered")
+    public String getDeliveredOrders(Model model) {
+        List<Order> orders = orderService.getDeliveredOrders(shipper_id_test);
+        model.addAttribute("orders", orders);
+        return "fragment/delivered-orders-box";
     }
 
 }
