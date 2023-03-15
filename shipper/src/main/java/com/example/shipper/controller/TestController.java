@@ -6,6 +6,7 @@ import com.example.shipper.service.OrderDetailFoodService;
 import com.example.shipper.service.OrderDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,9 +22,6 @@ public class TestController {
 
     @Autowired
     private OrderDetailFoodService orderDetailFoodService;
-
-    @Autowired
-    private OrderDetailFoodService findByOrderId;
 
     @GetMapping("/")
     public String index() {
@@ -60,6 +58,14 @@ public class TestController {
     @ResponseBody
     public List<OrderDetailFoodDto> getAllFoods() {
         return orderDetailFoodService.getFoodsByOrderId(1L);
+    }
+
+    @GetMapping("/7")
+    public String test7(Model model) {
+        OrderDetailDto orderDetail = orderDetailService.getOrderDetailById(1L);
+        model.addAttribute("orderDetail", orderDetail);
+        model.addAttribute("foods", orderDetail.getFoods());
+        return "order-detail";
     }
     
 }

@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class OrderDetailFoodDto {
-    private String foodName;
+    private String name;
     private int quantity;
     private float cost;
 }
