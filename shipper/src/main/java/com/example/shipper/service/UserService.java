@@ -10,7 +10,7 @@ import java.util.List;
 public interface UserService {
     List<UserDto> findAll();
 
-    UserDto findById(long id);
+    UserDto findById();
 
     void deleteById(long id);
 

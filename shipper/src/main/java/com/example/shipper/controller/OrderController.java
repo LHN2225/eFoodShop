@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -33,7 +34,7 @@ public class OrderController {
     @Autowired
     private OrderDetailFoodService orderDetailFoodService;
 
-    @GetMapping("/not-busy/{pageNumber}")
+    /*@GetMapping("/not-busy/{pageNumber}")
     public ResponseEntity<List<OrderDto>> getOrderThatNotBusy(@PathVariable int pageNumber) {
         try {
             List<OrderDto> orderDtoList = orderService.getNotBusyOrders(pageNumber);
@@ -44,9 +45,34 @@ public class OrderController {
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }*/
+
+    @GetMapping("/not-busy/{isSearch}/{orderId}/{pageNumber}")
+    public ResponseEntity<List<OrderDto>> getNotBusyOrders(@PathVariable int isSearch,
+                                                           @PathVariable Long orderId,
+                                                           @PathVariable int pageNumber) {
+        try {
+            List<OrderDto> orderDtoList = new ArrayList<>();
+            if (isSearch == 0) {
+                orderDtoList = orderService.getNotBusyOrders(pageNumber);
+            } else {
+                OrderDto orderDto = orderService.findNotBusyOrderById(orderId);
+                if (orderDto != null) {
+                    orderDtoList.add(orderDto);
+                }
+            }
+
+            if (orderDtoList.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(orderDtoList, HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
-    @GetMapping("/in-progress/{pageNumber}")
+    /*@GetMapping("/in-progress/{pageNumber}")
     public ResponseEntity<List<OrderDto>> getInProgressOrder(@PathVariable int pageNumber) {
         try {
             List<OrderDto> orderDtoList = orderService.getInProgressOrders(pageNumber);
@@ -57,9 +83,34 @@ public class OrderController {
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }*/
+
+    @GetMapping("/in-progress/{isSearch}/{orderId}/{pageNumber}")
+    public ResponseEntity<List<OrderDto>> getInProgressOrder(@PathVariable int isSearch,
+                                                           @PathVariable Long orderId,
+                                                           @PathVariable int pageNumber) {
+        try {
+            List<OrderDto> orderDtoList = new ArrayList<>();
+            if (isSearch == 0) {
+                orderDtoList = orderService.getInProgressOrders(pageNumber);
+            } else {
+                OrderDto orderDto = orderService.findInProgressOrderById(orderId);
+                if (orderDto != null) {
+                    orderDtoList.add(orderDto);
+                }
+            }
+
+            if (orderDtoList.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(orderDtoList, HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
-    @GetMapping("/delivered/{pageNumber}")
+    /*@GetMapping("/delivered/{pageNumber}")
     public ResponseEntity<List<OrderDto>> getDeliveredOrder(@PathVariable int pageNumber) {
         try {
             List<OrderDto> orderDtoList = orderService.getDeliveredOrders(pageNumber);
@@ -67,6 +118,31 @@ public class OrderController {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
             return new ResponseEntity<>(orderDtoList, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }*/
+
+    @GetMapping("/delivered/{isSearch}/{orderId}/{pageNumber}")
+    public ResponseEntity<List<OrderDto>> getDeliveredOrder(@PathVariable int isSearch,
+                                                             @PathVariable Long orderId,
+                                                             @PathVariable int pageNumber) {
+        try {
+            List<OrderDto> orderDtoList = new ArrayList<>();
+            if (isSearch == 0) {
+                orderDtoList = orderService.getDeliveredOrders(pageNumber);
+            } else {
+                OrderDto orderDto = orderService.findDeliveredOrderById(orderId);
+                if (orderDto != null) {
+                    orderDtoList.add(orderDto);
+                }
+            }
+
+            if (orderDtoList.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(orderDtoList, HttpStatus.OK);
+
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }

@@ -1,5 +1,6 @@
 package com.example.shipper.service.impl;
 
+import com.example.shipper.config.AppConfig;
 import com.example.shipper.dto.UserDto;
 import com.example.shipper.entity.User;
 import com.example.shipper.mapper.UserMapper;
@@ -17,6 +18,9 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Autowired
+    private AppConfig appConfig;
+
+    @Autowired
     private UserMapper userMapper;
 
     @Override
@@ -25,8 +29,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto findById(long id) {
-        return userMapper.entityToDto(userRepository.findById(id).orElse(null));
+    public UserDto findById() {
+        return userMapper.entityToDto(userRepository.findById(appConfig.shipperId).orElse(null));
     }
 
     @Override

@@ -10,6 +10,8 @@ import com.example.shipper.service.OrderDetailFoodService;
 import com.example.shipper.service.OrderDetailService;
 import com.example.shipper.service.PageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,18 +30,6 @@ public class OrderViewController {
     @Autowired
     private AppConfig appConfig;
     
-    @Autowired
-    private OrderService orderService;
-
-    @Autowired
-    private OrderDetailService orderDetailService;
-
-    @Autowired
-    private OrderDetailFoodService orderDetailFoodService;
-
-    @Autowired
-    private PageService pageService;
-
     @GetMapping("/in-progress")
     public String getInProgressOrdersPage(Model model) {
         // Rest template ...
@@ -85,15 +75,22 @@ public class OrderViewController {
         @PathVariable Long orderId,
         @PathVariable int pageNumber
     ) {
-        List<OrderDto> orderDtoList = new ArrayList<>();
-        if (isSearch == 0) {
-            orderDtoList = orderService.getNotBusyOrders(pageNumber);
-        } else {
-            OrderDto orderDto = orderService.findNotBusyOrderById(orderId);
-            if (orderDto != null) {
-                orderDtoList.add(orderDto);
-            }
-        }
+        // Rest template ...
+        RestTemplate restTemplate = new RestTemplate();
+
+        String urlTepmlate = appConfig.hostname + "/api/order/not-busy/%d/%s/%d";
+        String url = String.format(urlTepmlate, isSearch, String.valueOf(orderId), pageNumber);
+
+        ResponseEntity<List<OrderDto>> responseEntity = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<OrderDto>>() {}
+        );
+
+        List<OrderDto> orderDtoList = responseEntity.getBody();
+        // ...
+
         model.addAttribute("orders", orderDtoList);
         return "fragment/not-busy-orders";
     }
@@ -105,15 +102,22 @@ public class OrderViewController {
         @PathVariable Long orderId,
         @PathVariable int pageNumber
     ) {
-        List<OrderDto> orderDtoList = new ArrayList<>();
-        if (isSearch == 0) {
-            orderDtoList = orderService.getInProgressOrders(pageNumber);
-        } else {
-            OrderDto orderDto = orderService.findInProgressOrderById(orderId);
-            if (orderDto != null) {
-                orderDtoList.add(orderDto);
-            }
-        }
+        // Rest template ...
+        RestTemplate restTemplate = new RestTemplate();
+
+        String urlTepmlate = appConfig.hostname + "/api/order/in-progress/%d/%s/%d";
+        String url = String.format(urlTepmlate, isSearch, String.valueOf(orderId), pageNumber);
+
+        ResponseEntity<List<OrderDto>> responseEntity = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<OrderDto>>() {}
+        );
+
+        List<OrderDto> orderDtoList = responseEntity.getBody();
+        // ...
+
         model.addAttribute("orders", orderDtoList);
         return "fragment/in-progress-orders-box";
     }
@@ -125,22 +129,37 @@ public class OrderViewController {
         @PathVariable Long orderId,
         @PathVariable int pageNumber
     ) {
-        List<OrderDto> orderDtoList = new ArrayList<>();
-        if (isSearch == 0) {
-            orderDtoList = orderService.getDeliveredOrders(pageNumber);
-        } else {
-            OrderDto order = orderService.findDeliveredOrderById(orderId);
-            if (order != null) {
-                orderDtoList.add(order);
-            }
-        }
+        // Rest template ...
+        RestTemplate restTemplate = new RestTemplate();
+
+        String urlTepmlate = appConfig.hostname + "/api/order/delivered/%d/%s/%d";
+        String url = String.format(urlTepmlate, isSearch, String.valueOf(orderId), pageNumber);
+
+        ResponseEntity<List<OrderDto>> responseEntity = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<OrderDto>>() {}
+        );
+
+        List<OrderDto> orderDtoList = responseEntity.getBody();
+        // ...
+
         model.addAttribute("orders", orderDtoList);
         return "fragment/delivered-orders-box";
     }
 
     @GetMapping("/{orderId}")
-    public String getORderDetail(Model model, @PathVariable Long orderId) {
-        OrderDetailDto orderDetail = orderDetailService.getOrderDetailById(orderId);
+    public String getOrderDetail(Model model, @PathVariable Long orderId) {
+        // Rest template ...
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<OrderDetailDto> responseEntity = restTemplate.getForEntity(
+                appConfig.hostname + "/api/order/" + orderId,
+                OrderDetailDto.class
+        );
+        OrderDetailDto orderDetail = responseEntity.getBody();
+        // ...
+
         model.addAttribute("orderDetail", orderDetail);
         model.addAttribute("foods", orderDetail.getFoods());
         return "order-detail";

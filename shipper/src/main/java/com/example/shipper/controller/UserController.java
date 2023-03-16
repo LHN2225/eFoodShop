@@ -39,10 +39,10 @@ public class UserController {
         }
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<UserDto> getUserById(@PathVariable Long id){
+    @GetMapping("/profile")
+    public ResponseEntity<UserDto> getUserById(){
         try {
-            UserDto userDto = userService.findById(id);
+            UserDto userDto = userService.findById();
 
             if (userDto == null) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
