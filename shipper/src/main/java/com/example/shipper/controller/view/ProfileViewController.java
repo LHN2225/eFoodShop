@@ -1,4 +1,4 @@
-package com.example.shipper.controller;
+package com.example.shipper.controller.view;
 
 import com.example.shipper.config.AppConfig;
 import com.example.shipper.dto.UserDto;

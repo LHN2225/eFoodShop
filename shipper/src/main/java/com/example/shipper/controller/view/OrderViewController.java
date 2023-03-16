@@ -1,4 +1,4 @@
-package com.example.shipper.controller;
+package com.example.shipper.controller.view;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,7 @@ import com.example.shipper.dto.OrderDto;
 import com.example.shipper.repository.PageRepository;
 import com.example.shipper.service.OrderDetailFoodService;
 import com.example.shipper.service.OrderDetailService;
+import com.example.shipper.service.PageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.shipper.dto.OrderDetailDto;
-import com.example.shipper.entity.Order;
 import com.example.shipper.service.OrderService;
 
 @Controller
@@ -36,11 +36,11 @@ public class OrderViewController {
     private OrderDetailFoodService orderDetailFoodService;
 
     @Autowired
-    private PageRepository pageRepository;
+    private PageService pageService;
 
     @GetMapping("/in-progress")
     public String getInProgressOrdersPage(Model model) {           
-        int totalPageNumber = pageRepository.findInProgressOrderTotalPageNumber(appConfig.shipperId, "IN_PROGRESS", appConfig.pageSize);
+        int totalPageNumber = pageService.findInProgressOrderTotalPageNumber();
         int[] paginationItems = new int[totalPageNumber];
         for (int i = 1; i <= totalPageNumber; i++) {
             paginationItems[i-1] = i;
@@ -51,7 +51,7 @@ public class OrderViewController {
 
     @GetMapping("/delivered")
     public String getDeliveredOrdersPage(Model model) {
-        int totalPageNumber = pageRepository.findDeliveredOrderTotalPageNumber(appConfig.shipperId, "DELIVERED", appConfig.pageSize);
+        int totalPageNumber = pageService.findDeliveredOrderTotalPageNumber();
         int[] paginationItems = new int[totalPageNumber];
         for (int i = 1; i <= totalPageNumber; i++) {
             paginationItems[i-1] = i;

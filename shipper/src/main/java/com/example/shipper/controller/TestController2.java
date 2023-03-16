@@ -1,10 +1,14 @@
 package com.example.shipper.controller;
 
+import com.example.shipper.config.AppConfig;
+import com.example.shipper.dto.OrderDto;
+import com.example.shipper.dto.UserDto;
 import com.example.shipper.entity.Order;
+import com.example.shipper.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,17 +20,25 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/test/")
 public class TestController2 {
-    /*@Autowired
-    private RestTemplate restTemplate;*/
 
-    /*@GetMapping(value = "/order/not-busy/{pageNumber}")
-    public String getProductList(@PathVariable int pageNumber) {
-        HttpHeaders headers = new HttpHeaders();
-        HttpEntity<List<Order>> entity = new HttpEntity<List<Order>>(headers);
+    @Autowired
+    private RestTemplate restTemplate;
 
-        String urlTemplate = "http://localhost:8080/api/order/not-busy/%d";
-        String url = String.format(urlTemplate, pageNumber);
+    @Autowired
+    private AppConfig appConfig;
 
-        return restTemplate.exchange(url, HttpMethod.GET, entity, String.class).getBody();
-    }*/
+    @GetMapping(value = "/order/not-busy/{pageNumber}")
+    public List<OrderDto> getProductList(@PathVariable int pageNumber) {
+        RestTemplate restTemplate = new RestTemplate();
+
+        ResponseEntity<List<OrderDto>> responseEntity = restTemplate.exchange(
+                appConfig.hostname + "/api/order/not-busy/1",
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<OrderDto>>() {}
+        );
+
+        List<OrderDto> orderDtoList = responseEntity.getBody();
+        return orderDtoList;
+    }
 }

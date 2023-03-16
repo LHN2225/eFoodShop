@@ -1,6 +1,7 @@
 package com.example.shipper.dto;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Data
 @RequiredArgsConstructor
+@NoArgsConstructor
 public class OrderDetailDto {
     @NonNull
     private Long orderId;
