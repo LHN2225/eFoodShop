@@ -38,14 +38,24 @@ public class OrderViewController {
     private PageRepository pageRepository;
 
     @GetMapping("/in-progress")
-    public String getInProgressOrdersPage(Model model) {
-        model.addAttribute("pageNumber", pageRepository.findInProgressOrderTotalPageNumber(pageSize));
+    public String getInProgressOrdersPage(Model model) {           
+        int totalPageNumber = pageRepository.findInProgressOrderTotalPageNumber(shipper_id_test, "IN_PROGRESS", pageSize);
+        int[] paginationItems = new int[totalPageNumber];
+        for (int i = 1; i <= totalPageNumber; i++) {
+            paginationItems[i-1] = i;
+        }
+        model.addAttribute("paginationItems", paginationItems);
         return "in-progress-order";
     }
 
     @GetMapping("/delivered")
     public String getDeliveredOrdersPage(Model model) {
-        model.addAttribute("pageNumber", pageRepository.findDeliveredOrderTotalPageNumber(pageSize));
+        int totalPageNumber = pageRepository.findDeliveredOrderTotalPageNumber(shipper_id_test, "IN_PROGRESS", pageSize);
+        int[] paginationItems = new int[totalPageNumber];
+        for (int i = 1; i <= totalPageNumber; i++) {
+            paginationItems[i-1] = i;
+        }
+        model.addAttribute("paginationItems", paginationItems);
         return "delivered-order";
     }
 

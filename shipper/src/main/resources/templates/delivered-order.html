@@ -81,9 +81,12 @@
 				<!-- Pagination -->
 				<nav aria-label="Page navigation example" class="d-flex justify-content-center mt-4">
 					<ul class="pagination">
-						<li class="page-item"><a class="page-link active" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
+						<th:block th:each="paginationItem: ${paginationItems}">
+							<li class="page-item">
+								<a role="button" class="page-link" th:utext="${paginationItem}"
+									onclick="render(this.innerHTML); setActiveLink(this);">1</a>
+							</li>
+						</th:block>
 					</ul>
 				</nav>
 			</div>
@@ -116,12 +119,18 @@
 	<script>
 		let shipperId = 1; // Test for shipper id before authentication and authorization handling by security
 
-		render(); // Show all content at the first load
+		render(1); // Show all content at the first load
 
 
-		function render() {
+		function render(pageNumber) {
+			// Make first page in pagination active
+			document.querySelectorAll(".page-link")[0].classList.remove("active");
+			if (pageNumber === 1) {
+				document.querySelectorAll(".page-link")[0].classList.add("active");
+			}
+			
 			$.ajax({
-				url: "http://localhost:8080/shipper/order/fragment/delivered/" + 1,
+				url: "http://localhost:8080/shipper/order/fragment/delivered/" + pageNumber,
 				type: 'GET',
 				contentType: "html",
 				crossDomain: true,
@@ -131,23 +140,15 @@
 			});
 		}
 
-		function complete(that) {
-			let orderId = $(that).closest("tr").find(".order-id").text();
-			$.ajax({
-				url: 'http://localhost:8080/api/order/shipper',
-				method: 'PUT',
-				data: {
-					shipperId: shipperId,
-					orderId: orderId
-				},
-				success: function (response) {
-					//console.log('Request succeeded:', response);
-					render();
-				},
-				error: function (xhr, status, error) {
-					console.log('Request failed:', error);
-				}
+		function setActiveLink(link) {
+			// Remove the "active" class from all page links
+			let pageLinks = document.querySelectorAll(".page-link");
+			pageLinks.forEach(function (pageLink) {
+				pageLink.parentNode.classList.remove("active");
 			});
+
+			// Add the "active" class to the clicked page link's parent "li" element
+			link.parentNode.classList.add("active");
 		}
 	</script>
 
