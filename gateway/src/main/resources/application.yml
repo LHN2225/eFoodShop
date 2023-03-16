@@ -18,7 +18,7 @@ spring:
         - id: manager_info
           uri: lb://MANAGERINFO/
           predicates:
-            - Path=/api/managerInfo/**
+            - Path=/api/manager-info/**
 
 eureka:
   client:

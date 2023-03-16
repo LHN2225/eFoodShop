@@ -8,10 +8,10 @@
     <title>Home</title>
 
     <!-- favicon -->
-    <link rel="shortcut icon" th:href="@{img/sample/logo/favicon.ico}" type="image/x-icon">
+    <link rel="shortcut icon" th:href="@{../static/img/sample/logo/favicon.ico}" type="image/x-icon">
 
     <!-- custom css link -->
-    <link rel="stylesheet" th:href="@{/css/style_sample-prefix.css}">
+    <link rel="stylesheet" th:href="@{../static/css/style_sample-prefix.css}">
 
     <!-- google font link -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,17 +47,13 @@
             </div>
 
             <div class="mb-3 mt-3 d-flex">
-                <label class="form-label mx-3">Password</label>
-                <input class="form-control-sm form-control" type="password" th:field="*{password}" name="password" required>
-            </div>
-
-            <div class="mb-3 mt-3 d-flex">
                 <label class="form-label mx-3">Phone Number</label>
                 <input class="form-control-sm form-control" id="phone" th:field="*{phone}" name="phone" required>
             </div>
 
             <div class="mb-3 mt-3 d-flex">
                 <button type="submit" class="btn btn-primary">EDIT</button>
+                <button href="food/view-food" type="submit" class="btn btn-primary">BACK</button>
             </div>
         </form>
     </div>

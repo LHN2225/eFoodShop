@@ -3,7 +3,7 @@ spring:
     config:
       uri: http://localhost:8888
   application:
-    name: food
+    name: ManagerInfo
   profiles:
     active: dev
 
