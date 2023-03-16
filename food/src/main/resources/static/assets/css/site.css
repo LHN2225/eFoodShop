@@ -1,0 +1,285 @@
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 4rem; /* Vertically center the text there */
+}
+
+#slideBanner {
+    position: relative;
+}
+.display-4 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    color: #7B68EE;
+    text-align: center;
+}
+#mainContent {
+    padding-bottom: 4.5rem;
+}
+
+#menBanner {
+    position: relative;
+}
+
+#menBannerText {
+    position: absolute;
+    bottom: 10%;
+    left: 10%;
+    text-align: center;
+}
+
+#womenBanner {
+    position: relative;
+}
+
+#womenBannerText {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    text-align: center;
+}
+
+#babyBanner {
+    position: relative;
+}
+
+#babyBannerText {
+    position: absolute;
+    bottom: 10%;
+    left: 10%;
+    text-align: center;
+}
+
+#product_card_image {
+    height: auto;
+    width: 100%;
+}
+
+#product_card_name {
+    height: 4rem;
+}
+
+#addtocard_btn {
+    position: relative;
+    background-color: coral;
+    color: black;
+    border-color: coral;
+    height: 3rem;
+    text-align: match-parent;
+}
+    #addtocard_btn:hover {
+        background-color: white;
+    }
+
+#addtocard_text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+#product_card_name_link {
+    text-decoration: none;
+    color: black;
+}
+    #product_card_name_link:hover {
+        text-decoration: underline;
+    }
+
+#product_card {
+    width: 18rem;
+}
+
+#product_card_image_btn {
+    /*position: relative;*/
+    height: 26rem;
+}
+
+#product_card_image {
+    /*position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);*/
+    padding: 1rem;
+    width: 90%;
+    height: auto;
+}
+    #product_card_image:hover {
+        padding: 0;
+        width: 100%;
+        height: auto;
+    }
+
+#product_detail_image_frame {
+    position: relative;
+    width: 100%;
+}
+
+#product_detail_image_btn {
+    height: 40rem;
+    width: 100%;
+}
+
+#product_detail_image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    height: 80%;
+    width: auto;
+}
+    #product_detail_image:hover {
+        height: 100%;
+        width: auto;
+    }
+
+
+#order_path_home {
+    text-decoration: none;
+}
+
+#order_path_category {
+    text-decoration: none;
+}
+
+#product_detail_name {
+    height: 6rem;
+}
+
+#addtocard_product_detail_btn {
+    position: relative;
+    background-color: coral;
+    color: black;
+    border-color: coral;
+    height: 3rem;
+    text-align: match-parent;
+}
+
+    #addtocard_product_detail_btn:hover {
+        background-color: white;
+    }
+
+#addtocard_product_detail_text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+/**************************************/
+
+.checked {
+    color: #fd4;
+}
+
+#rating_card_frame {
+    align-items: center;
+}
+
+.star-widget {
+    display: inline-block;
+}
+
+.star-widget input {
+    display: none;
+}
+
+.star-widget label {
+    font-size: 3rem;
+    color: gray;
+    float: right;
+    transition: all 0.1s ease;
+}
+
+input:not(:checked) ~ label:hover,
+input:not(:checked) ~ label:hover ~ label {
+    color: #fd4;
+}
+
+input:checked ~ label {
+    color: #fd4;
+}
+
+input#rate-5:checked ~ label {
+    /*#c2c1c1*/
+    color: aqua;
+    text-shadow: 0 0 10px red;
+}
+
+#writeareview_btn {
+    background-color: royalblue;
+    border-color: royalblue;
+    float: right;
+    height: 3rem;
+}
+    #writeareview_btn:hover {
+        background: white;
+    }

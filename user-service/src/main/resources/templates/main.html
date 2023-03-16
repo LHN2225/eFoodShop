@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Food Management</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link th:href="@{/assets/img/favicon.png}" rel="icon">
+    <link th:href="@{/assets/img/apple-touch-icon.png}" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+            rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link th:href="@{/assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
+    <link th:href="@{/assets/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet">
+    <link th:href="@{/assets/vendor/glightbox/css/glightbox.min.css}" rel="stylesheet">
+    <link th:href="@{/assets/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet">
+    <link th:href="@{/assets/vendor/aos/aos.css}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link th:href="@{/assets/css/main.css}" rel="stylesheet">
+
+    <!-- Bootstrap import -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header th:replace="fragment/header :: header"></header>
+<!-- End Header -->
+
+<main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+        <div class="page-header d-flex align-items-center"
+             style="background-image: url('../assets/img/page-header.jpg');">
+            <div class="container position-relative">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-6 text-center">
+                        <h2>Food Management</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <div class="container">
+                <ol>
+                    <li><a th:href="@{/main}">Home</a></li>
+                    <li>Food</li>
+                </ol>
+            </div>
+        </nav>
+    </div><!-- End Breadcrumbs -->
+
+<!--    <section class="sample-page">-->
+<!--        <div class="container" data-aos="fade-up">-->
+<!--            <div class="row">-->
+<!--                <div class="col-md-4 col-sm-6 col-xs-12 p-0" style="margin-bottom: 2rem;">-->
+<!--                    <a href="./create-food" class="btn btn-success">Add food</a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="row">-->
+<!--                <div th:if="${Model != null}">-->
+<!--                    <div class="row">-->
+<!--                        <th:block th:each="food : ${Model.getFoodList()}">-->
+<!--                            <a th:href="@{|../food/view-food-detail?id=${food.getId()}|}" class="card col-auto"-->
+<!--                               style="width: 27rem; height: 32rem; margin-left: auto; margin-right: auto; margin-bottom: 2rem; display: flex; justify-content: center; align-items: center;">-->
+<!--                                <img style="width: 27rem; height: 20rem;"-->
+<!--                                     th:src="@{|${@environment.getProperty('food-image.server.url')}/${food.getImageUrl()}|}"-->
+<!--                                     class="card-img-top"-->
+<!--                                     alt="Image">-->
+<!--                                <div class="card-body" style="width: 27rem; height: 10rem;">-->
+<!--                                    <h5 th:text="${food.getName()}"></h5>-->
+<!--                                    <p th:text="|${food.getPrice()} VND|"></p>-->
+<!--                                    <form th:method="GET" th:action="@{../food/remove-food}">-->
+<!--                                        <input type="hidden" name="id" th:value="${food.getId()}">-->
+<!--                                        <button type="submit" class="btn btn-danger">Remove</button>-->
+<!--                                    </form>-->
+<!--                                </div>-->
+<!--                            </a>-->
+<!--                        </th:block>-->
+<!--                    </div>-->
+<!--                    <div class="row">-->
+<!--                        <nav aria-label="...">-->
+<!--                            <ul class="pagination">-->
+<!--                                <th:block th:each="i : ${#numbers.sequence(1, Model.getTotalPage())}">-->
+<!--                                    <li class="page-item">-->
+<!--                                        <a class="page-link" th:classappend="(${i} == ${Model.getCurrentPage()}) ? active : ''"-->
+<!--                                           th:href="@{|../food/view-food?page=${i}|}"-->
+<!--                                           th:text="${i}"></a>-->
+<!--                                    </li>-->
+<!--                                </th:block>-->
+<!--                                &lt;!&ndash;								<li class="page-item active" aria-current="page">&ndash;&gt;-->
+<!--                                &lt;!&ndash;									<a class="page-link" href="#">2</a>&ndash;&gt;-->
+<!--                                &lt;!&ndash;								</li>&ndash;&gt;-->
+<!--                                &lt;!&ndash;								<li class="page-item"><a class="page-link" href="#">3</a></li>&ndash;&gt;-->
+<!--                            </ul>-->
+<!--                        </nav>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="row">-->
+<!--                <div th:if="${Model == null}">-->
+<!--                    <h1>No product found!</h1>-->
+<!--                </div>-->
+<!--            </div>-->
+        </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer th:replace="fragment/footer :: footer"></footer>
+<!-- End Footer -->
+
+<a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+<div id="preloader"></div>
+
+<!-- Vendor JS Files -->
+<script th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+<script th:src="@{/assets/vendor/glightbox/js/glightbox.min.js}"></script>
+<script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+<script th:src="@{/assets/vendor/aos/aos.js}"></script>
+<script th:src="@{/assets/vendor/php-email-form/validate.js}"></script>
+
+<!-- Template Main JS File -->
+<script th:src="@{/assets/js/main.js}"></script>
+
+</body>
+
+</html>
