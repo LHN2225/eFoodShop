@@ -39,13 +39,13 @@ public class OrderViewController {
 
     @GetMapping("/in-progress")
     public String getInProgressOrdersPage(Model model) {
-        model.addAttribute("pageNumber", pageRepository.findOrderTotalPageNumber(pageSize));
+        model.addAttribute("pageNumber", pageRepository.findInProgressOrderTotalPageNumber(pageSize));
         return "in-progress-order";
     }
 
     @GetMapping("/delivered")
     public String getDeliveredOrdersPage(Model model) {
-        model.addAttribute("pageNumber", pageRepository.findOrderTotalPageNumber(pageSize));
+        model.addAttribute("pageNumber", pageRepository.findDeliveredOrderTotalPageNumber(pageSize));
         return "delivered-order";
     }
 

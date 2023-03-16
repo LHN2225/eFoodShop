@@ -105,7 +105,7 @@ public class TestController {
     @GetMapping("/11/{pageNumber}")
     @ResponseBody
     public List<Order> test11(@PathVariable int pageNumber) {
-        System.out.println(pageRepository.findOrderTotalPageNumber(2));
+        System.out.println(pageRepository.findNotBusyOrderTotalPageNumber(2));
         return orderRepository.findAll1(pageNumber, 2);
     }
 }

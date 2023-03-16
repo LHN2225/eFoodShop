@@ -19,7 +19,12 @@ public class HomeViewController {
 
     @GetMapping("")
     public String home(Model model) {
-        model.addAttribute("pageNumber", pageRepository.findOrderTotalPageNumber(pageSize));
+        int totalPageNumber = pageRepository.findNotBusyOrderTotalPageNumber("IN_PROGRESS", pageSize);
+        int[] paginationItems = new int[totalPageNumber];
+        for (int i = 1; i <= totalPageNumber; i++) {
+            paginationItems[i-1] = i;
+        }
+        model.addAttribute("paginationItems", paginationItems);
         return "home";
     }
 }
