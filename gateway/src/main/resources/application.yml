@@ -15,6 +15,10 @@ spring:
           uri: lb://STORAGE/
           predicates:
             - Path=/storage/**
+        - id: manager_info
+          uri: lb://MANAGERINFO/
+          predicates:
+            - Path=/api/managerInfo/**
 
 eureka:
   client:

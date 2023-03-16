@@ -27,6 +27,7 @@
     <module>eureka-server</module>
     <module>gateway</module>
     <module>storage</module>
+    <module>cart</module>
   </modules>
 
   <dependencyManagement>
