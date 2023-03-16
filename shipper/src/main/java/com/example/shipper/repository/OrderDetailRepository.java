@@ -26,19 +26,37 @@ public class OrderDetailRepository {
                 "\tJOIN USER_1 SHIPPER ON SHIPPER.ID = ORDER_1.SHIPPER_ID \n" +
                 "WHERE\n" +
                 "\tORDER_1.ID = " + orderId + "\n" +
+                "\tAND CART.IS_DELETED = 0\n" +
+                "\n" +
+                "UNION\n" +
+                "\n" +
+                "SELECT\n" +
+                "\tORDER_1.ID ORDER_ID, ORDER_1.CREATED_DATE, ORDER_1.ADDRESS,\n" +
+                "\tUSER_1.FULLNAME CUSTOMER_FULLNAME,\n" +
+                "\t' ' SHIPPER_FULLNAME\n" +
+                "FROM ORDER_1\n" +
+                "\tJOIN CART ON CART.ID = ORDER_1.CART_ID\n" +
+                "\tJOIN USER_1 ON USER_1.ID = CART.CUSTOMER_ID\n" +
+                "WHERE\n" +
+                "\tORDER_1.ID = " + orderId + "\n" +
+                "\tAND ORDER_1.SHIPPER_ID IS NULL\n" +
                 "\tAND CART.IS_DELETED = 0";
-
-        return jdbcTemplate
-                .queryForObject(query,
-                        (rs, rowNum) ->
-                                new OrderDetailDto(
-                                        rs.getLong("order_id"),
-                                        rs.getTimestamp("created_date"),
-                                        rs.getString("address"),
-                                        rs.getString("customer_fullname"),
-                                        rs.getString("shipper_fullname")
-                                )
-                );
+        
+                try {
+                        return jdbcTemplate
+                        .queryForObject(query,
+                                (rs, rowNum) ->
+                                        new OrderDetailDto(
+                                                rs.getLong("order_id"),
+                                                rs.getTimestamp("created_date"),
+                                                rs.getString("address"),
+                                                rs.getString("customer_fullname"),
+                                                rs.getString("shipper_fullname")
+                                        )
+                        );
+                } catch (Exception e) {
+                        return null;
+                }
     }
 
 }

@@ -21,7 +21,7 @@
                 <td class="order-id" th:utext="${order.id}"></td>
                 <td th:utext="${order.createdDate}"></td>
                 <td th:utext="${order.address}"></td>
-                <td><button class="btn btn-primary" onclick="detail(this)">Detail</button></td>
+                <td><a class="btn btn-primary" th:href="@{'/shipper/order/' + ${order.id}}">Detail</a></td>
             </tr>
         </tbody>
     </table>

@@ -8,6 +8,8 @@ import com.example.shipper.service.OrderDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,7 +24,13 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     @Override
     public OrderDetailDto getOrderDetailById(Long orderId) {
         OrderDetailDto orderDetail = orderDetailRepository.findByOrderId(orderId);
-        orderDetail.setFoods(orderDetailFoodRepository.findByOrderId(orderId));
+        if (orderDetail != null) {
+            orderDetail.setFoods(orderDetailFoodRepository.findByOrderId(orderId));
+        } else {
+            orderDetail = new OrderDetailDto(-1L, new Timestamp(System.currentTimeMillis()), "", "", "");
+            orderDetail.setFoods(new ArrayList<>());
+        }
+        System.out.println(orderDetail);
         return orderDetail;
     }
 }

@@ -3,6 +3,7 @@ package com.example.shipper.controller;
 import com.example.shipper.dto.OrderDetailDto;
 import com.example.shipper.dto.OrderDetailFoodDto;
 import com.example.shipper.entity.Order;
+import com.example.shipper.repository.OrderDetailRepository;
 import com.example.shipper.repository.OrderRepository;
 import com.example.shipper.repository.PageRepository;
 import com.example.shipper.service.OrderDetailFoodService;
@@ -34,6 +35,9 @@ public class TestController {
 
     @Autowired
     private OrderDetailFoodService orderDetailFoodService;
+
+    @Autowired
+    private OrderDetailRepository orderDetailRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -119,5 +123,12 @@ public class TestController {
     @ResponseBody
     public int test12(@PathVariable Long orderId) {
         return orderService.finishOrder(orderId);
+    }
+
+    @GetMapping("/13/{orderId}")
+    @ResponseBody
+    public String test13(@PathVariable Long orderId) {
+        orderDetailRepository.findByOrderId(orderId);
+        return "Hello";
     }
 }
