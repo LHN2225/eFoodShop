@@ -1,5 +1,6 @@
 package com.example.shipper.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.example.shipper.repository.PageRepository;
@@ -59,9 +60,18 @@ public class OrderViewController {
         return "delivered-order";
     }
 
-    @GetMapping("/fragment/not-busy/{pageNumber}")
-    public String getNotBusyOrders(Model model, @PathVariable int pageNumber) {
-        List<Order> orders = orderService.getNotBusyOrders(pageNumber);
+    @GetMapping("/fragment/not-busy/{isSearch}/{orderId}/{pageNumber}")
+    public String getNotBusyOrders(Model model, @PathVariable int isSearch,
+        @PathVariable Long orderId,
+        @PathVariable int pageNumber
+    ) {
+        List<Order> orders = new ArrayList<>();
+        if (isSearch == 0) {
+            orders = orderService.getNotBusyOrders(pageNumber);
+        } else {
+            orders.add(orderService.findNotBusyOrderById(orderId, "IN_PROGRESS"));
+        }
+        
         model.addAttribute("orders", orders);
         return "fragment/not-busy-orders";
     }

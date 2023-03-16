@@ -16,4 +16,10 @@ public interface OrderService {
     List<Order> getDeliveredOrders(Long shipperId, int pageNumber);
 
     int receiveOrderByShipper(Long shipperId, Long orderId);
+
+    // Used for search feature
+    Order findNotBusyOrderById(Long id, String shippingStatus);
+
+    Order findBusyOrderById(Long id, String shippingStatus);
+    //... End of used for search feature
 }

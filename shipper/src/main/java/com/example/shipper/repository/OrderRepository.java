@@ -14,6 +14,14 @@ import java.util.List;
 public interface OrderRepository extends JpaRepository<Order, Long> {
     List<Order> findByShipperId(Long shipperId);
 
+    // Used for search feature
+    @Query(value = "SELECT * FROM ORDER_1 WHERE SHIPPER_ID IS NULL AND SHIPPING_STATUS = ?2 AND ID = ?1", nativeQuery = true)
+    Order findNotBusyOrderById(Long id, String shippingStatus);
+
+    @Query(value = "SELECT * FROM ORDER_1 WHERE SHIPPER_ID IS NOT NULL AND SHIPPING_STATUS = ?2 AND ID = ?1", nativeQuery = true)
+    Order findBusyOrderById(Long id, String shippingStatus);
+    // End of used for search feature
+
     @Query(value = "SELECT * FROM ORDER_1 WHERE SHIPPER_ID IS NULL " +
             "AND SHIPPING_STATUS = ?1 OFFSET (?2 - 1) * ?3 ROWS FETCH NEXT ?3 ROWS ONLY", nativeQuery = true)
     List<Order> findNotBusyOrders(String shippingStatus, int pageNumber, int pageSize);
