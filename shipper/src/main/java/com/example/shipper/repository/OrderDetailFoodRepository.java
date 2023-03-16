@@ -25,6 +25,7 @@ public class OrderDetailFoodRepository {
                 "WHERE\n" +
                 "\tORDER_1.ID = " + orderId + "\n" +
                 "\tAND FOOD.IS_DELETED = 0\n" +
+                "\tAND FOOD_CART.IS_DELETED = 0\n" +
                 "\tAND CART.IS_DELETED = 0";
 
         return jdbcTemplate

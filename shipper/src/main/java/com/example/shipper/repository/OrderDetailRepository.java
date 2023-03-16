@@ -26,6 +26,7 @@ public class OrderDetailRepository {
                 "\tJOIN USER_1 SHIPPER ON SHIPPER.ID = ORDER_1.SHIPPER_ID \n" +
                 "WHERE\n" +
                 "\tORDER_1.ID = " + orderId + "\n" +
+                "\tAND ORDER_1.IS_DELETED = 0\n" +
                 "\tAND CART.IS_DELETED = 0\n" +
                 "\n" +
                 "UNION\n" +
@@ -40,6 +41,7 @@ public class OrderDetailRepository {
                 "WHERE\n" +
                 "\tORDER_1.ID = " + orderId + "\n" +
                 "\tAND ORDER_1.SHIPPER_ID IS NULL\n" +
+                "\tAND ORDER_1.IS_DELETED = 0\n" +
                 "\tAND CART.IS_DELETED = 0";
         
                 try {

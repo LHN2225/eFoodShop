@@ -24,4 +24,7 @@ public class FoodCart {
 
     @Column(name = "fixed_price")
     private float fixedPrice;
+
+    @Column(name = "is_deleted")
+    private boolean isDeleted;
 }

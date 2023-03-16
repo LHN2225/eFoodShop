@@ -29,4 +29,7 @@ public class Order {
 
     @Column(name = "shipping_status")
     private String shippingStatus;
+
+    @Column(name = "is_deleted")
+    private boolean isDeleted;
 }
