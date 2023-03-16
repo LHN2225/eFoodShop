@@ -10,6 +10,7 @@ import com.example.shipper.service.OrderDetailFoodService;
 import com.example.shipper.service.OrderDetailService;
 import com.example.shipper.service.PageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.shipper.dto.OrderDetailDto;
 import com.example.shipper.service.OrderService;
+import org.springframework.web.client.RestTemplate;
 
 @Controller
 @RequestMapping("/shipper/order")
@@ -39,8 +41,16 @@ public class OrderViewController {
     private PageService pageService;
 
     @GetMapping("/in-progress")
-    public String getInProgressOrdersPage(Model model) {           
-        int totalPageNumber = pageService.findInProgressOrderTotalPageNumber();
+    public String getInProgressOrdersPage(Model model) {
+        // Rest template ...
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<Integer> responseEntity = restTemplate.getForEntity(
+                appConfig.hostname + "/api/page/in-progress",
+                Integer.class
+        );
+        int totalPageNumber = responseEntity.getBody();
+        // ...
+
         int[] paginationItems = new int[totalPageNumber];
         for (int i = 1; i <= totalPageNumber; i++) {
             paginationItems[i-1] = i;
@@ -51,7 +61,15 @@ public class OrderViewController {
 
     @GetMapping("/delivered")
     public String getDeliveredOrdersPage(Model model) {
-        int totalPageNumber = pageService.findDeliveredOrderTotalPageNumber();
+        // Rest template ...
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<Integer> responseEntity = restTemplate.getForEntity(
+                appConfig.hostname + "/api/page/delivered",
+                Integer.class
+        );
+        int totalPageNumber = responseEntity.getBody();
+        // ...
+
         int[] paginationItems = new int[totalPageNumber];
         for (int i = 1; i <= totalPageNumber; i++) {
             paginationItems[i-1] = i;
@@ -71,7 +89,7 @@ public class OrderViewController {
         if (isSearch == 0) {
             orderDtoList = orderService.getNotBusyOrders(pageNumber);
         } else {
-            OrderDto orderDto = orderService.findNotBusyOrderById(orderId, "IN_PROGRESS");
+            OrderDto orderDto = orderService.findNotBusyOrderById(orderId);
             if (orderDto != null) {
                 orderDtoList.add(orderDto);
             }
@@ -89,9 +107,9 @@ public class OrderViewController {
     ) {
         List<OrderDto> orderDtoList = new ArrayList<>();
         if (isSearch == 0) {
-            orderDtoList = orderService.getInProgressOrders(appConfig.shipperId, pageNumber);
+            orderDtoList = orderService.getInProgressOrders(pageNumber);
         } else {
-            OrderDto orderDto = orderService.findBusyOrderById(orderId, "IN_PROGRESS");
+            OrderDto orderDto = orderService.findInProgressOrderById(orderId);
             if (orderDto != null) {
                 orderDtoList.add(orderDto);
             }
@@ -109,9 +127,9 @@ public class OrderViewController {
     ) {
         List<OrderDto> orderDtoList = new ArrayList<>();
         if (isSearch == 0) {
-            orderDtoList = orderService.getDeliveredOrders(appConfig.shipperId, pageNumber);
+            orderDtoList = orderService.getDeliveredOrders(pageNumber);
         } else {
-            OrderDto order = orderService.findBusyOrderById(orderId, "DELIVERED");
+            OrderDto order = orderService.findDeliveredOrderById(orderId);
             if (order != null) {
                 orderDtoList.add(order);
             }

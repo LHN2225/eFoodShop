@@ -11,17 +11,19 @@ public interface OrderService {
 
     List<OrderDto> getNotBusyOrders(int pageNumber);
 
-    List<OrderDto> getInProgressOrders(Long shipperId, int pageNumber);
+    List<OrderDto> getInProgressOrders(int pageNumber);
 
-    List<OrderDto> getDeliveredOrders(Long shipperId, int pageNumber);
+    List<OrderDto> getDeliveredOrders(int pageNumber);
 
-    int receiveOrderByShipper(Long shipperId, Long orderId);
+    int receiveOrderByShipper(Long orderId);
 
     int finishOrder(Long orderId);
 
     // Used for search feature
-    OrderDto findNotBusyOrderById(Long id, String shippingStatus);
+    OrderDto findNotBusyOrderById(Long id);
 
-    OrderDto findBusyOrderById(Long id, String shippingStatus);
+    OrderDto findInProgressOrderById(Long id);
+
+    OrderDto findDeliveredOrderById(Long id);
     //... End of used for search feature
 }

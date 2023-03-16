@@ -49,7 +49,7 @@ public class OrderController {
     @GetMapping("/in-progress/{pageNumber}")
     public ResponseEntity<List<OrderDto>> getInProgressOrder(@PathVariable int pageNumber) {
         try {
-            List<OrderDto> orderDtoList = orderService.getInProgressOrders(appConfig.shipperId, pageNumber);
+            List<OrderDto> orderDtoList = orderService.getInProgressOrders(pageNumber);
             if (orderDtoList.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -62,7 +62,7 @@ public class OrderController {
     @GetMapping("/delivered/{pageNumber}")
     public ResponseEntity<List<OrderDto>> getDeliveredOrder(@PathVariable int pageNumber) {
         try {
-            List<OrderDto> orderDtoList = orderService.getDeliveredOrders(appConfig.shipperId, pageNumber);
+            List<OrderDto> orderDtoList = orderService.getDeliveredOrders(pageNumber);
             if (orderDtoList.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -88,7 +88,7 @@ public class OrderController {
     @PutMapping("/shipper")
     public ResponseEntity<Integer> receiveOrderByShipper(@RequestParam Long orderId) {
         try {
-            int response = orderService.receiveOrderByShipper(appConfig.shipperId, orderId);
+            int response = orderService.receiveOrderByShipper(orderId);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
