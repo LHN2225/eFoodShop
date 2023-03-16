@@ -28,6 +28,7 @@
     <module>gateway</module>
     <module>storage</module>
     <module>cart</module>
+    <module>shipper</module>
   </modules>
 
   <dependencyManagement>
