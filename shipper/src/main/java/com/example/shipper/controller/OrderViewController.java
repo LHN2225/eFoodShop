@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.shipper.config.AppConfig;
+import com.example.shipper.dto.OrderDto;
 import com.example.shipper.repository.PageRepository;
 import com.example.shipper.service.OrderDetailFoodService;
 import com.example.shipper.service.OrderDetailService;
@@ -68,16 +69,16 @@ public class OrderViewController {
         @PathVariable Long orderId,
         @PathVariable int pageNumber
     ) {
-        List<Order> orders = new ArrayList<>();
+        List<OrderDto> orderDtoList = new ArrayList<>();
         if (isSearch == 0) {
-            orders = orderService.getNotBusyOrders(pageNumber);
+            orderDtoList = orderService.getNotBusyOrders(pageNumber);
         } else {
-            Order order = orderService.findNotBusyOrderById(orderId, "IN_PROGRESS");
-            if (order != null) {
-                orders.add(order);
+            OrderDto orderDto = orderService.findNotBusyOrderById(orderId, "IN_PROGRESS");
+            if (orderDto != null) {
+                orderDtoList.add(orderDto);
             }
         }
-        model.addAttribute("orders", orders);
+        model.addAttribute("orders", orderDtoList);
         return "fragment/not-busy-orders";
     }
 
@@ -88,16 +89,16 @@ public class OrderViewController {
         @PathVariable Long orderId,
         @PathVariable int pageNumber
     ) {
-        List<Order> orders = new ArrayList<>();
+        List<OrderDto> orderDtoList = new ArrayList<>();
         if (isSearch == 0) {
-            orders = orderService.getInProgressOrders(appConfig.shipperId, pageNumber);
+            orderDtoList = orderService.getInProgressOrders(appConfig.shipperId, pageNumber);
         } else {
-            Order order = orderService.findBusyOrderById(orderId, "IN_PROGRESS");
-            if (order != null) {
-                orders.add(order);
+            OrderDto orderDto = orderService.findBusyOrderById(orderId, "IN_PROGRESS");
+            if (orderDto != null) {
+                orderDtoList.add(orderDto);
             }
         }
-        model.addAttribute("orders", orders);
+        model.addAttribute("orders", orderDtoList);
         return "fragment/in-progress-orders-box";
     }
 
@@ -108,16 +109,16 @@ public class OrderViewController {
         @PathVariable Long orderId,
         @PathVariable int pageNumber
     ) {
-        List<Order> orders = new ArrayList<>();
+        List<OrderDto> orderDtoList = new ArrayList<>();
         if (isSearch == 0) {
-            orders = orderService.getDeliveredOrders(appConfig.shipperId, pageNumber);
+            orderDtoList = orderService.getDeliveredOrders(appConfig.shipperId, pageNumber);
         } else {
-            Order order = orderService.findBusyOrderById(orderId, "DELIVERED");
+            OrderDto order = orderService.findBusyOrderById(orderId, "DELIVERED");
             if (order != null) {
-                orders.add(order);
+                orderDtoList.add(order);
             }
         }
-        model.addAttribute("orders", orders);
+        model.addAttribute("orders", orderDtoList);
         return "fragment/delivered-orders-box";
     }
 

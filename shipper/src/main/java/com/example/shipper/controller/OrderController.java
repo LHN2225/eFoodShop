@@ -2,7 +2,9 @@ package com.example.shipper.controller;
 
 import com.example.shipper.config.AppConfig;
 import com.example.shipper.dto.OrderDetailDto;
+import com.example.shipper.dto.OrderDto;
 import com.example.shipper.entity.Order;
+import com.example.shipper.mapper.OrderMapper;
 import com.example.shipper.repository.PageRepository;
 import com.example.shipper.service.OrderDetailFoodService;
 import com.example.shipper.service.OrderDetailService;
@@ -22,6 +24,9 @@ public class OrderController {
     private AppConfig appConfig;
 
     @Autowired
+    private OrderMapper orderMapper;
+
+    @Autowired
     private OrderService orderService;
 
     @Autowired
@@ -31,39 +36,39 @@ public class OrderController {
     private OrderDetailFoodService orderDetailFoodService;
 
     @GetMapping("/not-busy/{pageNumber}")
-    public ResponseEntity<List<Order>> getOrderThatNotBusy(@PathVariable int pageNumber) {
+    public ResponseEntity<List<OrderDto>> getOrderThatNotBusy(@PathVariable int pageNumber) {
         try {
-            List<Order> orders = orderService.getNotBusyOrders(pageNumber);
-            if (orders.isEmpty()) {
+            List<OrderDto> orderDtoList = orderService.getNotBusyOrders(pageNumber);
+            if (orderDtoList.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
-            return new ResponseEntity<>(orders, HttpStatus.OK);
+            return new ResponseEntity<>(orderDtoList, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("/in-progress/{pageNumber}")
-    public ResponseEntity<List<Order>> getInProgressOrder(@PathVariable int pageNumber) {
+    public ResponseEntity<List<OrderDto>> getInProgressOrder(@PathVariable int pageNumber) {
         try {
-            List<Order> orders = orderService.getInProgressOrders(appConfig.shipperId, pageNumber);
-            if (orders.isEmpty()) {
+            List<OrderDto> orderDtoList = orderService.getInProgressOrders(appConfig.shipperId, pageNumber);
+            if (orderDtoList.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
-            return new ResponseEntity<>(orders, HttpStatus.OK);
+            return new ResponseEntity<>(orderDtoList, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("/delivered/{pageNumber}")
-    public ResponseEntity<List<Order>> getDeliveredOrder(@PathVariable int pageNumber) {
+    public ResponseEntity<List<OrderDto>> getDeliveredOrder(@PathVariable int pageNumber) {
         try {
-            List<Order> orders = orderService.getDeliveredOrders(appConfig.shipperId, pageNumber);
-            if (orders.isEmpty()) {
+            List<OrderDto> orderDtoList = orderService.getDeliveredOrders(appConfig.shipperId, pageNumber);
+            if (orderDtoList.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
-            return new ResponseEntity<>(orders, HttpStatus.OK);
+            return new ResponseEntity<>(orderDtoList, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }

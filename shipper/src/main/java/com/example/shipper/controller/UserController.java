@@ -1,6 +1,7 @@
 package com.example.shipper.controller;
 
 import com.example.shipper.config.AppConfig;
+import com.example.shipper.dto.UserDto;
 import com.example.shipper.entity.User;
 import com.example.shipper.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,28 +26,28 @@ public class UserController {
     private PasswordEncoder passwordEncoder;
 
     @GetMapping("")
-    public ResponseEntity<List<User>> getAllUsers(){
+    public ResponseEntity<List<UserDto>> getAllUsers(){
         try {
-            List<User> users = userService.findAll();
+            List<UserDto> userDtoList = userService.findAll();
 
-            if (users.isEmpty()) {
+            if (userDtoList.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
-            return new ResponseEntity<>(users, HttpStatus.OK);
+            return new ResponseEntity<>(userDtoList, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id){
+    public ResponseEntity<UserDto> getUserById(@PathVariable Long id){
         try {
-            User user = userService.findById(id);
+            UserDto userDto = userService.findById(id);
 
-            if (user == null) {
+            if (userDto == null) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
-            return new ResponseEntity<>(user, HttpStatus.OK);
+            return new ResponseEntity<>(userDto, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }

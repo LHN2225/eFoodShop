@@ -1,6 +1,8 @@
 package com.example.shipper.service.impl;
 
+import com.example.shipper.dto.UserDto;
 import com.example.shipper.entity.User;
+import com.example.shipper.mapper.UserMapper;
 import com.example.shipper.repository.UserRepository;
 import com.example.shipper.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +16,17 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private UserMapper userMapper;
+
     @Override
-    public List<User> findAll() {
-        return userRepository.findAll();
+    public List<UserDto> findAll() {
+        return userMapper.entityListToDtoList(userRepository.findAll());
     }
 
     @Override
-    public User findById(long id) {
-        return userRepository.findById(id).orElse(null);
+    public UserDto findById(long id) {
+        return userMapper.entityToDto(userRepository.findById(id).orElse(null));
     }
 
     @Override

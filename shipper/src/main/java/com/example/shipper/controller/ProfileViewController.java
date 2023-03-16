@@ -1,6 +1,7 @@
 package com.example.shipper.controller;
 
 import com.example.shipper.config.AppConfig;
+import com.example.shipper.dto.UserDto;
 import com.example.shipper.entity.User;
 import com.example.shipper.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,8 @@ public class ProfileViewController {
 
     @GetMapping("/profile-box")
     public String getProfilePBox(Model model) {
-        User user = userService.findById(appConfig.shipperId);
-        model.addAttribute("user", user);
+        UserDto userDto = userService.findById(appConfig.shipperId);
+        model.addAttribute("user", userDto);
         return "fragment/profile-box";
     }
     
