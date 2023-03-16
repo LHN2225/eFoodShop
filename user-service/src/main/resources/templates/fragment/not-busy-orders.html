@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <table class="table table-striped table-hover" th:fragment="not-busy-orders">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Created Date</th>
+                <th>Address</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="order: ${orders}">
+                <td class="order-id" th:utext="${order.id}">1</td>
+                <td th:utext="${order.createdDate}">2023-03-12</td>
+                <td th:utext="${order.address}">123 Main St</td>
+                <td><button class="btn btn-primary" onclick="detail(this)">Detail</button></td>
+                <td><button class="btn btn-success" onclick="choose(this)">Choose</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <!-- ======= Header ======= -->
+    <header id="header" class="header d-flex align-items-center fixed-top" th:fragment="header">
+        <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+            <a th:href="@{/main}" class="logo d-flex align-items-center">
+                <h1>eFoodShop</h1>
+            </a>
+
+            <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+            <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a th:href="@{/main}" class="active">Home</a></li>
+                    <li><a sec:authorize="principal.username"></a>
+                        <ul>
+                            <li><a th:action="@{/logout}">Logout</a>
+                            <li><a >Edit</a>
+                        </ul>
+                    </li>
+
+                    <li><a href="#">Cart</a>
+                </ul>
+            </nav><!-- .navbar -->
+
+        </div>
+    </header><!-- End Header -->
+    <!-- End Header -->
+</body>
+
+</html>

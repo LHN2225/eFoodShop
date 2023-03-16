@@ -1,0 +1,81 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="https://www.thymeleaf.org/" >-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <div>-->
+<!--        <div>-->
+<!--            <h1>Welcome Account Form</h1>-->
+<!--            <form>-->
+<!--                <p>-->
+<!--                    <input type="text" th:value="${account.fullName}">-->
+<!--                </p>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Sign Up - CodeJava</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <title>Login</title>
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="main">
+    <!-- Sign up form -->
+    <section class="signup">
+        <div class="container">
+            <div class="signup-content">
+                <div class="signup-form">
+                    <h2 class="form-title">Profiles</h2>
+                    <form th:action="@{/account/save}" th:object="${account}" method="post" class="register-form" id="register-form">
+                        <div class="form-group">
+                            <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                            <input th:field="${account.fullName}" type="text" name="name" id="name" placeholder="Your name"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="email"><i class="zmdi zmdi-email"></i></label>
+                            <input th:field="${account.email}"  type="email" name="email" id="email" placeholder="Your Email"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="pass"><i class="zmdi zmdi-lock"></i></label>
+                            <input th:field="${account.password}"  type="password" name="pass" id="pass" placeholder="Password"/>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-8">
+                                <th:block th:each="role: ${listRoles}">
+                                    <input type="radio" th:field="${account.roles}"
+                                           th:text="${role.name}" th:value="${role.id}" class="m-2" />
+                                </th:block>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-button">
+                            <input type="submit" name="signup" id="signup" class="form-submit" value="Update"/>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+<script src="vendor/jquery/login-jquery.min.js"></script>
+<script src="js/login.js"></script>
+</body>
+</html>
