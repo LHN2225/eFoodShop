@@ -1,5 +1,6 @@
 package com.example.shipper.service.impl;
 
+import com.example.shipper.config.AppConfig;
 import com.example.shipper.entity.Order;
 import com.example.shipper.repository.OrderRepository;
 import com.example.shipper.service.OrderService;
@@ -11,7 +12,8 @@ import java.util.List;
 @Service
 public class OrderServiceImpl implements OrderService {
 
-    int pageSize = 5;
+    @Autowired
+    private AppConfig appConfig;
 
     @Autowired
     private OrderRepository orderRepository;
@@ -23,17 +25,17 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> getNotBusyOrders(int pageNumber) {
-        return orderRepository.findNotBusyOrders("IN_PROGRESS", pageNumber, pageSize);
+        return orderRepository.findNotBusyOrders("IN_PROGRESS", pageNumber, appConfig.pageSize);
     }
 
     @Override
     public List<Order> getInProgressOrders(Long shipperId, int pageNumber) {
-        return orderRepository.findByShipperIdAndShippingStatus(shipperId, "IN_PROGRESS", pageNumber, pageSize);
+        return orderRepository.findByShipperIdAndShippingStatus(shipperId, "IN_PROGRESS", pageNumber, appConfig.pageSize);
     }
 
     @Override
     public List<Order> getDeliveredOrders(Long shipperId, int pageNumber) {
-        return orderRepository.findByShipperIdAndShippingStatus(shipperId, "DELIVERED", pageNumber, pageSize);
+        return orderRepository.findByShipperIdAndShippingStatus(shipperId, "DELIVERED", pageNumber, appConfig.pageSize);
     }
 
     @Override

@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.shipper.config.AppConfig;
 import com.example.shipper.repository.PageRepository;
 import com.example.shipper.service.OrderDetailFoodService;
 import com.example.shipper.service.OrderDetailService;
@@ -23,11 +24,8 @@ import com.example.shipper.service.OrderService;
 @RequestMapping("/shipper/order")
 public class OrderViewController {
 
-    // Page size
-    public int pageSize = 5;
-
-    // Test for shipper id before authentication and authorization handling by security
-    public Long shipper_id_test = 1L;
+    @Autowired
+    private AppConfig appConfig;
     
     @Autowired
     private OrderService orderService;
@@ -43,7 +41,7 @@ public class OrderViewController {
 
     @GetMapping("/in-progress")
     public String getInProgressOrdersPage(Model model) {           
-        int totalPageNumber = pageRepository.findInProgressOrderTotalPageNumber(shipper_id_test, "IN_PROGRESS", pageSize);
+        int totalPageNumber = pageRepository.findInProgressOrderTotalPageNumber(appConfig.shipperId, "IN_PROGRESS", appConfig.pageSize);
         int[] paginationItems = new int[totalPageNumber];
         for (int i = 1; i <= totalPageNumber; i++) {
             paginationItems[i-1] = i;
@@ -54,7 +52,7 @@ public class OrderViewController {
 
     @GetMapping("/delivered")
     public String getDeliveredOrdersPage(Model model) {
-        int totalPageNumber = pageRepository.findDeliveredOrderTotalPageNumber(shipper_id_test, "DELIVERED", pageSize);
+        int totalPageNumber = pageRepository.findDeliveredOrderTotalPageNumber(appConfig.shipperId, "DELIVERED", appConfig.pageSize);
         int[] paginationItems = new int[totalPageNumber];
         for (int i = 1; i <= totalPageNumber; i++) {
             paginationItems[i-1] = i;
@@ -92,7 +90,7 @@ public class OrderViewController {
     ) {
         List<Order> orders = new ArrayList<>();
         if (isSearch == 0) {
-            orders = orderService.getInProgressOrders(shipper_id_test, pageNumber);
+            orders = orderService.getInProgressOrders(appConfig.shipperId, pageNumber);
         } else {
             Order order = orderService.findBusyOrderById(orderId, "IN_PROGRESS");
             if (order != null) {
@@ -112,7 +110,7 @@ public class OrderViewController {
     ) {
         List<Order> orders = new ArrayList<>();
         if (isSearch == 0) {
-            orders = orderService.getDeliveredOrders(shipper_id_test, pageNumber);
+            orders = orderService.getDeliveredOrders(appConfig.shipperId, pageNumber);
         } else {
             Order order = orderService.findBusyOrderById(orderId, "DELIVERED");
             if (order != null) {

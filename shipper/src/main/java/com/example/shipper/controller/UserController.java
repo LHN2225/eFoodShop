@@ -1,5 +1,6 @@
 package com.example.shipper.controller;
 
+import com.example.shipper.config.AppConfig;
 import com.example.shipper.entity.User;
 import com.example.shipper.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,8 @@ import java.util.List;
 @RequestMapping("/api/user")
 public class UserController {
 
-    // Test for shipper id before authentication and authorization handling by security
-    public Long shipper_id_test = 1L;
+    @Autowired
+    private AppConfig appConfig;
 
     @Autowired
     private UserService userService;
@@ -110,7 +111,7 @@ public class UserController {
             @RequestParam String phone
     ) {
         System.out.println(password);
-        int response = userService.updateProfile(shipper_id_test, passwordEncoder.encode(password), fullname, phone);
+        int response = userService.updateProfile(appConfig.shipperId, passwordEncoder.encode(password), fullname, phone);
         try {
             //int response = userService.updateProfile(shipper_id_test, password, fullname, phone);
             return new ResponseEntity<>(response, HttpStatus.OK);

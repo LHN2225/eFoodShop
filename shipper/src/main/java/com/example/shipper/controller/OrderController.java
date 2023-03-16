@@ -1,5 +1,6 @@
 package com.example.shipper.controller;
 
+import com.example.shipper.config.AppConfig;
 import com.example.shipper.dto.OrderDetailDto;
 import com.example.shipper.entity.Order;
 import com.example.shipper.repository.PageRepository;
@@ -17,8 +18,8 @@ import java.util.List;
 @RequestMapping("/api/order")
 public class OrderController {
 
-    // Test for shipper id before authentication and authorization handling by security
-    public Long shipper_id_test = 1L;
+    @Autowired
+    private AppConfig appConfig;
 
     @Autowired
     private OrderService orderService;
@@ -45,7 +46,7 @@ public class OrderController {
     @GetMapping("/in-progress/{pageNumber}")
     public ResponseEntity<List<Order>> getInProgressOrder(@PathVariable int pageNumber) {
         try {
-            List<Order> orders = orderService.getInProgressOrders(shipper_id_test, pageNumber);
+            List<Order> orders = orderService.getInProgressOrders(appConfig.shipperId, pageNumber);
             if (orders.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -58,7 +59,7 @@ public class OrderController {
     @GetMapping("/delivered/{pageNumber}")
     public ResponseEntity<List<Order>> getDeliveredOrder(@PathVariable int pageNumber) {
         try {
-            List<Order> orders = orderService.getDeliveredOrders(shipper_id_test, pageNumber);
+            List<Order> orders = orderService.getDeliveredOrders(appConfig.shipperId, pageNumber);
             if (orders.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -84,7 +85,7 @@ public class OrderController {
     @PutMapping("/shipper")
     public ResponseEntity<Integer> receiveOrderByShipper(@RequestParam Long orderId) {
         try {
-            int response = orderService.receiveOrderByShipper(shipper_id_test, orderId);
+            int response = orderService.receiveOrderByShipper(appConfig.shipperId, orderId);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

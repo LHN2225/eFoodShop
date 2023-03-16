@@ -1,5 +1,6 @@
 package com.example.shipper.controller;
 
+import com.example.shipper.config.AppConfig;
 import com.example.shipper.entity.User;
 import com.example.shipper.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/shipper/profile")
 public class ProfileViewController {
 
-    // Test for shipper id before authentication and authorization handling by security
-    public Long shipper_id_test = 1L;
+    @Autowired
+    private AppConfig appConfig;
 
     @Autowired
     private UserService userService;
@@ -25,7 +26,7 @@ public class ProfileViewController {
 
     @GetMapping("/profile-box")
     public String getProfilePBox(Model model) {
-        User user = userService.findById(shipper_id_test);
+        User user = userService.findById(appConfig.shipperId);
         model.addAttribute("user", user);
         return "fragment/profile-box";
     }
