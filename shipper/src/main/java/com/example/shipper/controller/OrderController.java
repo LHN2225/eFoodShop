@@ -82,9 +82,9 @@ public class OrderController {
     }
 
     @PutMapping("/shipper")
-    public ResponseEntity<Integer> receiveOrderByShipper(@RequestParam Long shipperId, @RequestParam Long orderId) {
+    public ResponseEntity<Integer> receiveOrderByShipper(@RequestParam Long orderId) {
         try {
-            int response = orderService.receiveOrderByShipper(shipperId, orderId);
+            int response = orderService.receiveOrderByShipper(shipper_id_test, orderId);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

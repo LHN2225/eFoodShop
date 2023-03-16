@@ -16,7 +16,6 @@
             </tr>
         </thead>
         <tbody>
-            <!-- Check if orders list is not empty -->
             <tr th:each="order: ${orders}">
                 <td class="order-id" th:utext="${order.id}"></td>
                 <td th:utext="${order.createdDate}"></td>
