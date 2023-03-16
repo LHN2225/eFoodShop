@@ -68,9 +68,10 @@
 				<h1 class="mb-5">In-Progress Orders</h1>
 				<!-- Search bar -->
 				<div class="input-group mb-3 w-25">
-					<input type="text" class="form-control" placeholder="Order ID...">
+					<input type="text" id="orderIdSearch" class="form-control" placeholder="Order ID..."
+						onkeydown="if (event.keyCode === 13) renderFromSearch()">
 					<div class="input-group-append">
-						<button class="btn btn-outline-primary" type="button">Search</button>
+						<button class="btn btn-outline-primary" type="button" onclick="renderFromSearch()">Search</button>
 					</div>
 				</div>
 
@@ -130,7 +131,38 @@
 			}
 
 			$.ajax({
-				url: "http://localhost:8080/shipper/order/fragment/in-progress/" + pageNumber,
+				url: "http://localhost:8080/shipper/order/fragment/in-progress/0/-1/" + pageNumber,
+				type: 'GET',
+				contentType: "html",
+				crossDomain: true,
+				success: function (data) {
+					$("#in-progress-orders").html(data);
+				}
+			});
+		}
+
+		function renderFromSearch() {
+			let orderId = document.getElementById("orderIdSearch").value;
+
+			let pageNumber = 1;
+			// Make first page in pagination active
+			let pageLinks = document.querySelectorAll(".page-link");
+
+			pageLinks.forEach(function (pageLink) {
+				pageLink.parentNode.classList.remove("active");
+			});
+
+			pageLinks[0].classList.add("active");
+
+			let isSearch = 1;
+
+			if (orderId === '') {
+				isSearch = 0;
+				orderId =-1;
+			}
+
+			$.ajax({
+				url: `http://localhost:8080/shipper/order/fragment/in-progress/${isSearch}/${orderId}/1`,
 				type: 'GET',
 				contentType: "html",
 				crossDomain: true,

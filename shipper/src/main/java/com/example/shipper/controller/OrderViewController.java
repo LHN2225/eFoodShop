@@ -61,7 +61,9 @@ public class OrderViewController {
     }
 
     @GetMapping("/fragment/not-busy/{isSearch}/{orderId}/{pageNumber}")
-    public String getNotBusyOrders(Model model, @PathVariable int isSearch,
+    public String getNotBusyOrders(
+        Model model,
+        @PathVariable int isSearch,
         @PathVariable Long orderId,
         @PathVariable int pageNumber
     ) {
@@ -69,23 +71,51 @@ public class OrderViewController {
         if (isSearch == 0) {
             orders = orderService.getNotBusyOrders(pageNumber);
         } else {
-            orders.add(orderService.findNotBusyOrderById(orderId, "IN_PROGRESS"));
+            Order order = orderService.findNotBusyOrderById(orderId, "IN_PROGRESS");
+            if (order != null) {
+                orders.add(order);
+            }
         }
-        
         model.addAttribute("orders", orders);
         return "fragment/not-busy-orders";
     }
 
-    @GetMapping("/fragment/in-progress/{pageNumber}")
-    public String getInProgressOrders(Model model, @PathVariable int pageNumber) {
-        List<Order> orders = orderService.getInProgressOrders(shipper_id_test, pageNumber);
+    @GetMapping("/fragment/in-progress/{isSearch}/{orderId}/{pageNumber}")
+    public String getInProgressOrders(
+        Model model,
+        @PathVariable int isSearch,
+        @PathVariable Long orderId,
+        @PathVariable int pageNumber
+    ) {
+        List<Order> orders = new ArrayList<>();
+        if (isSearch == 0) {
+            orders = orderService.getInProgressOrders(shipper_id_test, pageNumber);
+        } else {
+            Order order = orderService.findBusyOrderById(orderId, "IN_PROGRESS");
+            if (order != null) {
+                orders.add(order);
+            }
+        }
         model.addAttribute("orders", orders);
         return "fragment/in-progress-orders-box";
     }
 
-    @GetMapping("/fragment/delivered/{pageNumber}")
-    public String getDeliveredOrders(Model model, @PathVariable int pageNumber) {
-        List<Order> orders = orderService.getDeliveredOrders(shipper_id_test, pageNumber);
+    @GetMapping("/fragment/delivered/{isSearch}/{orderId}/{pageNumber}")
+    public String getDeliveredOrders(
+        Model model,
+        @PathVariable int isSearch,
+        @PathVariable Long orderId,
+        @PathVariable int pageNumber
+    ) {
+        List<Order> orders = new ArrayList<>();
+        if (isSearch == 0) {
+            orders = orderService.getDeliveredOrders(shipper_id_test, pageNumber);
+        } else {
+            Order order = orderService.findBusyOrderById(orderId, "DELIVERED");
+            if (order != null) {
+                orders.add(order);
+            }
+        }
         model.addAttribute("orders", orders);
         return "fragment/delivered-orders-box";
     }

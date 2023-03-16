@@ -68,9 +68,11 @@
 				<h1 class="mb-5">Not-busy Orders</h1>
 				<!-- Search bar -->
 				<div class="input-group mb-3 w-25">
-					<input type="text" id="orderIdSearch" class="form-control" placeholder="Order ID...">
+					<input type="text" id="orderIdSearch" class="form-control" placeholder="Order ID..."
+						onkeydown="if (event.keyCode === 13) renderFromSearch()">
 					<div class="input-group-append">
-						<button class="btn btn-outline-primary" type="button" onclick="renderFromSearch()">Search</button>
+						<button class="btn btn-outline-primary" type="button"
+							onclick="renderFromSearch()">Search</button>
 					</div>
 				</div>
 
@@ -156,7 +158,7 @@
 
 			if (orderId === '') {
 				isSearch = 0;
-				orderId =-1;
+				orderId = -1;
 			}
 
 			$.ajax({
