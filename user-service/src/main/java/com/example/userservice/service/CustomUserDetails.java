@@ -6,17 +6,17 @@ import java.util.Set;
 
 import com.example.userservice.entity.Role;
 import com.example.userservice.entity.User;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+@Data
+@AllArgsConstructor
 public class CustomUserDetails implements UserDetails {
     private static final long serialVersionUID = 1L;
     private User user;
-
-    public CustomUserDetails(User user) {
-        this.user = user;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -40,6 +40,7 @@ public class CustomUserDetails implements UserDetails {
         return user.getEmail();
     }
 
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -60,8 +61,15 @@ public class CustomUserDetails implements UserDetails {
         return true;
     }
 
+
     public String getFullName() {
         return user.getFullName();
     }
+
+    public void setFullName(String fullName){
+        this.user.setFullName(fullName);
+    }
+
+
 
 }

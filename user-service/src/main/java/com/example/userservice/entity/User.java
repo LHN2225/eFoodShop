@@ -9,9 +9,7 @@ import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -19,6 +17,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Setter
 @Getter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "users")
 public class User {
@@ -44,6 +44,7 @@ public class User {
                 inverseJoinColumns = @JoinColumn(name = "role_id")
         )
         private Set<Role> roles = new HashSet<>();
+
 
 
         public void addRole(Role role) {

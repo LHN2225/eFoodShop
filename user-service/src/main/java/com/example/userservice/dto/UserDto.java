@@ -1,19 +1,15 @@
 package com.example.userservice.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@Data
+@AllArgsConstructor
+@ToString
 public class UserDto {
     private Long id;
     private String email;
 
-    public UserDto(Long id, String email) {
-        this.id = id;
-        this.email = email;
-    }
-    public UserDto() {
-    }
 
 }
