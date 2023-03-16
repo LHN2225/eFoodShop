@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/api/manager-info/user/")
 @Slf4j
 public class UserController {
     
@@ -34,7 +33,8 @@ public class UserController {
             userService.update(userDto);
         } catch (Exception e) {
             e.printStackTrace();
+            return "fail";
         }
-        return "redirect:/api/manager-info/user/get-manager-info";
+        return "success";
     }
 }
