@@ -33,38 +33,14 @@
 <body>
 <div class="container mt-5">
     <h1 class="d-flex justify-content-center align-items-center">Edit Manager</h1>
-    <div class="container d-flex justify-content-center align-items-center">
-    <!--    <form th:method="PUT" th:action="@{/api/admin/admin}" th:object="${managerInfo}">-->
-        <form th:method="post" class="flex-column" th:object="${manager}" action="../manager-info/update-manager-info">
-            <div class="mb-3 mt-3 d-flex">
-                <label class="form-label mx-3">Manager's Id</label>
-                <input class="form-control-sm form-control" th:field="*{id}" name="username" required readonly>
+    <br>
+    <div class="container justify-content-center align-items-center">
+        <h1 class="d-flex justify-content-center align-items-center">SUCCESS</h1>
+        <a class="d-flex justify-content-center align-items-center" href="../manager-info/get-manager-info">
+            <div class="btn btn-primary">
+                Back
             </div>
-
-            <div class="mb-3 mt-3 d-flex">
-                <label class="form-label mx-3">Username</label>
-                <input class="form-control-sm form-control" th:field="*{username}" name="username" required>
-            </div>
-
-            <div class="mb-3 mt-3 d-flex">
-                <label class="form-label mx-3">Phone Number</label>
-                <input class="form-control-sm form-control" id="phone" th:field="*{phone}" name="phone" required>
-            </div>
-
-            <div class="mb-3 mt-3 d-flex">
-                <div style="margin-right: 3px">
-                    <button type="submit" class="btn btn-primary">Edit</button>
-                </div>
-
-                <div style="margin-left: 3px">
-                    <a href="../food/view-food">
-                        <div class="btn btn-primary">
-                            Back
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </form>
+        </a>
     </div>
 </div>
 
