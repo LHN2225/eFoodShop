@@ -1,11 +1,11 @@
 spring:
-cloud:
-  config:
-    uri: http://localhost:8888
-application:
-  name: food
-profiles:
-  active: dev
+  cloud:
+    config:
+      uri: http://localhost:8888
+  application:
+    name: food
+  profiles:
+    active: dev
 
 server:
   port: 8080
