@@ -41,6 +41,11 @@ public class OrderServiceImpl implements OrderService {
         return orderRepository.receiveOrderByShipper(shipperId, orderId);
     }
 
+    @Override
+    public int finishOrder(Long orderId) {
+        return orderRepository.finishOrder(orderId);
+    }
+
     // Used for search feature ...
     @Override
     public Order findNotBusyOrderById(Long id, String shippingStatus) {

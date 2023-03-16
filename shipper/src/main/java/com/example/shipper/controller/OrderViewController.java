@@ -51,7 +51,7 @@ public class OrderViewController {
 
     @GetMapping("/delivered")
     public String getDeliveredOrdersPage(Model model) {
-        int totalPageNumber = pageRepository.findDeliveredOrderTotalPageNumber(shipper_id_test, "IN_PROGRESS", pageSize);
+        int totalPageNumber = pageRepository.findDeliveredOrderTotalPageNumber(shipper_id_test, "DELIVERED", pageSize);
         int[] paginationItems = new int[totalPageNumber];
         for (int i = 1; i <= totalPageNumber; i++) {
             paginationItems[i-1] = i;

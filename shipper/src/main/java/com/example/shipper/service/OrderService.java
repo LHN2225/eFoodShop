@@ -17,6 +17,8 @@ public interface OrderService {
 
     int receiveOrderByShipper(Long shipperId, Long orderId);
 
+    int finishOrder(Long orderId);
+
     // Used for search feature
     Order findNotBusyOrderById(Long id, String shippingStatus);
 

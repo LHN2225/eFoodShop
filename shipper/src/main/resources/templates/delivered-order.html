@@ -125,10 +125,15 @@
 
 
 		function render(pageNumber) {
-			// Make first page in pagination active
-			document.querySelectorAll(".page-link")[0].classList.remove("active");
-			if (pageNumber === 1) {
-				document.querySelectorAll(".page-link")[0].classList.add("active");
+			let pageLinks = document.querySelectorAll(".page-link");
+			if (pageLinks.length !== 0) {
+				// Make first page in pagination active
+				pageLinks.forEach(function (pageLink) {
+					pageLink.parentNode.classList.remove("active");
+				});
+				if (pageNumber === 1) {
+					document.querySelectorAll(".page-link")[0].classList.add("active");
+				}
 			}
 
 			$.ajax({
@@ -177,7 +182,7 @@
 			// Remove the "active" class from all page links
 			let pageLinks = document.querySelectorAll(".page-link");
 			pageLinks.forEach(function (pageLink) {
-				pageLink.parentNode.classList.remove("active");
+				pageLink.classList.remove("active");
 			});
 
 			// Add the "active" class to the clicked page link's parent "li" element

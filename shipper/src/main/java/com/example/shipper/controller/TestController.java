@@ -7,6 +7,8 @@ import com.example.shipper.repository.OrderRepository;
 import com.example.shipper.repository.PageRepository;
 import com.example.shipper.service.OrderDetailFoodService;
 import com.example.shipper.service.OrderDetailService;
+import com.example.shipper.service.OrderService;
+
 import org.apache.tomcat.util.net.jsse.JSSEUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -25,6 +28,9 @@ public class TestController {
 
     @Autowired
     private OrderDetailService orderDetailService;
+
+    @Autowired
+    private OrderService orderService;
 
     @Autowired
     private OrderDetailFoodService orderDetailFoodService;
@@ -108,4 +114,10 @@ public class TestController {
         System.out.println(pageRepository.findNotBusyOrderTotalPageNumber(2));
         return orderRepository.findAll1(pageNumber, 2);
     }*/
+
+    @PutMapping("/12/{orderId}")
+    @ResponseBody
+    public int test12(@PathVariable Long orderId) {
+        return orderService.finishOrder(orderId);
+    }
 }

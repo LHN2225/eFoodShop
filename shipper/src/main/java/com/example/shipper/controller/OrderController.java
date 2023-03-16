@@ -90,4 +90,14 @@ public class OrderController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @PutMapping("/shipper/finish")
+    public ResponseEntity<Integer> finishOrder(@RequestParam Long orderId) {
+        try {
+            int response = orderService.finishOrder(orderId);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
