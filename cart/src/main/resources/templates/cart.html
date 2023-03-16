@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+
+<head th:replace="fragments::head">
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+
+<body>
+    <!-- Start Main Top -->
+    <header th:replace="fragments::main-header">
+    </header>
+    <!-- End Main Top -->
+
+    <!-- Start Top Search -->
+    <div th:replace="fragments::top-search">
+    </div>
+    <!-- End Top Search -->
+
+    <!-- Start All Title Box -->
+    <div th:replace="fragments::slider">
+
+    </div>
+    <!-- End All Title Box -->
+
+    <div class="cart-box-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div th:if="${check}" class="text-center alert-warning">
+                        <p th:text="${check}"></p>
+                    </div>
+
+                    <div class="table-main table-responsive" th:if="${check == null}">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Images</th>
+                                <th>Product Name</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                                <tr th:each="cartItem : ${shoppingCart}">
+                                    <td class="thumbnail-img">
+                                        <a href="#">
+                                            <img class="img-fluid"
+                                                 th:src="'https://dienmaymanhthang.com/wp-content/uploads/2022/05/bat-pho-1.jpg'" alt=""/>
+                                        </a>
+                                    </td>
+                                    <td class="name-pr">
+                                        <p th:text="'Phở'"></p>
+                                    </td>
+                                    <td class="price-pr">
+                                        <p th:text="'$' + ${cartItem.fixedPrice}"></p>
+                                    </td>
+
+                                    <form th:action="@{/update-cart}" method="post">
+                                        <input type="hidden" name="id" th:value="${cartItem.foodId}">
+                                        <td class="quantity-box"><input type="number" size="4" th:value="${cartItem.foodQuantity}"
+                                                                        name="quantity" min="0" step="1"
+                                                                        class="c-input-text qty text">
+                                        </td>
+                                        <td class="total-pr">
+                                            <p th:text="${cartItem.foodQuantity} * ${cartItem.fixedPrice} + ' VND'"></p>
+                                        </td>
+                                        <td class="remove-pr">
+                                            <button type="submit" name="action" value="update" title="Update"
+                                                    class="btn btn-primary">Update
+                                            </button>
+
+                                            <button type="submit" name="action" value="delete" title="Delete"
+                                                    class="btn btn-warning">Delete
+                                            </button>
+                                        </td>
+                                    </form>
+
+                                </tr>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row my-5">
+                <div class="col-lg-8 col-sm-12"></div>
+                <div class="col-lg-4 col-sm-12">
+                    <div class="order-box">
+                        <h3>Order summary</h3>
+                        <div class="d-flex">
+                            <h4>Sub Total</h4>
+                            <div class="ml-auto font-weight-bold" th:text = "${subTotal} + ' VND'"> </div>
+                        </div>
+                        <div class="d-flex">
+                            <h4>Shipping Cost</h4>
+                            <div class="ml-auto font-weight-bold"> Free</div>
+                        </div>
+                        <hr>
+                        <div class="d-flex gr-total">
+                            <h5>Total Price</h5>
+                            <div class="ml-auto h5" th:text = "${subTotal} + ${shipCost} + ' VND'"> </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+                <div class="col-12 d-flex shopping-box"><a th:href="@{/}" class="ml-auto btn hvr-hover">Checkout</a>
+
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

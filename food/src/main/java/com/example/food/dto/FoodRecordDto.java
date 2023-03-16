@@ -8,6 +8,6 @@ import lombok.Data;
 public class FoodRecordDto {
     Long id;
     String name;
-    String imageUrl;
+    String imageLink;
     Float price;
 }

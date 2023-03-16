@@ -29,7 +29,7 @@ public class FoodRepository {
 
     public List<FoodRecordDto> getAllFood(int pageNumber) {
         return jdbcTemplate
-                .query("select id, name, description, image_url, price"
+                .query("select id, name, description, image_link, price"
                                 + " from food"
                                 + " where is_deleted = 0"
                                 + " offset ("+ PageConvention.PAGE_SIZE +"*" + (pageNumber - 1) +") rows fetch next "+ PageConvention.PAGE_SIZE +" rows only",
@@ -37,18 +37,18 @@ public class FoodRepository {
                                 new FoodRecordDto(
                                         rs.getLong("id"),
                                         rs.getString("name"),
-                                        rs.getString("image_url"),
+                                        rs.getString("image_link"),
                                         rs.getFloat("price")
                                 )
                 );
     }
 
     public int saveFood(Food food) {
-        return jdbcTemplate.update("insert into food (name, description, image_url, price, is_deleted) " +
+        return jdbcTemplate.update("insert into food (name, description, image_link, price, is_deleted) " +
                 "values (?, ?, ?, ?, 0)",
                 food.getName(),
                 food.getDescription(),
-                food.getImageUrl(),
+                food.getImageLink(),
                 food.getPrice()
         );
 
@@ -60,7 +60,7 @@ public class FoodRepository {
 
     public FoodDetailDto viewFoodDetail(long id) throws NoResultException {
         FoodDetailDto result = (FoodDetailDto) jdbcTemplate
-                .queryForObject("select id, name, description, image_url, price"
+                .queryForObject("select id, name, description, image_link, price"
                                 + " from food"
                                 + " where id = " + id + " and is_deleted = 0",
                         (rs, rowNum) ->
@@ -68,7 +68,7 @@ public class FoodRepository {
                                         rs.getLong("id"),
                                         rs.getString("name"),
                                         rs.getString("description"),
-                                        rs.getString("image_url"),
+                                        rs.getString("image_link"),
                                         rs.getFloat("price")
                                 )
                 );
@@ -90,7 +90,7 @@ public class FoodRepository {
         return jdbcTemplate.update("UPDATE food"
                 +" SET name = "+ "'" + food.getName() + "'"
                 +", description = '"+ food.getDescription() + "'"
-                +", image_url = '"+ food.getImageUrl() + "'"
+                +", image_link = '"+ food.getImageLink() + "'"
                 +", price = "+ food.getPrice()
                 +" WHERE id = "+ food.getId()
                 +" and is_deleted = 0"
