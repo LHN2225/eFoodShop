@@ -2,8 +2,6 @@ package com.example.shipper.mapper;
 
 import com.example.shipper.dto.UserDto;
 import com.example.shipper.entity.User;
-import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

@@ -1,6 +1,5 @@
 package com.example.shipper.repository;
 
-import com.example.shipper.dto.OrderDetailDto;
 import com.example.shipper.dto.OrderDetailFoodDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;

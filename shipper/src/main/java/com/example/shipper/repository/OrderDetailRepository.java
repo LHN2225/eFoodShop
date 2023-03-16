@@ -1,13 +1,9 @@
 package com.example.shipper.repository;
 
 import com.example.shipper.dto.OrderDetailDto;
-import com.example.shipper.dto.UserLoginDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
-import java.sql.Timestamp;
-import java.util.List;
 
 @Repository
 public class OrderDetailRepository {

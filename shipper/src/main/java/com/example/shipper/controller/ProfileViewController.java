@@ -2,7 +2,6 @@ package com.example.shipper.controller;
 
 import com.example.shipper.config.AppConfig;
 import com.example.shipper.dto.UserDto;
-import com.example.shipper.entity.User;
 import com.example.shipper.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
