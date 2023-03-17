@@ -61,7 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/")
                 .usernameParameter("email")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/users")
+                .defaultSuccessUrl("http://localhost:8765/food/view-food")
                 .and()
                 .logout().logoutSuccessUrl("/").permitAll()
                 .and()

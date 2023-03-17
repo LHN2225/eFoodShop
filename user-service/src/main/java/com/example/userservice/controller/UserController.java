@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
-@RequestMapping
 public class UserController {
     @Autowired
     private UserService service;
