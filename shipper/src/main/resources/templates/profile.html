@@ -88,6 +88,7 @@
 
 	<!-- Template Main JS File -->
 	<script th:src="@{/assets/js/main.js}"></script>
+	<script th:src="@{/assets/js/domain.js}"></script>
 
 	<!-- Ajax -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
@@ -96,7 +97,7 @@
 
 		function render() {
 			$.ajax({
-				url: "http://localhost:8080/shipper/profile/profile-box",
+				url: shipperDomain + "/shipper/profile/profile-box",
 				type: 'GET',
 				contentType: "html",
 				crossDomain: true,
@@ -111,7 +112,7 @@
 			let formData = $('#submit-form').serialize(); // Serialize the form data
 
 			$.ajax({
-				url: 'http://localhost:8080/api/user',
+				url: shipperDomain + '/api/user',
 				method: 'PUT',
 				data: formData,
 				success: function (response) {

@@ -1,9 +1,9 @@
 server:
-  port: &port 9002
+  port: &port 9000
 
 spring:
   application:
-    name: virtual_food_cart_order
+    name: shipper
   datasource:
     url: jdbc:oracle:thin:@localhost:1521:orcl
     username: EFOODSHOP
@@ -15,8 +15,12 @@ spring:
       ddl-auto: update
 
 app-config:
-  virtual_food_cart_order:
+  shipper:
     hostname: 'http://localhost'
     port: *port
+    page-size: 5
+  virtual_food_cart_order:
+    hostname: 'http://localhost'
+    port: 9002
     page-size: 5
 

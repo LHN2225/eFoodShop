@@ -30,6 +30,7 @@
 
 	<!-- Template Main CSS File -->
 	<link th:href="@{/assets/css/main.css}" rel="stylesheet">
+	<script th:src="@{/assets/js/domain.js}"></script>
 
 </head>
 
@@ -133,7 +134,7 @@
 			}
 
 			$.ajax({
-				url: "http://localhost:8080/shipper/order/fragment/delivered/0/-1/" + pageNumber,
+				url: shipperDomain + "/shipper/order/fragment/delivered/0/-1/" + pageNumber,
 				type: 'GET',
 				contentType: "html",
 				crossDomain: true,
@@ -164,7 +165,7 @@
 			}
 
 			$.ajax({
-				url: `http://localhost:8080/shipper/order/fragment/delivered/${isSearch}/${orderId}/1`,
+				url: shipperDomain + `/shipper/order/fragment/delivered/${isSearch}/${orderId}/1`,
 				type: 'GET',
 				contentType: "html",
 				crossDomain: true,

@@ -113,6 +113,7 @@
 
 	<!-- Template Main JS File -->
 	<script th:src="@{/assets/js/main.js}"></script>
+	<script th:src="@{/assets/js/domain.js}"></script>
 
 	<!-- Ajax -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
@@ -124,7 +125,7 @@
 			let formData = $(this).serialize(); // Serialize the form data
 
 			$.ajax({
-				url: 'http://localhost:8080/shipper/login',
+				url: shipperDomain + '/shipper/login',
 				method: 'POST',
 				data: formData,
 				success: function(response) {

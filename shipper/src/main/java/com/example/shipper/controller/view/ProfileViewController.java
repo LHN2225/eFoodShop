@@ -1,7 +1,7 @@
 package com.example.shipper.controller.view;
 
 import com.example.shipper.config.AppConfig;
-import com.example.shipper.dto.OrderDetailDto;
+import com.example.shipper.config.VirtualFoodCartOrderConfig;
 import com.example.shipper.dto.UserDto;
 import com.example.shipper.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +20,9 @@ public class ProfileViewController {
     private AppConfig appConfig;
 
     @Autowired
+    private VirtualFoodCartOrderConfig virtualFoodCartOrderConfig;
+
+    @Autowired
     private UserService userService;
 
     @GetMapping("")
@@ -32,7 +35,7 @@ public class ProfileViewController {
         // Rest template ...
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<UserDto> responseEntity = restTemplate.getForEntity(
-                appConfig.hostname + "/api/user/profile",
+                appConfig.getDomain() + "/api/user/profile",
                 UserDto.class
         );
         UserDto userDto = responseEntity.getBody();

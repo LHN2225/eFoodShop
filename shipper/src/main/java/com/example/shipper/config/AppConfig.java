@@ -1,14 +1,26 @@
 package com.example.shipper.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
 public class AppConfig {
-    public int pageSize = 5;
     public Long shipperId = 1L;
-    public String hostname = "http://localhost:8080";
+
+    @Value("${app-config.shipper.page-size}")
+    public int pageSize;
+
+    @Value("${app-config.shipper.port}")
+    public String port;
+
+    @Value("${app-config.shipper.hostname}")
+    public String hostname;
+
+    public String getDomain() {
+        return this.hostname + ":" + this.port;
+    }
 
     @Bean
     public RestTemplate restTemplate() {
