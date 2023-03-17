@@ -20,6 +20,9 @@ public class ProfileViewController {
     private AppConfig appConfig;
 
     @Autowired
+    private RestTemplate restTemplate;
+
+    @Autowired
     private VirtualFoodCartOrderConfig virtualFoodCartOrderConfig;
 
     @Autowired
@@ -33,7 +36,6 @@ public class ProfileViewController {
     @GetMapping("/profile-box")
     public String getProfileBox(Model model) {
         // Rest template ...
-        RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<UserDto> responseEntity = restTemplate.getForEntity(
                 appConfig.getDomain() + "/api/user/profile",
                 UserDto.class

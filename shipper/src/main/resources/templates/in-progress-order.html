@@ -136,7 +136,7 @@
 			}
 
 			$.ajax({
-				url: shipperDomain + "/shipper/order/fragment/in-progress/0/-1/" + pageNumber,
+				url: "../order/fragment/in-progress/0/-1/" + pageNumber,
 				type: 'GET',
 				contentType: "html",
 				crossDomain: true,
@@ -167,7 +167,7 @@
 			}
 
 			$.ajax({
-				url: shipperDomain + `/shipper/order/fragment/in-progress/${isSearch}/${orderId}/1`,
+				url: `../order/fragment/in-progress/${isSearch}/${orderId}/1`,
 				type: 'GET',
 				contentType: "html",
 				crossDomain: true,
