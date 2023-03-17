@@ -19,6 +19,10 @@ spring:
           uri: lb://MANAGERINFO/
           predicates:
             - Path=/manager-info/**
+        - id: cart
+          uri: lb://CART/
+          predicates:
+            - Path=/cart/**
 
 eureka:
   client:

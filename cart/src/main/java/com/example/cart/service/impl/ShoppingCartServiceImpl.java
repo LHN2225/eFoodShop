@@ -21,7 +21,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     private FoodCartRepository foodCartRepository;
     @Override
     public Cart updateItemInCart(Optional<Food> product, Long quantity, User customer) {
-        Long cartId = cartRepository.findByCustomerId(customer.getId()).getId();
+        Long cartId = cartRepository.findByCustomerIdAndIsDeleted(customer.getId(), false).getId();
         List<FoodCart> cartItems = foodCartRepository.findByCartId(cartId);
 
 
@@ -30,23 +30,23 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         item.setFoodQuantity(quantity);
 
         foodCartRepository.save(item);
-        return cartRepository.findByCustomerId(customer.getId());
+        return cartRepository.findByCustomerIdAndIsDeleted(customer.getId(), false);
     }
 
     @Override
     public Cart deleteItemFromCart(Optional<Food> product, User customer) {
-        Long cartId = cartRepository.findByCustomerId(customer.getId()).getId();
+        Long cartId = cartRepository.findByCustomerIdAndIsDeleted(customer.getId(), false).getId();
         List<FoodCart> cartItems = foodCartRepository.findByCartId(cartId);
 
         FoodCart item = findFood(cartItems, product.get().getId());
         cartItems.remove(item);
         foodCartRepository.delete(item);
-        return cartRepository.findByCustomerId(customer.getId());
+        return cartRepository.findByCustomerIdAndIsDeleted(customer.getId(), false);
     }
 
     @Override
     public Cart findByCustomerId(Long customerId) {
-        return cartRepository.findByCustomerId(customerId);
+        return cartRepository.findByCustomerIdAndIsDeleted(customerId, false);
     }
 
     @Override

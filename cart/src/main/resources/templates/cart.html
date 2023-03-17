@@ -52,18 +52,18 @@
                                     <td class="thumbnail-img">
                                         <a href="#">
                                             <img class="img-fluid"
-                                                 th:src="'https://dienmaymanhthang.com/wp-content/uploads/2022/05/bat-pho-1.jpg'" alt=""/>
+                                                 th:src="${cartItem.food.imageLink}" alt=""/>
                                         </a>
                                     </td>
                                     <td class="name-pr">
-                                        <p th:text="'Phở'"></p>
+                                        <p th:text="${cartItem.food.name}"></p>
                                     </td>
                                     <td class="price-pr">
-                                        <p th:text="'$' + ${cartItem.fixedPrice}"></p>
+                                        <p th:text="${cartItem.fixedPrice} + 'VND'"></p>
                                     </td>
 
                                     <form th:action="@{/update-cart}" method="post">
-                                        <input type="hidden" name="id" th:value="${cartItem.foodId}">
+                                        <input type="hidden" name="id" th:value="${cartItem.food.id}">
                                         <td class="quantity-box"><input type="number" size="4" th:value="${cartItem.foodQuantity}"
                                                                         name="quantity" min="0" step="1"
                                                                         class="c-input-text qty text">
