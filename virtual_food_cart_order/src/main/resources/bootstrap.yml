@@ -3,12 +3,12 @@ spring:
     config:
       uri: http://localhost:8888
   application:
-    name: shipper
+    name: virtual_food_cart_order
   profiles:
     active: dev
 
 server:
-  port: 9000
+  port: 9002
 
 eureka:
   client:

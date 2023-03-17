@@ -27,6 +27,10 @@ spring:
           uri: lb://SHIPPER/
           predicates:
             - Path=/shipper/**
+        - id: virtual_food_cart_order
+          uri: lb://VIRTUALFOODCARTORDER/
+          predicates:
+            - Path=/virtual-food-cart-order/**
 
 eureka:
   client:

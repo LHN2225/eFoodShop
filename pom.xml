@@ -30,6 +30,7 @@
     <module>cart</module>
     <module>shipper</module>
     <module>user-service</module>
+    <module>virtual_food_cart_order</module>
   </modules>
 
   <dependencyManagement>
