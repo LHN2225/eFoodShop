@@ -22,7 +22,7 @@ import com.example.shipper.dto.OrderDetailDto;
 import org.springframework.web.client.RestTemplate;
 
 @Controller
-@RequestMapping("/shipper/order")
+@RequestMapping("/order")
 public class OrderViewController {
 
     @Autowired

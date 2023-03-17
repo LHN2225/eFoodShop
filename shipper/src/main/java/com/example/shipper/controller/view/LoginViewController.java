@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.shipper.entity.User;
 
 @Controller
-@RequestMapping("/shipper/login")
+@RequestMapping("/login")
 public class LoginViewController {
 
     @GetMapping("")
