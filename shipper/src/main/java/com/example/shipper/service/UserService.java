@@ -18,5 +18,5 @@ public interface UserService {
 
     User saveUser(User user);
 
-    int updateProfile(Long id, String password, String fullname, String phone);
+    int updateProfile(Long id, String fullname, String phone);
 }

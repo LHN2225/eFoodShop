@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int updateProfile(Long id, String password, String fullname, String phone) {
-        return userRepository.updateProfile(id, password, fullname, phone);
+    public int updateProfile(Long id, String fullname, String phone) {
+        return userRepository.updateProfile(id, fullname, phone);
     }
 }

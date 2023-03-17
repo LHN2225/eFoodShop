@@ -22,18 +22,20 @@ import com.example.shipper.dto.OrderDetailDto;
 import org.springframework.web.client.RestTemplate;
 
 @Controller
-@RequestMapping("/shipper/order")
+@RequestMapping("/order")
 public class OrderViewController {
 
     @Autowired
     private VirtualFoodCartOrderConfig virtualFoodCartOrderConfig;
 
+    @Autowired
+    private RestTemplate restTemplate;
+
     @GetMapping("/in-progress")
     public String getInProgressOrdersPage(Model model) {
         // Rest template ...
-        RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<Integer> responseEntity = restTemplate.getForEntity(
-                virtualFoodCartOrderConfig.getDomain() + "/api/page/in-progress",
+                "lb://VIRTUAL/api/page/in-progress",
                 Integer.class
         );
         int totalPageNumber = responseEntity.getBody();
@@ -50,9 +52,8 @@ public class OrderViewController {
     @GetMapping("/delivered")
     public String getDeliveredOrdersPage(Model model) {
         // Rest template ...
-        RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<Integer> responseEntity = restTemplate.getForEntity(
-                virtualFoodCartOrderConfig.getDomain() + "/api/page/delivered",
+                "lb://VIRTUAL/api/page/delivered",
                 Integer.class
         );
         int totalPageNumber = responseEntity.getBody();
@@ -74,9 +75,7 @@ public class OrderViewController {
         @PathVariable int pageNumber
     ) {
         // Rest template ...
-        RestTemplate restTemplate = new RestTemplate();
-
-        String urlTepmlate = virtualFoodCartOrderConfig.getDomain() + "/api/order/not-busy/%d/%s/%d";
+        String urlTepmlate = "lb://VIRTUAL/api/order/not-busy/%d/%s/%d";
         String url = String.format(urlTepmlate, isSearch, String.valueOf(orderId), pageNumber);
 
         ResponseEntity<List<OrderDto>> responseEntity = restTemplate.exchange(
@@ -101,9 +100,7 @@ public class OrderViewController {
         @PathVariable int pageNumber
     ) {
         // Rest template ...
-        RestTemplate restTemplate = new RestTemplate();
-
-        String urlTepmlate = virtualFoodCartOrderConfig.getDomain() + "/api/order/in-progress/%d/%s/%d";
+        String urlTepmlate = "lb://VIRTUAL/api/order/in-progress/%d/%s/%d";
         String url = String.format(urlTepmlate, isSearch, String.valueOf(orderId), pageNumber);
 
         ResponseEntity<List<OrderDto>> responseEntity = restTemplate.exchange(
@@ -128,9 +125,7 @@ public class OrderViewController {
         @PathVariable int pageNumber
     ) {
         // Rest template ...
-        RestTemplate restTemplate = new RestTemplate();
-
-        String urlTepmlate = virtualFoodCartOrderConfig.getDomain() + "/api/order/delivered/%d/%s/%d";
+        String urlTepmlate = "lb://VIRTUAL/api/order/delivered/%d/%s/%d";
         String url = String.format(urlTepmlate, isSearch, String.valueOf(orderId), pageNumber);
 
         ResponseEntity<List<OrderDto>> responseEntity = restTemplate.exchange(
@@ -150,9 +145,8 @@ public class OrderViewController {
     @GetMapping("/{orderId}")
     public String getOrderDetail(Model model, @PathVariable Long orderId) {
         // Rest template ...
-        RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<OrderDetailDto> responseEntity = restTemplate.getForEntity(
-                virtualFoodCartOrderConfig.getDomain() + "/api/order/" + orderId,
+                "lb://VIRTUAL/api/order/" + orderId,
                 OrderDetailDto.class
         );
         OrderDetailDto orderDetail = responseEntity.getBody();
@@ -168,10 +162,8 @@ public class OrderViewController {
     public ResponseEntity<Integer> receiveOrderByShipper(@RequestParam Long orderId) {
 			try {
 				// Rest template ...
-				RestTemplate restTemplate = new RestTemplate();
-
                 ResponseEntity<Integer> responseEntity = restTemplate.exchange(
-                    virtualFoodCartOrderConfig.getDomain() + "/api/order/shipper/" + orderId,
+                    "lb://VIRTUAL/api/order/shipper/" + orderId,
                     HttpMethod.PUT,
                     null,
                     Integer.class
@@ -192,10 +184,8 @@ public class OrderViewController {
     public ResponseEntity<Integer> finishOrder(@RequestParam Long orderId) {
         try {
 			// Rest template ...
-            RestTemplate restTemplate = new RestTemplate();
-
             ResponseEntity<Integer> responseEntity = restTemplate.exchange(
-                virtualFoodCartOrderConfig.getDomain() + "/api/order/shipper/finish/" + orderId,
+                "lb://VIRTUAL/api/order/shipper/finish/" + orderId,
                 HttpMethod.PUT,
                 null,
                 Integer.class

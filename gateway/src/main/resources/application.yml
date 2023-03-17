@@ -31,6 +31,10 @@ spring:
           uri: lb://SHIPPER/
           predicates:
             - Path=/shipper/**
+        - id: virtual
+          uri: lb://VIRTUAL/
+          predicates:
+            - Path=/api/**
 
 eureka:
   client:

@@ -13,11 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 
 @Controller
-@RequestMapping("/shipper/profile")
+@RequestMapping("/profile")
 public class ProfileViewController {
 
     @Autowired
     private AppConfig appConfig;
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     @Autowired
     private VirtualFoodCartOrderConfig virtualFoodCartOrderConfig;
@@ -33,15 +36,14 @@ public class ProfileViewController {
     @GetMapping("/profile-box")
     public String getProfileBox(Model model) {
         // Rest template ...
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<UserDto> responseEntity = restTemplate.getForEntity(
-                appConfig.getDomain() + "/api/user/profile",
-                UserDto.class
-        );
-        UserDto userDto = responseEntity.getBody();
+//        ResponseEntity<UserDto> responseEntity = restTemplate.getForEntity(
+//                "http://localhost:9000/api/user/profile",
+//                UserDto.class
+//        );
+//        UserDto userDto = responseEntity.getBody();
         // ...
 
-        model.addAttribute("user", userDto);
+        model.addAttribute("user", userService.findById());
         return "fragment/profile-box";
     }
     

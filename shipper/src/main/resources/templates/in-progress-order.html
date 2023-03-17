@@ -44,7 +44,7 @@
 		<!-- ======= Breadcrumbs ======= -->
 		<div class="breadcrumbs">
 			<div class="page-header d-flex align-items-center"
-				style="background-image: url('/assets/img/page-header.jpg');">
+				style="background-image: url('../assets/img/page-header.jpg');">
 				<div class="container position-relative">
 					<div class="row d-flex justify-content-center">
 						<div class="col-lg-6 text-center">
@@ -136,7 +136,7 @@
 			}
 
 			$.ajax({
-				url: shipperDomain + "/shipper/order/fragment/in-progress/0/-1/" + pageNumber,
+				url: "../order/fragment/in-progress/0/-1/" + pageNumber,
 				type: 'GET',
 				contentType: "html",
 				crossDomain: true,
@@ -167,7 +167,7 @@
 			}
 
 			$.ajax({
-				url: shipperDomain + `/shipper/order/fragment/in-progress/${isSearch}/${orderId}/1`,
+				url: `../order/fragment/in-progress/${isSearch}/${orderId}/1`,
 				type: 'GET',
 				contentType: "html",
 				crossDomain: true,
@@ -180,7 +180,7 @@
 		function finish(that) {
 			let orderId = $(that).closest("tr").find(".order-id").text();
 			$.ajax({
-				url: shipperDomain + '/shipper/order/finish',
+				url: '../order/finish',
 				method: 'PUT',
 				data: {
 					orderId: orderId
