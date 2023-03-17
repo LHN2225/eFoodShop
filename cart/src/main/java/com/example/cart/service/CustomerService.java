@@ -6,5 +6,5 @@ import com.example.cart.entity.User;
 public interface CustomerService {
     UserDto save(UserDto customerDto);
 
-    User findByUsername(String username);
+    User findByEmail(String email);
 }

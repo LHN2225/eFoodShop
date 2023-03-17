@@ -23,7 +23,7 @@ public class CustomerServiceImpl implements CustomerService {
     public UserDto save(UserDto customerDto) {
         User customer = new User();
         customer.setId(customerDto.getId());
-        customer.setUsername(customerDto.getUsername());
+        customer.setEmail(customerDto.getEmail());
         customer.setPassword(customerDto.getPassword());
         customer.setPhone(customerDto.getPhone());
         customer.setRoleId(1L);
@@ -33,8 +33,8 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public User findByUsername(String username) {
-        return customerRepository.findByUsername(username);
+    public User findByEmail(String email) {
+        return customerRepository.findByEmail(email);
     }
 
 

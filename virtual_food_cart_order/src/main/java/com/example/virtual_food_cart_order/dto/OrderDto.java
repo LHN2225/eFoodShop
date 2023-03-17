@@ -11,6 +11,5 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 public class OrderDto {
     private Long id;
-    private Timestamp createdDate;
     private String address;
 }

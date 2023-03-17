@@ -34,11 +34,13 @@ public class CartController {
     @Autowired
     private FoodCartService foodCartService;
 
+    private final String email = "Another_test@123.com";
+
 
 
     @GetMapping("/cart")
     public String cart(Model model, HttpSession session){
-        User customer = customerService.findByUsername("customer");
+        User customer = customerService.findByEmail(email);
         Long customerId = customer.getId();
         Cart cart = cartService.findByCustomerId(customerId);
         if(cart == null){
@@ -59,8 +61,7 @@ public class CartController {
                              @RequestParam("id") Long productId,
                              Model model
     ){
-            String username = "customer";
-            User customer = customerService.findByUsername(username);
+            User customer = customerService.findByEmail(email);
             Optional<Food> product = foodService.getFoodById(productId);
             Cart cart = cartService.updateItemInCart(product, quantity, customer);
 
@@ -72,8 +73,7 @@ public class CartController {
     public String deleteItemFromCart(@RequestParam("id") Long productId,
                                      Model model){
 
-            String username = "customer";
-            User customer = customerService.findByUsername(username);
+            User customer = customerService.findByEmail(email);
             Optional<Food> product = foodService.getFoodById(productId);
             Cart cart = cartService.deleteItemFromCart(product, customer);
 //            model.addAttribute("shoppingCart", cart);

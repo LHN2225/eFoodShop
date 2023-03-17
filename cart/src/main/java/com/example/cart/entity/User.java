@@ -17,8 +17,8 @@ public class User {
     @Column(name="id")
     private Long id;
 
-    @Column(name="username")
-    private String username;
+    @Column(name = "email")
+    private String email;
 
     @Column(name="password")
     private String password;
@@ -26,6 +26,6 @@ public class User {
     @Column(name="role_id")
     private Long roleId;
 
-    @Column(name="phone_number")
+    @Column(name="phone")
     private String phone;
 }

@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 @Component
 public class OrderMapper {
     public OrderDto entityToDto(Order order) {
-        return new OrderDto(order.getId(), order.getCreatedDate(), order.getAddress());
+        return new OrderDto(order.getId(), order.getAddress());
     }
 
     public List<OrderDto> entityListToDtoList(List<Order> orderList) {
