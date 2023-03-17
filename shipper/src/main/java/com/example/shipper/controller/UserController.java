@@ -107,12 +107,10 @@ public class UserController {
 
     @PutMapping("")
     public ResponseEntity<Integer> updateProfile(
-            @RequestParam String password,
             @RequestParam String fullname,
             @RequestParam String phone
     ) {
-        System.out.println(password);
-        int response = userService.updateProfile(appConfig.shipperId, passwordEncoder.encode(password), fullname, phone);
+        int response = userService.updateProfile(appConfig.shipperId, fullname, phone);
         try {
             //int response = userService.updateProfile(shipper_id_test, password, fullname, phone);
             return new ResponseEntity<>(response, HttpStatus.OK);

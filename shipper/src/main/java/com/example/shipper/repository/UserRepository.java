@@ -13,10 +13,9 @@ import javax.transaction.Transactional;
 public interface UserRepository extends JpaRepository<User, Long> {
     @Modifying
     @Transactional
-    @Query("UPDATE User u SET u.password = :password, u.fullname = :fullname, u.phone = :phone WHERE u.id = :id")
+    @Query("UPDATE User u SET u.fullname = :fullname, u.phone = :phone WHERE u.id = :id")
     int updateProfile(
             @Param("id") Long id,
-            @Param("password") String password,
             @Param("fullname") String fullname,
             @Param("phone") String phone
     );

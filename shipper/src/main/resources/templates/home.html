@@ -180,7 +180,7 @@
 		function choose(that) {
 			let orderId = $(that).closest("tr").find(".order-id").text();
 			$.ajax({
-				url: shipperDomain + '/shipper/order/receive',
+				url: '../shipper/order/receive',
 				method: 'PUT',
 				data: {
 					orderId: orderId
