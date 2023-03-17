@@ -1,5 +1,6 @@
 package com.example.cart.controller;
 
+import com.example.cart.dto.FoodCartDto;
 import com.example.cart.entity.Cart;
 import com.example.cart.entity.Food;
 import com.example.cart.entity.FoodCart;
@@ -37,14 +38,14 @@ public class CartController {
 
     @GetMapping("/cart")
     public String cart(Model model, HttpSession session){
-        User customer = customerService.findByUsername("user1");
+        User customer = customerService.findByUsername("customer");
         Long customerId = customer.getId();
         Cart cart = cartService.findByCustomerId(customerId);
         if(cart == null){
             model.addAttribute("check", "No item in your cart");
             return "cart";
         }
-        List<FoodCart> shoppingCart = foodCartService.findByCartId(cart.getId());
+        List<FoodCartDto> shoppingCart = foodCartService.findByCartId(cart.getId());
 
         session.setAttribute("totalItems", foodCartService.totalItems(cart.getId()));
         model.addAttribute("subTotal", foodCartService.getTotalPrice(cart.getId()));
@@ -58,25 +59,25 @@ public class CartController {
                              @RequestParam("id") Long productId,
                              Model model
     ){
-            String username = "user1";
+            String username = "customer";
             User customer = customerService.findByUsername(username);
             Optional<Food> product = foodService.getFoodById(productId);
             Cart cart = cartService.updateItemInCart(product, quantity, customer);
 
-            List<FoodCart> shoppingCart = foodCartService.findByCartId(cart.getId());
+            List<FoodCartDto> shoppingCart = foodCartService.findByCartId(cart.getId());
             model.addAttribute("shoppingCart", shoppingCart);
-            return "redirect:/cart";
+            return "cart";
     }
     @RequestMapping(value = "/update-cart", method = RequestMethod.POST, params = "action=delete")
     public String deleteItemFromCart(@RequestParam("id") Long productId,
                                      Model model){
 
-            String username = "user1";
+            String username = "customer";
             User customer = customerService.findByUsername(username);
             Optional<Food> product = foodService.getFoodById(productId);
             Cart cart = cartService.deleteItemFromCart(product, customer);
             model.addAttribute("shoppingCart", cart);
-            return "redirect:/cart";
+            return "cart";
 
 
     }

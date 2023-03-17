@@ -50,7 +50,7 @@ public class CartServiceImpl implements CartService {
 
         if (addFoodToCart != null) {
             addFoodToCart.setFoodQuantity(addFoodToCart.getFoodQuantity() + 1);
-            addFoodToCart.setFixedPrice(addFoodToCart.getFixedPrice() + buyFood.get().getPrice());
+            addFoodToCart.setFixedPrice(addFoodToCart.getFixedPrice());
         } else {
             addFoodToCart = new FoodCart();
             addFoodToCart.setCartId(currentCart.getId());
