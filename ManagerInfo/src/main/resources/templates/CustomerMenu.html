@@ -8,10 +8,10 @@
     <title>Home</title>
 
     <!-- favicon -->
-    <link rel="shortcut icon" th:href="@{../static/img/sample/logo/favicon.ico}" type="image/x-icon">
+    <link rel="shortcut icon" th:href="@{/img/sample/logo/favicon.ico}" type="image/x-icon">
 
     <!-- custom css link -->
-    <link rel="stylesheet" th:href="@{../static/css/style_sample-prefix.css}">
+    <link rel="stylesheet" th:href="@{/css/style_sample-prefix.css}">
 
     <!-- google font link -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -81,7 +81,7 @@
 
         $.ajax({
             type: 'GET',
-            url: `/api/manager-info/cart/quantity-in-cart/`,
+            url: `/manager-info/quantity-in-cart/`,
             dataType: "text",
             success: function (response) {
                 console.log(response)
@@ -92,29 +92,28 @@
                 alert("Error!")
             }
         });
+    });
 
-        $('.buy-button').click(function() {
-            let foodId = parseInt($(this).data('foodid'), 10);
+    $('.buy-button').click(function() {
+        let foodId = parseInt($(this).data('foodid'), 10);
 
-            $.ajax({
-                type: 'POST',
-                url: `/api/manager-info/cart/add-to-cart/` + foodId,
-                data: {},
-                success: function (response) {
-                    // Handle the response from the server
-                    alert("Done Buying!")
+        $.ajax({
+            type: 'POST',
+            url: `/manager-info/add-to-cart/` + foodId,
+            data: {},
+            success: function (response) {
+                // Handle the response from the server
+                alert("Done Buying!")
 
-                    let currentBuy = $('.count').text();
-                    $('.count').text(parseInt(currentBuy, 10) + 1);
-                    console.log(currentBuy);
-                },
-                error: function (xhr, status, error) {
-                    // Handle the error
-                    alert("Error!")
-                }
-            });
+                let currentBuy = $('.count').text();
+                $('.count').text(parseInt(currentBuy, 10) + 1);
+                console.log(currentBuy);
+            },
+            error: function (xhr, status, error) {
+                // Handle the error
+                alert("Error!")
+            }
         });
-
     });
 </script>
 

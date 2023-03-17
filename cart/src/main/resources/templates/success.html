@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+
+<head th:replace="fragments::head">
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+
+<body>
+    <!-- Start Main Top -->
+    <header th:replace="fragments::main-header">
+    </header>
+    <!-- End Main Top -->
+
+    <!-- Start Top Search -->
+    <div th:replace="fragments::top-search">
+    </div>
+    <!-- End Top Search -->
+
+    <!-- Start All Title Box -->
+    <div th:replace="fragments::slider">
+
+    </div>
+    <!-- End All Title Box -->
+
+    <div class="container justify-content-center align-items-center">
+        <h1 class="d-flex justify-content-center align-items-center">SUCCESS</h1>
+        <a class="d-flex justify-content-center align-items-center" href="../cart/cart">
+            <div class="btn btn-primary">
+                Back
+            </div>
+        </a>
+    </div>
+</body>
+</html>

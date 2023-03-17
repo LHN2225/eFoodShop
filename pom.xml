@@ -29,6 +29,7 @@
     <module>storage</module>
     <module>cart</module>
     <module>shipper</module>
+    <module>user-service</module>
   </modules>
 
   <dependencyManagement>
