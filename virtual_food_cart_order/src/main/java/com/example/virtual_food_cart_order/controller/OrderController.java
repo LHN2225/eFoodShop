@@ -122,8 +122,8 @@ public class OrderController {
         }
     }
 
-    @PutMapping("/shipper")
-    public ResponseEntity<Integer> receiveOrderByShipper(@RequestParam Long orderId) {
+    @PutMapping("/shipper/{orderId}")
+    public ResponseEntity<Integer> receiveOrderByShipper(@PathVariable Long orderId) {
         try {
             int response = orderService.receiveOrderByShipper(orderId);
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -132,8 +132,8 @@ public class OrderController {
         }
     }
 
-    @PutMapping("/shipper/finish")
-    public ResponseEntity<Integer> finishOrder(@RequestParam Long orderId) {
+    @PutMapping("/shipper/finish/{orderId}")
+    public ResponseEntity<Integer> finishOrder(@PathVariable Long orderId) {
         try {
             int response = orderService.finishOrder(orderId);
             return new ResponseEntity<>(response, HttpStatus.OK);

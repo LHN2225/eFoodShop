@@ -1,13 +1,18 @@
 package com.example.shipper.controller.view;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.example.shipper.config.VirtualFoodCartOrderConfig;
 import com.example.shipper.dto.OrderDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -164,10 +169,14 @@ public class OrderViewController {
 			try {
 				// Rest template ...
 				RestTemplate restTemplate = new RestTemplate();
-				ResponseEntity<Integer> responseEntity = restTemplate.getForEntity(
-						virtualFoodCartOrderConfig.getDomain() + "/api/order/shipper",
-						Integer.class
-				);
+
+                ResponseEntity<Integer> responseEntity = restTemplate.exchange(
+                    virtualFoodCartOrderConfig.getDomain() + "/api/order/shipper/" + orderId,
+                    HttpMethod.PUT,
+                    null,
+                    Integer.class
+                );
+
 				int response = responseEntity.getBody();
 				// ...
 			
@@ -183,13 +192,17 @@ public class OrderViewController {
     public ResponseEntity<Integer> finishOrder(@RequestParam Long orderId) {
         try {
 			// Rest template ...
-			RestTemplate restTemplate = new RestTemplate();
-			ResponseEntity<Integer> responseEntity = restTemplate.getForEntity(
-					virtualFoodCartOrderConfig.getDomain() + "/api/order/shipper/finish",
-					Integer.class
-			);
-			int response = responseEntity.getBody();
-			// ...
+            RestTemplate restTemplate = new RestTemplate();
+
+            ResponseEntity<Integer> responseEntity = restTemplate.exchange(
+                virtualFoodCartOrderConfig.getDomain() + "/api/order/shipper/finish/" + orderId,
+                HttpMethod.PUT,
+                null,
+                Integer.class
+            );
+
+            int response = responseEntity.getBody();
+            // ...
 			
 			//int response = orderService.finishOrder(orderId);
 			return new ResponseEntity<>(response, HttpStatus.OK);

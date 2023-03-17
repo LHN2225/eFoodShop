@@ -180,7 +180,7 @@
 		function choose(that) {
 			let orderId = $(that).closest("tr").find(".order-id").text();
 			$.ajax({
-				url: virtual_food_cart_orderDomain + '/api/order/shipper',
+				url: shipperDomain + '/shipper/order/receive',
 				method: 'PUT',
 				data: {
 					orderId: orderId

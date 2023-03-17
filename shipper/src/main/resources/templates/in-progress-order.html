@@ -180,7 +180,7 @@
 		function finish(that) {
 			let orderId = $(that).closest("tr").find(".order-id").text();
 			$.ajax({
-				url: virtual_food_cart_orderDomain + '/api/order/shipper/finish/',
+				url: shipperDomain + '/shipper/order/finish',
 				method: 'PUT',
 				data: {
 					orderId: orderId
