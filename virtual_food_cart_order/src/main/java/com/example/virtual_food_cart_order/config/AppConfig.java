@@ -1,4 +1,4 @@
-package com.example.shipper.config;
+package com.example.virtual_food_cart_order.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -9,13 +9,13 @@ import org.springframework.web.client.RestTemplate;
 public class AppConfig {
     public Long shipperId = 1L;
 
-    @Value("${app-config.shipper.page-size}")
+    @Value("${app-config.virtual_food_cart_order.page-size}")
     public int pageSize;
 
-    @Value("${app-config.shipper.port}")
+    @Value("${app-config.virtual_food_cart_order.port}")
     public String port;
 
-    @Value("${app-config.shipper.hostname}")
+    @Value("${app-config.virtual_food_cart_order.hostname}")
     public String hostname;
 
     public String getDomain() {
