@@ -1,0 +1,22 @@
+server:
+  port: &port 9002
+
+spring:
+  application:
+    name: virtual_food_cart_order
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521:orcl
+    username: EFOODSHOP
+    password: 123456
+  jpa:
+    database-platform: org.hibernate.dialect.Oracle12cDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+app-config:
+  virtual_food_cart_order:
+    hostname: 'http://localhost'
+    port: *port
+    page-size: 5
+

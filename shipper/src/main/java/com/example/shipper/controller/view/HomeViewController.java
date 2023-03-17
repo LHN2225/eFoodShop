@@ -1,7 +1,6 @@
 package com.example.shipper.controller.view;
 
-import com.example.shipper.config.AppConfig;
-import com.example.shipper.service.PageService;
+import com.example.shipper.config.VirtualFoodCartOrderConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,7 +14,7 @@ import org.springframework.web.client.RestTemplate;
 public class HomeViewController {
 
     @Autowired
-    private AppConfig appConfig;
+    private VirtualFoodCartOrderConfig virtualFoodCartOrderConfig;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -25,7 +24,7 @@ public class HomeViewController {
         // Rest template ...
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<Integer> responseEntity = restTemplate.getForEntity(
-                appConfig.hostname + "/api/page/not-busy",
+                virtualFoodCartOrderConfig.getDomain() + "/api/page/not-busy",
                 Integer.class
         );
         int totalPageNumber = responseEntity.getBody();
