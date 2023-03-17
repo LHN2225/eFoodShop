@@ -31,8 +31,8 @@ spring:
           uri: lb://SHIPPER/
           predicates:
             - Path=/shipper/**
-        - id: virtualfoodcartorder
-          uri: lb://VIRTUAL_FOOD_CART_ORDER/
+        - id: virtual
+          uri: lb://VIRTUAL/
           predicates:
             - Path=/api/**
 

@@ -22,9 +22,9 @@ public class HomeViewController {
     @GetMapping("")
     public String home(Model model) {
         // Rest template ...
-        RestTemplate restTemplate = new RestTemplate();
+        //RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<Integer> responseEntity = restTemplate.getForEntity(
-                virtualFoodCartOrderConfig.getDomain() + "/api/page/not-busy",
+                "lb://VIRTUAL/api/page/not-busy",
                 Integer.class
         );
         int totalPageNumber = responseEntity.getBody();

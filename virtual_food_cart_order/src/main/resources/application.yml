@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: virtual_food_cart_order
+    name: virtual
   datasource:
     url: jdbc:oracle:thin:@localhost:1521:orcl
     username: EFOODSHOP
