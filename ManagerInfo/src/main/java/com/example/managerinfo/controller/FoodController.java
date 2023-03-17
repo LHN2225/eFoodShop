@@ -8,13 +8,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/api/manager-info/food/")
 public class FoodController {
 
     @Autowired
     private FoodService foodService;
 
-    @GetMapping("get-all")
+    @GetMapping("get-all-food")
     public String customerGetAllFood(Model model) {
         model.addAttribute("foods", foodService.findAll());
         return "CustomerMenu";

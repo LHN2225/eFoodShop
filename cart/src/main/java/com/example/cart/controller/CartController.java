@@ -64,9 +64,9 @@ public class CartController {
             Optional<Food> product = foodService.getFoodById(productId);
             Cart cart = cartService.updateItemInCart(product, quantity, customer);
 
-            List<FoodCartDto> shoppingCart = foodCartService.findByCartId(cart.getId());
-            model.addAttribute("shoppingCart", shoppingCart);
-            return "cart";
+//            List<FoodCartDto> shoppingCart = foodCartService.findByCartId(cart.getId());
+//            model.addAttribute("shoppingCart", shoppingCart);
+            return "success";
     }
     @RequestMapping(value = "/update-cart", method = RequestMethod.POST, params = "action=delete")
     public String deleteItemFromCart(@RequestParam("id") Long productId,
@@ -76,8 +76,8 @@ public class CartController {
             User customer = customerService.findByUsername(username);
             Optional<Food> product = foodService.getFoodById(productId);
             Cart cart = cartService.deleteItemFromCart(product, customer);
-            model.addAttribute("shoppingCart", cart);
-            return "cart";
+//            model.addAttribute("shoppingCart", cart);
+            return "success";
 
 
     }
