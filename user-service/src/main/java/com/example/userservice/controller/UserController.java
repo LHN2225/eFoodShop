@@ -90,7 +90,7 @@ public class UserController {
     @PostMapping("/account/save")
     public String saveProfile(User user, RedirectAttributes redirectAttributes, @AuthenticationPrincipal CustomUserDetails userDetails) throws IOException{
         service.save(user);
-        userDetails.setFullName(user.getFullName());
+        userDetails.setFullname(user.getFullname());
         redirectAttributes.addFlashAttribute("message", "Update account success");
         return "redirect:/users";
     }

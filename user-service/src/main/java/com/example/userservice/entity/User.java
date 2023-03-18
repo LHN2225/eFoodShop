@@ -1,48 +1,31 @@
 package com.example.userservice.entity;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 
 import lombok.*;
-import org.hibernate.validator.constraints.Length;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-@Setter
-@Getter
-@ToString
+@Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "users")
+@Table(name = "restaurant_user")
 public class User {
-
-
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Column(name = "id")
         private Long id;
 
-        @Column(nullable = false, unique = true, length = 45)
+        @Column(name = "email")
         private String email;
 
-        @Column(nullable = false, length = 64)
+        @Column(name = "password")
         private String password;
 
-        @Column(name = "full_name", nullable = false, length = 20)
-        private String fullName;
+        @Column(name = "fullname")
+        private String fullname;
 
-        //        @JoinTable(
-//                name = "users_roles",
-//                joinColumns = @JoinColumn(name = "user_id"),
-//                inverseJoinColumns = @JoinColumn(name = "role_id")
-//        )
+        @Column(name = "phone")
+        private String phone;
+
+        @Column(name = "role_id")
         private Long roleId;
-
-
 }

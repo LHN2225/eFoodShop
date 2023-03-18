@@ -37,7 +37,6 @@ public class CustomUserDetails implements UserDetails {
         return user.getEmail();
     }
 
-
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -59,12 +58,12 @@ public class CustomUserDetails implements UserDetails {
     }
 
 
-    public String getFullName() {
-        return user.getFullName();
+    public String getFullname() {
+        return user.getFullname();
     }
 
-    public void setFullName(String fullName){
-        this.user.setFullName(fullName);
+    public void setFullname(String fullname){
+        this.user.getFullname();
     }
 
 
