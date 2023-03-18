@@ -50,8 +50,8 @@ public class UserServiceImpl implements UserService {
 
         updateUser.setRoleId(oldUser.get().getRoleId());
 
-        if (updateUser.getUsername() == null || oldUser.get().getUsername().equals(updateUser.getUsername())) {
-            updateUser.setUsername(oldUser.get().getUsername());
+        if (updateUser.getEmail() == null || oldUser.get().getEmail().equals(updateUser.getEmail())) {
+            updateUser.setEmail(oldUser.get().getEmail());
         }
         if (updateUser.getPassword() == null || oldUser.get().getPassword().equals(updateUser.getPassword())) {
             updateUser.setPassword(oldUser.get().getPassword());

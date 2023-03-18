@@ -1,8 +1,5 @@
 package com.example.userservice.service;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import com.example.userservice.entity.Role;
 import com.example.userservice.entity.User;
@@ -20,14 +17,14 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<Role> roles = user.getRoles();
-        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+//        Set<Role> roles = user.getRoles();
+//        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+//
+//        for (Role role : roles) {
+//            authorities.add(new SimpleGrantedAuthority(role.getName()));
+//        }
 
-        for (Role role : roles) {
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
-        }
-
-        return authorities;
+        return Collections.singleton(new SimpleGrantedAuthority(String.valueOf(user.getRoleId())));
     }
 
     @Override

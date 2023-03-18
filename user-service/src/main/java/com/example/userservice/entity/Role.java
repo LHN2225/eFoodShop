@@ -3,6 +3,7 @@ package com.example.userservice.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,6 +19,7 @@ public class Role {
 
     @Column(nullable = false, length = 45)
     private String name;
+
 
     public Role(Long id) {
         this.id = id;

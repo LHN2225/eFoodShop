@@ -52,7 +52,7 @@
                                     <td class="thumbnail-img">
                                         <a href="#">
                                             <img class="img-fluid"
-                                                 th:src="${cartItem.food.imageLink}" alt=""/>
+                                                 th:src="@{|../storage/image-food/${cartItem.food.imageLink}|}" alt=""/>
                                         </a>
                                     </td>
                                     <td class="name-pr">
