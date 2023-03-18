@@ -1,18 +1,17 @@
 package com.example.managerinfo.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class UserDto {
     private Long id;
-    private String username;
+    private String email;
     private String password;
     private Long roleId;
     private String phone;
+    private String fullname;
 }

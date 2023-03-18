@@ -6,18 +6,18 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Data
 @Entity
-@Table(name="cart")
-@AllArgsConstructor
+@Data
+@Table(name = "cart")
 @NoArgsConstructor
+@AllArgsConstructor
 public class Cart {
     @Id
-    @GeneratedValue
-    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name="customer_id")
+    @Column(name = "customer_id")
     private Long customerId;
 
     @Column(name = "is_deleted")

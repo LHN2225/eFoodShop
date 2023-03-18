@@ -42,8 +42,13 @@
             </div>
 
             <div class="mb-3 mt-3 d-flex">
-                <label class="form-label mx-3">Username</label>
-                <input class="form-control-sm form-control" th:field="*{username}" name="username" required>
+                <label class="form-label mx-3">Email</label>
+                <input class="form-control-sm form-control" th:field="*{email}" name="email" required readonly>
+            </div>
+
+            <div class="mb-3 mt-3 d-flex">
+                <label class="form-label mx-3">Fullname</label>
+                <input class="form-control-sm form-control" th:field="*{fullname}" name="fullname" required>
             </div>
 
             <div class="mb-3 mt-3 d-flex">

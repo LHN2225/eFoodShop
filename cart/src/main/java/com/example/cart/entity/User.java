@@ -6,26 +6,29 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Data
 @Entity
-@Table(name="restaurant_user")
-@NoArgsConstructor
+@Data
 @AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "restaurant_user")
 public class User {
     @Id
-    @GeneratedValue
-    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "email")
     private String email;
 
-    @Column(name="password")
+    @Column(name = "password")
     private String password;
 
-    @Column(name="role_id")
-    private Long roleId;
+    @Column(name = "fullname")
+    private String fullname;
 
-    @Column(name="phone")
+    @Column(name = "phone")
     private String phone;
+
+    @Column(name = "role_id")
+    private Long roleId;
 }

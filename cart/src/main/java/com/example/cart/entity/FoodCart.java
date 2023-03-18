@@ -6,26 +6,26 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Data
 @Entity
-@Table(name="food_cart")
+@Data
+@Table(name = "food_cart")
 @NoArgsConstructor
 @AllArgsConstructor
 public class FoodCart {
     @Id
-    @GeneratedValue
-    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name="food_id")
+    @Column(name = "food_id")
     private Long foodId;
 
-    @Column(name="cart_id")
+    @Column(name = "cart_id")
     private Long cartId;
 
-    @Column(name="food_quantity")
+    @Column(name = "food_quantity")
     private Long foodQuantity;
 
-    @Column(name="fixed_price")
+    @Column(name = "fixed_price")
     private float fixedPrice;
 }
