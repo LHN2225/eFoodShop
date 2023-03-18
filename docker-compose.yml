@@ -7,6 +7,7 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8761:8761"
+    restart: on-failure
   configserver:
     container_name: configserver
     build:
@@ -17,8 +18,9 @@ services:
     environment:
       - euraka.client.service-url.defaultZone=http://eureka-server:8761/eureka
       - JAVA_OPTS=
-        - Dspring.cloud.config.server.native.searchLocations=/var/config-data
-        - DEURAKA_SERVER=http://eureka-server:8761/eureka
+        -Dspring.cloud.config.server.native.searchLocations=/var/config-data
+        -DEURAKA_SERVER=http://eureka-server:8761/eureka
+    restart: on-failure
     depends_on:
       - eureka-server
     ports:
@@ -31,11 +33,12 @@ services:
     environment:
       - euraka.client.service-url.defaultZone=http://eureka-server:8761/eureka
       - JAVA_OPTS=
-        - DEURAKA_SERVER=http://eureka-server:8761/eureka
+        -DEURAKA_SERVER=http://eureka-server:8761/eureka
     depends_on:
       - eureka-server
     ports:
       - "8765:8765"
+    restart: on-failure
   cart:
     build:
       context: /cart
@@ -45,7 +48,7 @@ services:
     environment:
       - euraka.client.service-url.defaultZone=http://eureka-server:8761/eureka
       - JAVA_OPTS=
-        - DEURAKA_SERVER=http://eureka-server:8761/eureka
+        -DEURAKA_SERVER=http://eureka-server:8761/eureka
     restart: on-failure
     depends_on:
       - eureka-server
@@ -62,7 +65,7 @@ services:
     environment:
       - euraka.client.service-url.defaultZone=http://eureka-server:8761/eureka
       - JAVA_OPTS=
-        - DEURAKA_SERVER=http://eureka-server:8761/eureka
+        -DEURAKA_SERVER=http://eureka-server:8761/eureka
     restart: on-failure
     depends_on:
       - eureka-server
@@ -79,7 +82,7 @@ services:
     environment:
       - euraka.client.service-url.defaultZone=http://eureka-server:8761/eureka
       - JAVA_OPTS=
-        - DEURAKA_SERVER=http://eureka-server:8761/eureka
+        -DEURAKA_SERVER=http://eureka-server:8761/eureka
     restart: on-failure
     depends_on:
       - eureka-server
@@ -96,7 +99,7 @@ services:
     environment:
       - euraka.client.service-url.defaultZone=http://eureka-server:8761/eureka
       - JAVA_OPTS=
-        - DEURAKA_SERVER=http://eureka-server:8761/eureka
+        -DEURAKA_SERVER=http://eureka-server:8761/eureka
     restart: on-failure
     depends_on:
       - eureka-server
@@ -113,7 +116,7 @@ services:
     environment:
       - euraka.client.service-url.defaultZone=http://eureka-server:8761/eureka
       - JAVA_OPTS=
-        - DEURAKA_SERVER=http://eureka-server:8761/eureka
+        -DEURAKA_SERVER=http://eureka-server:8761/eureka
     restart: on-failure
     depends_on:
       - eureka-server
@@ -130,7 +133,7 @@ services:
     environment:
       - euraka.client.service-url.defaultZone=http://eureka-server:8761/eureka
       - JAVA_OPTS=
-        - DEURAKA_SERVER=http://eureka-server:8761/eureka
+        -DEURAKA_SERVER=http://eureka-server:8761/eureka
     restart: on-failure
     depends_on:
       - eureka-server
@@ -147,7 +150,7 @@ services:
     environment:
       - euraka.client.service-url.defaultZone=http://eureka-server:8761/eureka
       - JAVA_OPTS=
-        - DEURAKA_SERVER=http://eureka-server:8761/eureka
+        -DEURAKA_SERVER=http://eureka-server:8761/eureka
     restart: on-failure
     depends_on:
       - eureka-server

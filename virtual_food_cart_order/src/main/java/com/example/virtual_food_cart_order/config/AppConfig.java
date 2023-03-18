@@ -10,8 +10,7 @@ import org.springframework.web.client.RestTemplate;
 public class AppConfig {
     public Long shipperId = 1L;
 
-    @Value("${app-config.page-size}")
-    public int pageSize;
+    public int pageSize = 5;
 
     @Bean
     @LoadBalanced
