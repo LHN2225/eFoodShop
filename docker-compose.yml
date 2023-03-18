@@ -1,0 +1,167 @@
+version: '3'
+services:
+  eureka-server:
+    container_name: eureka-server
+    build:
+      context: eureka-server
+      dockerfile: Dockerfile
+    ports:
+      - "8761:8761"
+  configserver:
+    container_name: configserver
+    build:
+      context: configserver
+      dockerfile: Dockerfile
+    volumes:
+      - ./config-data:/var/config-data
+    environment:
+      - euraka.client.service-url.defaultZone=http://eureka-server:8761/eureka
+      - JAVA_OPTS=
+        - Dspring.cloud.config.server.native.searchLocations=/var/config-data
+        - DEURAKA_SERVER=http://eureka-server:8761/eureka
+    depends_on:
+      - eureka-server
+    ports:
+      - "8888:8888"
+  gateway:
+    container_name: gateway
+    build:
+      context: gateway
+      dockerfile: Dockerfile
+    environment:
+      - euraka.client.service-url.defaultZone=http://eureka-server:8761/eureka
+      - JAVA_OPTS=
+        - DEURAKA_SERVER=http://eureka-server:8761/eureka
+    depends_on:
+      - eureka-server
+    ports:
+      - "8765:8765"
+  cart:
+    build:
+      context: /cart
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    environment:
+      - euraka.client.service-url.defaultZone=http://eureka-server:8761/eureka
+      - JAVA_OPTS=
+        - DEURAKA_SERVER=http://eureka-server:8761/eureka
+    restart: on-failure
+    depends_on:
+      - eureka-server
+      - configserver
+    deploy:
+      mode: replicated
+      replicas: 2
+  food:
+    build:
+      context: /food
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    environment:
+      - euraka.client.service-url.defaultZone=http://eureka-server:8761/eureka
+      - JAVA_OPTS=
+        - DEURAKA_SERVER=http://eureka-server:8761/eureka
+    restart: on-failure
+    depends_on:
+      - eureka-server
+      - configserver
+    deploy:
+      mode: replicated
+      replicas: 2
+  manager-info:
+    build:
+      context: /ManagerInfo
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - euraka.client.service-url.defaultZone=http://eureka-server:8761/eureka
+      - JAVA_OPTS=
+        - DEURAKA_SERVER=http://eureka-server:8761/eureka
+    restart: on-failure
+    depends_on:
+      - eureka-server
+      - configserver
+    deploy:
+      mode: replicated
+      replicas: 2
+  shipper:
+    build:
+      context: /shipper
+      dockerfile: Dockerfile
+    ports:
+      - "8083:8083"
+    environment:
+      - euraka.client.service-url.defaultZone=http://eureka-server:8761/eureka
+      - JAVA_OPTS=
+        - DEURAKA_SERVER=http://eureka-server:8761/eureka
+    restart: on-failure
+    depends_on:
+      - eureka-server
+      - configserver
+    deploy:
+      mode: replicated
+      replicas: 2
+  storage:
+    build:
+      context: /storage
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - euraka.client.service-url.defaultZone=http://eureka-server:8761/eureka
+      - JAVA_OPTS=
+        - DEURAKA_SERVER=http://eureka-server:8761/eureka
+    restart: on-failure
+    depends_on:
+      - eureka-server
+      - configserver
+    deploy:
+      mode: replicated
+      replicas: 2
+  user-service:
+    build:
+      context: /user-service
+      dockerfile: Dockerfile
+    ports:
+      - "8084:8084"
+    environment:
+      - euraka.client.service-url.defaultZone=http://eureka-server:8761/eureka
+      - JAVA_OPTS=
+        - DEURAKA_SERVER=http://eureka-server:8761/eureka
+    restart: on-failure
+    depends_on:
+      - eureka-server
+      - configserver
+    deploy:
+      mode: replicated
+      replicas: 2
+  virtual_food_cart_order:
+    build:
+      context: /virtual_food_cart_order
+      dockerfile: Dockerfile
+    ports:
+      - "9002:9002"
+    environment:
+      - euraka.client.service-url.defaultZone=http://eureka-server:8761/eureka
+      - JAVA_OPTS=
+        - DEURAKA_SERVER=http://eureka-server:8761/eureka
+    restart: on-failure
+    depends_on:
+      - eureka-server
+      - configserver
+    deploy:
+      mode: replicated
+      replicas: 2
+  oracle:
+    image: doctorkirk/oracle-19c
+    ports:
+      - "1521:1521"
+    environment:
+      - ORACLE_SID=orcl
+      - ORACLE_PWD=password
+
+
+
