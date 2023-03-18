@@ -10,7 +10,7 @@ public class PageRepository {
     private JdbcTemplate jdbcTemplate;
 
     public int findNotBusyOrderTotalPageNumber(String shippingStatus, int pageSize) {
-        String template = "SELECT CEIL(COUNT(1)/%d) FROM ORDER_1 WHERE SHIPPER_ID IS NULL AND ORDER_1.IS_DELETED = 0 AND SHIPPING_STATUS = \'%s\'";
+        String template = "SELECT CEIL(COUNT(1)/%d) FROM RESTAURANT_ORDER WHERE SHIPPER_ID IS NULL AND RESTAURANT_ORDER.IS_DELETED = 0 AND SHIPPING_STATUS = \'%s\'";
         String query = String.format(template, pageSize, shippingStatus);
 
         return jdbcTemplate
@@ -18,7 +18,7 @@ public class PageRepository {
     }
 
     public int findInProgressOrderTotalPageNumber(Long shipperId, String shippingStatus, int pageSize) {
-        String template = "SELECT CEIL(COUNT(1)/%d) FROM ORDER_1 WHERE SHIPPER_ID = %s AND ORDER_1.IS_DELETED = 0 AND SHIPPING_STATUS = \'%s\'";
+        String template = "SELECT CEIL(COUNT(1)/%d) FROM RESTAURANT_ORDER WHERE SHIPPER_ID = %s AND RESTAURANT_ORDER.IS_DELETED = 0 AND SHIPPING_STATUS = \'%s\'";
         String query = String.format(template, pageSize, String.valueOf(shipperId), shippingStatus);
 
         return jdbcTemplate
@@ -26,7 +26,7 @@ public class PageRepository {
     }
 
     public int findDeliveredOrderTotalPageNumber(Long shipperId, String shippingStatus, int pageSize) {
-        String template = "SELECT CEIL(COUNT(1)/%d) FROM ORDER_1 WHERE SHIPPER_ID = %s AND ORDER_1.IS_DELETED = 0 AND SHIPPING_STATUS = \'%s\'";
+        String template = "SELECT CEIL(COUNT(1)/%d) FROM RESTAURANT_ORDER WHERE SHIPPER_ID = %s AND RESTAURANT_ORDER.IS_DELETED = 0 AND SHIPPING_STATUS = \'%s\'";
         String query = String.format(template, pageSize, String.valueOf(shipperId), shippingStatus);
 
         return jdbcTemplate

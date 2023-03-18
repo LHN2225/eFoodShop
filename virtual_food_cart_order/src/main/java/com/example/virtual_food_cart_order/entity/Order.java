@@ -2,8 +2,6 @@ package com.example.virtual_food_cart_order.entity;
 
 import lombok.Data;
 
-import java.sql.Timestamp;
-
 import javax.persistence.*;
 
 @Entity
@@ -30,3 +28,4 @@ public class Order {
     @Column(name = "is_deleted")
     private boolean isDeleted;
 }
+

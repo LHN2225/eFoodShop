@@ -13,31 +13,33 @@ public class OrderDetailRepository {
 
     public OrderDetailDto findByOrderId(Long orderId) {
         String query = "SELECT\n" +
-                "\tORDER_1.ID ORDER_ID, ORDER_1.CREATED_DATE, ORDER_1.ADDRESS,\n" +
-                "\tUSER_1.FULLNAME CUSTOMER_FULLNAME,\n" +
+                "\tRESTAURANT_ORDER.ID ORDER_ID, RESTAURANT_ORDER.ADDRESS,\n" +
+                "\tRESTAURANT_USER.FULLNAME CUSTOMER_FULLNAME,\n" +
+                "\tRESTAURANT_USER.PHONE CUSTOMER_PHONE,\n" +
                 "\tSHIPPER.FULLNAME SHIPPER_FULLNAME\n" +
-                "FROM ORDER_1\n" +
-                "\tJOIN CART ON CART.ID = ORDER_1.CART_ID\n" +
-                "\tJOIN USER_1 ON USER_1.ID = CART.CUSTOMER_ID\n" +
-                "\tJOIN USER_1 SHIPPER ON SHIPPER.ID = ORDER_1.SHIPPER_ID \n" +
+                "FROM RESTAURANT_ORDER\n" +
+                "\tJOIN CART ON CART.ID = RESTAURANT_ORDER.CART_ID\n" +
+                "\tJOIN RESTAURANT_USER ON RESTAURANT_USER.ID = CART.CUSTOMER_ID\n" +
+                "\tJOIN RESTAURANT_USER SHIPPER ON SHIPPER.ID = RESTAURANT_ORDER.SHIPPER_ID \n" +
                 "WHERE\n" +
-                "\tORDER_1.ID = " + orderId + "\n" +
-                "\tAND ORDER_1.IS_DELETED = 0\n" +
+                "\tRESTAURANT_ORDER.ID = " + orderId + "\n" +
+                "\tAND RESTAURANT_ORDER.IS_DELETED = 0\n" +
                 "\tAND CART.IS_DELETED = 0\n" +
                 "\n" +
                 "UNION\n" +
                 "\n" +
                 "SELECT\n" +
-                "\tORDER_1.ID ORDER_ID, ORDER_1.CREATED_DATE, ORDER_1.ADDRESS,\n" +
-                "\tUSER_1.FULLNAME CUSTOMER_FULLNAME,\n" +
+                "\tRESTAURANT_ORDER.ID ORDER_ID, RESTAURANT_ORDER.ADDRESS,\n" +
+                "\tRESTAURANT_USER.FULLNAME CUSTOMER_FULLNAME,\n" +
+                "\tRESTAURANT_USER.PHONE CUSTOMER_PHONE,\n" +
                 "\t' ' SHIPPER_FULLNAME\n" +
-                "FROM ORDER_1\n" +
-                "\tJOIN CART ON CART.ID = ORDER_1.CART_ID\n" +
-                "\tJOIN USER_1 ON USER_1.ID = CART.CUSTOMER_ID\n" +
+                "FROM RESTAURANT_ORDER\n" +
+                "\tJOIN CART ON CART.ID = RESTAURANT_ORDER.CART_ID\n" +
+                "\tJOIN RESTAURANT_USER ON RESTAURANT_USER.ID = CART.CUSTOMER_ID\n" +
                 "WHERE\n" +
-                "\tORDER_1.ID = " + orderId + "\n" +
-                "\tAND ORDER_1.SHIPPER_ID IS NULL\n" +
-                "\tAND ORDER_1.IS_DELETED = 0\n" +
+                "\tRESTAURANT_ORDER.ID = " + orderId + "\n" +
+                "\tAND RESTAURANT_ORDER.SHIPPER_ID IS NULL\n" +
+                "\tAND RESTAURANT_ORDER.IS_DELETED = 0\n" +
                 "\tAND CART.IS_DELETED = 0";
         
                 try {
@@ -46,9 +48,9 @@ public class OrderDetailRepository {
                                 (rs, rowNum) ->
                                         new OrderDetailDto(
                                                 rs.getLong("order_id"),
-                                                rs.getTimestamp("created_date"),
                                                 rs.getString("address"),
                                                 rs.getString("customer_fullname"),
+                                                rs.getString("customer_phone"),
                                                 rs.getString("shipper_fullname")
                                         )
                         );

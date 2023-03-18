@@ -22,6 +22,9 @@ public class OrderDetailDto {
     private String customerFullname;
 
     @NonNull
+    private String customerPhone;
+
+    @NonNull
     private String shipperFullname;
 
     private List<OrderDetailFoodDto> foods;
