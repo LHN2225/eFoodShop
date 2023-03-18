@@ -3,14 +3,14 @@ services:
   eureka-server:
     container_name: eureka-server
     build:
-      context: eureka-server
+      context: /eureka-server
       dockerfile: Dockerfile
     ports:
       - "8761:8761"
   configserver:
     container_name: configserver
     build:
-      context: configserver
+      context: /configserver
       dockerfile: Dockerfile
     volumes:
       - ./config-data:/var/config-data
@@ -26,7 +26,7 @@ services:
   gateway:
     container_name: gateway
     build:
-      context: gateway
+      context: /gateway
       dockerfile: Dockerfile
     environment:
       - euraka.client.service-url.defaultZone=http://eureka-server:8761/eureka
@@ -52,7 +52,7 @@ services:
       - configserver
     deploy:
       mode: replicated
-      replicas: 2
+      replicas: 1
   food:
     build:
       context: /food
@@ -69,7 +69,7 @@ services:
       - configserver
     deploy:
       mode: replicated
-      replicas: 2
+      replicas: 1
   manager-info:
     build:
       context: /ManagerInfo
@@ -86,7 +86,7 @@ services:
       - configserver
     deploy:
       mode: replicated
-      replicas: 2
+      replicas: 1
   shipper:
     build:
       context: /shipper
@@ -103,7 +103,7 @@ services:
       - configserver
     deploy:
       mode: replicated
-      replicas: 2
+      replicas: 1
   storage:
     build:
       context: /storage
@@ -120,7 +120,7 @@ services:
       - configserver
     deploy:
       mode: replicated
-      replicas: 2
+      replicas: 1
   user-service:
     build:
       context: /user-service
@@ -137,7 +137,7 @@ services:
       - configserver
     deploy:
       mode: replicated
-      replicas: 2
+      replicas: 1
   virtual_food_cart_order:
     build:
       context: /virtual_food_cart_order
@@ -154,14 +154,14 @@ services:
       - configserver
     deploy:
       mode: replicated
-      replicas: 2
-  oracle:
-    image: doctorkirk/oracle-19c
-    ports:
-      - "1521:1521"
-    environment:
-      - ORACLE_SID=orcl
-      - ORACLE_PWD=password
+      replicas: 1
+#  oracle:
+#    image: doctorkirk/oracle-19c
+#    ports:
+#      - "1521:1521"
+#    environment:
+#      - ORACLE_SID=orcl
+#      - ORACLE_PWD=password
 
 
 
