@@ -1,11 +1,7 @@
 package com.example.shipper.dto;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 @Data
@@ -16,13 +12,13 @@ public class OrderDetailDto {
     private Long orderId;
 
     @NonNull
-    private Timestamp createdDate;
-
-    @NonNull
     private String address;
 
     @NonNull
     private String customerFullname;
+
+    @NonNull
+    private String customerPhone;
 
     @NonNull
     private String shipperFullname;

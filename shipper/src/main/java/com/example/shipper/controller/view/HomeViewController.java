@@ -1,6 +1,5 @@
 package com.example.shipper.controller.view;
 
-import com.example.shipper.config.VirtualFoodCartOrderConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -12,9 +11,6 @@ import org.springframework.web.client.RestTemplate;
 @Controller
 @RequestMapping("/home")
 public class HomeViewController {
-
-    @Autowired
-    private VirtualFoodCartOrderConfig virtualFoodCartOrderConfig;
 
     @Autowired
     private RestTemplate restTemplate;

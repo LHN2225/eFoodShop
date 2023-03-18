@@ -10,7 +10,6 @@
         <thead>
             <tr>
                 <th>Order ID</th>
-                <th>Created Date</th>
                 <th>Address</th>
                 <th></th>
                 <th></th>
@@ -19,7 +18,6 @@
         <tbody>
             <tr th:each="order: ${orders}">
                 <td class="order-id" th:utext="${order.id}"></td>
-                <td th:utext="${order.createdDate}"></td>
                 <td th:utext="${order.address}"></td>
                 <td><a class="btn btn-primary" th:href="@{'../order/' + ${order.id}}">Detail</a></td>
                 <td><button class="btn btn-success" onclick="finish(this)">Finish</button></td>
