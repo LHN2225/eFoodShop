@@ -31,7 +31,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderDto> getNotBusyOrders(int pageNumber) {
         return orderMapper.entityListToDtoList(orderRepository.findNotBusyOrders(
-                "IN_PROGRESS",
+                "PENDING",
                 pageNumber,
                 appConfig.pageSize
         ));
@@ -41,7 +41,7 @@ public class OrderServiceImpl implements OrderService {
     public List<OrderDto> getInProgressOrders(int pageNumber) {
         return orderMapper.entityListToDtoList(orderRepository.findByShipperIdAndShippingStatus(
                 appConfig.shipperId,
-                "IN_PROGRESS",
+                "PENDING",
                 pageNumber,
                 appConfig.pageSize
         ));
@@ -70,7 +70,7 @@ public class OrderServiceImpl implements OrderService {
     // Used for search feature ...
     @Override
     public OrderDto findNotBusyOrderById(Long id) {
-        Order order = orderRepository.findNotBusyOrderById(id, "IN_PROGRESS");
+        Order order = orderRepository.findNotBusyOrderById(id, "PENDING");
         if (order != null) {
             return orderMapper.entityToDto(order);
         }
@@ -79,7 +79,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDto findInProgressOrderById(Long id) {
-        Order order = orderRepository.findBusyOrderById(id, "IN_PROGRESS");
+        Order order = orderRepository.findBusyOrderById(id, "PENDING");
         if (order != null) {
             return orderMapper.entityToDto(order);
         }

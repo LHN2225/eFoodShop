@@ -1,22 +1,23 @@
 package com.example.virtual_food_cart_order.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Data
-@Table(name = "cart")
-public class Cart {
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "role")
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "customer_id")
-    private Long customerId;
-
-    @Column(name = "is_deleted")
-    private boolean isDeleted;
+    @Column(name = "role_name")
+    private String roleName;
 }
 

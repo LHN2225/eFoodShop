@@ -17,12 +17,12 @@ public class PageServiceImpl implements PageService {
 
     @Override
     public int findNotBusyOrderTotalPageNumber() {
-        return pageRepository.findNotBusyOrderTotalPageNumber("IN_PROGRESS", appConfig.pageSize);
+        return pageRepository.findNotBusyOrderTotalPageNumber("PENDING", appConfig.pageSize);
     }
 
     @Override
     public int findInProgressOrderTotalPageNumber() {
-        return pageRepository.findInProgressOrderTotalPageNumber(appConfig.shipperId, "IN_PROGRESS", appConfig.pageSize);
+        return pageRepository.findInProgressOrderTotalPageNumber(appConfig.shipperId, "PENDING", appConfig.pageSize);
     }
 
     @Override

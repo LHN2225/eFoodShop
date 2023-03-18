@@ -2,13 +2,11 @@ package com.example.virtual_food_cart_order.entity;
 
 import lombok.Data;
 
-import java.sql.Timestamp;
-
 import javax.persistence.*;
 
 @Entity
 @Data
-@Table(name = "order_1")
+@Table(name = "restaurant_order")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,9 +15,6 @@ public class Order {
 
     @Column(name = "cart_id")
     private Long cartId;
-
-    @Column(name = "created_date")
-    private Timestamp createdDate;
 
     @Column(name = "address")
     private String address;
@@ -33,3 +28,4 @@ public class Order {
     @Column(name = "is_deleted")
     private boolean isDeleted;
 }
+

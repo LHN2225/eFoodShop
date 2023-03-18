@@ -16,13 +16,13 @@ public class OrderDetailDto {
     private Long orderId;
 
     @NonNull
-    private Timestamp createdDate;
-
-    @NonNull
     private String address;
 
     @NonNull
     private String customerFullname;
+
+    @NonNull
+    private String customerPhone;
 
     @NonNull
     private String shipperFullname;

@@ -7,9 +7,7 @@ import com.example.virtual_food_cart_order.service.OrderDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class OrderDetailServiceImpl implements OrderDetailService {
@@ -26,7 +24,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
         if (orderDetail != null) {
             orderDetail.setFoods(orderDetailFoodRepository.findByOrderId(orderId));
         } else {
-            orderDetail = new OrderDetailDto(-1L, new Timestamp(System.currentTimeMillis()), "", "", "");
+            orderDetail = new OrderDetailDto(-1L, "", "", "", "");
             orderDetail.setFoods(new ArrayList<>());
         }
         System.out.println(orderDetail);

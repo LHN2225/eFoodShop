@@ -17,14 +17,13 @@ public class OrderDetailFoodRepository {
                 "\tFOOD.NAME,\n" +
                 "\tFOOD_CART.FOOD_QUANTITY QUANTITY,\n" +
                 "\tFOOD_CART.FIXED_PRICE * FOOD_CART.FOOD_QUANTITY COST\n" +
-                "FROM ORDER_1\n" +
-                "\tJOIN CART ON CART.ID = ORDER_1.CART_ID\n" +
+                "FROM RESTAURANT_ORDER\n" +
+                "\tJOIN CART ON CART.ID = RESTAURANT_ORDER.CART_ID\n" +
                 "\tJOIN FOOD_CART ON FOOD_CART.CART_ID = CART.ID\n" +
                 "\tJOIN FOOD ON FOOD.ID = FOOD_CART.FOOD_ID\n" +
                 "WHERE\n" +
-                "\tORDER_1.ID = " + orderId + "\n" +
+                "\tRESTAURANT_ORDER.ID = " + orderId + "\n" +
                 "\tAND FOOD.IS_DELETED = 0\n" +
-                "\tAND FOOD_CART.IS_DELETED = 0\n" +
                 "\tAND CART.IS_DELETED = 0";
 
         return jdbcTemplate
