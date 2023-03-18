@@ -20,7 +20,7 @@
 | -------- | -------- | -------- |
 | Đỗ Việt Bách | Meet almost all deadlines | Have a firm knowledge in designing database |
 | Võ Văn Đăng Khoa | Meet deadlines <br> Putting in a lot of efforts | Propose creative approaches for developing project functions |
-| Nguyễn Hoàng Linh | Meet deadlines <br> Have nice code format <br> Make an all-out effort <br> Have a lot of compassion in coding | Got excellent ideas <br> Have remarkable learning ability <br> Enhance the project <br> Diligent and careful <br> Help a teammate fully comprehend the code |
+| Nguyễn Hoàng Linh | Meet deadlines <br> Have nice code format <br> Make an all-out effort <br> Have a lot of compassion in coding | Got excellent ideas <br> Have remarkable learning ability <br> Enhance the project <br> Diligent and careful <br> Help teammate fully comprehend the code |
 | Lê Hoàng Nhân | Meet deadlines <br> Provide significant technical and theoretical support for teammates | Exhibit a strong intellectual curiosity and an ability to explore new areas of knowledge in many directions <br> Provide key ideas and solutions to enhance the project |
 | Phan Hồng Hà | Meet deadlines <br> Assist a teammate with debugging <br> Achieve difficult tasks, such as security and gateway configuration | Have a vast amount of knowledge in Spring boot |
 
