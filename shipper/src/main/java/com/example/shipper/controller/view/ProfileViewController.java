@@ -1,11 +1,7 @@
 package com.example.shipper.controller.view;
 
-import com.example.shipper.config.AppConfig;
-import com.example.shipper.config.VirtualFoodCartOrderConfig;
-import com.example.shipper.dto.UserDto;
 import com.example.shipper.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,13 +13,7 @@ import org.springframework.web.client.RestTemplate;
 public class ProfileViewController {
 
     @Autowired
-    private AppConfig appConfig;
-
-    @Autowired
     private RestTemplate restTemplate;
-
-    @Autowired
-    private VirtualFoodCartOrderConfig virtualFoodCartOrderConfig;
 
     @Autowired
     private UserService userService;
