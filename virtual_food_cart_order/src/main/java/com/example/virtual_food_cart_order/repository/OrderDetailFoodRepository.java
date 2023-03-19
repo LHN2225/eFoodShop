@@ -23,8 +23,7 @@ public class OrderDetailFoodRepository {
                 "\tJOIN FOOD ON FOOD.ID = FOOD_CART.FOOD_ID\n" +
                 "WHERE\n" +
                 "\tRESTAURANT_ORDER.ID = " + orderId + "\n" +
-                "\tAND FOOD.IS_DELETED = 0\n" +
-                "\tAND CART.IS_DELETED = 0";
+                "\tAND FOOD.IS_DELETED = 0";
 
         return jdbcTemplate
                 .query(query,

@@ -24,7 +24,6 @@ public class OrderDetailRepository {
                 "WHERE\n" +
                 "\tRESTAURANT_ORDER.ID = " + orderId + "\n" +
                 "\tAND RESTAURANT_ORDER.IS_DELETED = 0\n" +
-                "\tAND CART.IS_DELETED = 0\n" +
                 "\n" +
                 "UNION\n" +
                 "\n" +
@@ -39,8 +38,7 @@ public class OrderDetailRepository {
                 "WHERE\n" +
                 "\tRESTAURANT_ORDER.ID = " + orderId + "\n" +
                 "\tAND RESTAURANT_ORDER.SHIPPER_ID IS NULL\n" +
-                "\tAND RESTAURANT_ORDER.IS_DELETED = 0\n" +
-                "\tAND CART.IS_DELETED = 0";
+                "\tAND RESTAURANT_ORDER.IS_DELETED = 0";
         
                 try {
                         return jdbcTemplate

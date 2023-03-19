@@ -34,7 +34,7 @@ public class CartController {
     @Autowired
     private FoodCartService foodCartService;
 
-    private final String email = "linh@gmail.com";
+    private final String email = "customer1@gmail.com";
 
 
 

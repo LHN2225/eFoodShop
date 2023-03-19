@@ -18,7 +18,7 @@ public class UserController {
     @GetMapping("get-manager-info")
     public String getManagerInfo(Model model) throws Exception {
         // hard-code id of user
-        Long userId = Long.valueOf(21);
+        Long userId = Long.valueOf(5);
 
         UserDto userDto = userService.findByIdAndRoleId(userId, "MANAGER");
         model.addAttribute("manager", userDto);

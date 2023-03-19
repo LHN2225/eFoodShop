@@ -16,7 +16,7 @@ public class CartController {
 
     @PostMapping("add-to-cart/{foodId}")
     public String addToCart(@PathVariable Long foodId, Model model) throws Exception {
-        Long customerId = Long.valueOf(22);
+        Long customerId = Long.valueOf(4);
         cartService.addToCart(customerId, foodId);
         return "CustomerMenu";
     }
@@ -24,7 +24,7 @@ public class CartController {
     @GetMapping("quantity-in-cart")
     @ResponseBody
     public Long getQuantityInCart() {
-        Long customerId = Long.valueOf(22);
+        Long customerId = Long.valueOf(4);
         return cartService.getQuantityInCartByCustomerId(customerId);
     }
 }
