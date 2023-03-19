@@ -69,6 +69,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .successHandler((request, response, authentication) -> {
                     CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
                     Long roleId = customUserDetails.getUser().getRoleId();
+                    Long userID = customUserDetails.getUser().getId();
 
                     String url = "";
 
@@ -76,7 +77,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         url = "http://localhost:8765/food/view-food";
                     } else if (roleId == 2) {
                         response.setHeader("Authorization", "Bearer " + "123456789");
-                        url = "http://localhost:8765/shipper/home";
+                        url = "http://localhost:8765/shipper/home/redirect/" + userID;
                     } else if (roleId == 3) {
                         url = "http://localhost:8765/manager-info/get-all-food";
                     } else {
