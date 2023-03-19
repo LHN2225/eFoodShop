@@ -65,7 +65,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/")
                 .usernameParameter("email")
                 .passwordParameter("password")
-                .defaultSuccessUrl("http://localhost:8765/manager-info/get-all-food")
+                //.defaultSuccessUrl("http://localhost:8765/manager-info/get-all-food")
+                .successHandler((request, response, authentication) -> {
+                    CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
+                    Long roleId = customUserDetails.getUser().getRoleId();
+
+                    String url = "";
+
+                    if (roleId == 1) {
+                        url = "http://localhost:8765/food/view-food";
+                    } else if (roleId == 2) {
+                        response.setHeader("Authorization", "Bearer " + "123456789");
+                        url = "http://localhost:8765/shipper/home";
+                    } else if (roleId == 3) {
+                        url = "http://localhost:8765/manager-info/get-all-food";
+                    } else {
+                        System.out.println("Error!");
+                    }
+
+                    response.sendRedirect(url);
+
+                })
                 .and()
                 .logout().logoutSuccessUrl("/").permitAll()
                 .and()
