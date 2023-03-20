@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+
+<head>
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+	<title>Home</title>
+	<meta content="" name="description">
+	<meta content="" name="keywords">
+
+	<!-- Favicons -->
+	<link th:href="@{/assets/img/favicon.png}" rel="icon">
+	<link th:href="@{/assets/img/apple-touch-icon.png}" rel="apple-touch-icon">
+
+	<!-- Google Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+		rel="stylesheet">
+
+	<!-- Vendor CSS Files -->
+	<link th:href="@{/assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+	<link th:href="@{/assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
+	<link th:href="@{/assets/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet">
+	<link th:href="@{/assets/vendor/glightbox/css/glightbox.min.css}" rel="stylesheet">
+	<link th:href="@{/assets/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet">
+	<link th:href="@{/assets/vendor/aos/aos.css}" rel="stylesheet">
+
+	<!-- Template Main CSS File -->
+	<link th:href="@{/assets/css/main.css}" rel="stylesheet">
+
+</head>
+
+<body>
+
+	<!-- ======= Header ======= -->
+	<header th:replace="fragment/header :: header"></header>
+	<!-- End Header -->
+
+	<main id="main">
+
+		<!-- ======= Breadcrumbs ======= -->
+		<div class="breadcrumbs">
+			<div class="page-header d-flex align-items-center"
+				style="background-image: url('../shipper/assets/img/page-header.jpg');">
+				<div class="container position-relative">
+					<div class="row d-flex justify-content-center">
+						<div class="col-lg-6 text-center">
+							<h2>Home</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+			<nav>
+				<div class="container">
+					<ol>
+						<li><a href="/shipper/home">Home</a></li>
+					</ol>
+				</div>
+			</nav>
+		</div><!-- End Breadcrumbs -->
+
+		<section class="sample-page">
+			<div class="container" data-aos="fade-up">
+				<h1 class="mb-5">Not-busy Orders</h1>
+				<!-- Search bar -->
+				<div class="input-group mb-3 w-25">
+					<input type="text" id="orderIdSearch" class="form-control" placeholder="Order ID..."
+						onkeydown="if (event.keyCode === 13) renderFromSearch()">
+					<div class="input-group-append">
+						<button class="btn btn-outline-primary" type="button"
+							onclick="renderFromSearch()">Search</button>
+					</div>
+				</div>
+
+				<!-- Table content -->
+				<div id="not-busy-order"></div>
+				<!--<table th:replace="fragment/not-busy-orders :: not-busy-orders"></table>-->
+
+				<!-- Pagination -->
+				<nav aria-label="Page navigation example" class="d-flex justify-content-center mt-4">
+					<ul class="pagination">
+						<th:block th:each="paginationItem: ${paginationItems}">
+							<li class="page-item">
+								<a role="button" class="page-link" th:utext="${paginationItem}"
+									onclick="render(this.innerHTML); setActiveLink(this);">1</a>
+							</li>
+						</th:block>
+					</ul>
+				</nav>
+			</div>
+		</section>
+
+	</main><!-- End #main -->
+
+	<!-- ======= Footer ======= -->
+	<footer th:replace="fragment/footer :: footer"></footer>
+	<!-- End Footer -->
+
+	<a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i
+			class="bi bi-arrow-up-short"></i></a>
+
+	<div id="preloader"></div>
+
+	<!-- Vendor JS Files -->
+	<script th:src="@{/assets/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	<script th:src="@{/assets/vendor/purecounter/purecounter_vanilla.js}"></script>
+	<script th:src="@{/assets/vendor/glightbox/js/glightbox.min.js}"></script>
+	<script th:src="@{/assets/vendor/swiper/swiper-bundle.min.js}"></script>
+	<script th:src="@{/assets/vendor/aos/aos.js}"></script>
+	<script th:src="@{/assets/vendor/php-email-form/validate.js}"></script>
+
+	<!-- Template Main JS File -->
+	<script th:src="@{/assets/js/main.js}"></script>
+	<script th:src="@{/assets/js/domain.js}"></script>
+
+	<!-- Ajax -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+	<script>
+		let shipperId = 1; // Test for shipper id before authentication and authorization handling by security
+
+		render(1); // Show all content at the first load
+
+		function render(pageNumber) {
+			let pageLinks = document.querySelectorAll(".page-link");
+			if (pageLinks.length !== 0) {
+				// Make first page in pagination active
+				pageLinks.forEach(function (pageLink) {
+					pageLink.parentNode.classList.remove("active");
+				});
+				if (pageNumber === 1) {
+					document.querySelectorAll(".page-link")[0].classList.add("active");
+				}
+			}
+
+			$.ajax({
+				url: "../shipper/order/fragment/not-busy/0/-1/" + pageNumber,
+				type: 'GET',
+				contentType: "html",
+				crossDomain: true,
+				success: function (data) {
+					$("#not-busy-order").html(data);
+				}
+			});
+		}
+
+		function renderFromSearch() {
+			let orderId = document.getElementById("orderIdSearch").value;
+
+			let pageNumber = 1;
+			// Make first page in pagination active
+			let pageLinks = document.querySelectorAll(".page-link");
+
+			pageLinks.forEach(function (pageLink) {
+				pageLink.parentNode.classList.remove("active");
+			});
+
+			pageLinks[0].classList.add("active");
+
+			let isSearch = 1;
+
+			if (orderId === '') {
+				isSearch = 0;
+				orderId = -1;
+			}
+
+			$.ajax({
+				url: `../shipper/order/fragment/not-busy/${isSearch}/${orderId}/1`,
+				type: 'GET',
+				contentType: "html",
+				crossDomain: true,
+				success: function (data) {
+					$("#not-busy-order").html(data);
+				}
+			});
+		}
+
+		function choose(that) {
+			let orderId = $(that).closest("tr").find(".order-id").text();
+			$.ajax({
+				url: '../shipper/order/receive',
+				method: 'PUT',
+				data: {
+					orderId: orderId
+				},
+				success: function (response) {
+					//console.log('Request succeeded:', response);
+					render(1);
+				},
+				error: function (xhr, status, error) {
+					console.log('Request failed:', error);
+				}
+			});
+		}
+
+		function setActiveLink(link) {
+			// Remove the "active" class from all page links
+			let pageLinks = document.querySelectorAll(".page-link");
+			pageLinks.forEach(function (pageLink) {
+				pageLink.classList.remove("active");
+			});
+
+			// Add the "active" class to the clicked page link's parent "li" element
+			link.parentNode.classList.add("active");
+		}
+	</script>
+
+</body>
+
+</html>
